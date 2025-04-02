@@ -1,0 +1,132 @@
+<div class="content-wrapper">
+    <h2 class="mb-1">Crie sua loja</h2>
+    <p class="mb-3">Vamos começar? Monte sua loja da maneira que quiser!</p>
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-danger mb-4" style="display: none;"></div>
+            <form method="post" id="createWebstore">
+                <div class="card-title">1. Configurações básicas</div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="f1">Nome da loja</label>
+                            <input type="text" class="form-control" name="name" id="f1">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="f2">Escolha um subdomínio</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="subdomain" id="f2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.steveshop.com.br</span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <label for="f3">Selecione a moeda</label>
+                            <select class="form-control" name="currency" id="f3">
+                                <option value="BRL">BRL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-title">2. Selecione seu plano</div>
+                <input type="hidden" name="plan" value="starter">
+                <div class="row">
+                    <div class="col-md">
+                        <button type="button" class="btn btn-warning font-weight-bold btn-lg btn-block btn-gateway" id="gateway-starter">
+                            Starter
+                        </button>
+                        <div class="text-center text-muted mt-2">
+                            Grátis
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <button type="button" class="btn btn-light btn-lg btn-block btn-gateway" id="gateway-standard">
+                            Standard
+                        </button>
+                        <div class="text-center text-muted mt-2">
+                            R$12,93/mês
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <button type="button" class="btn btn-light btn-lg btn-block btn-gateway" id="gateway-premium">
+                            Premium
+                        </button>
+                        <div class="text-center text-muted mt-2">
+                            R$18,93/mês
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <button type="button" class="btn btn-light btn-lg btn-block btn-gateway" id="gateway-enterprise">
+                            Enterprise
+                        </button>
+                        <div class="text-center text-muted mt-2">
+                            R$24,93/mês
+                        </div>
+                    </div>
+                </div>
+                <button class="mt-5 ml-auto btn btn-dark">Validar e Finalizar</button>
+                <div class="dot-opacity-loader mt-3" style="display: none;">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function() {
+        $('.btn-gateway').on('click', function () {
+            var $this = $(this);
+            var thisId = $this.attr('id');
+            var thisValue = thisId.split('-')[1];
+
+            var btns = $('.btn-gateway');
+
+            btns.removeClass('btn-warning');
+            btns.removeClass('font-weight-bold');
+            $this.removeClass('btn-light');
+
+            $this.addClass('btn-warning');
+            $this.addClass('font-weight-bold');
+
+            $('input[name=plan]').val(thisValue);
+        });
+
+        $('#createWebstore').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstores/create/create',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (data) {
+
+                    let res = JSON.parse(data.responseText);
+
+                    if(res.status) {
+
+                        if(res.free) {
+                            location.href = '/';
+                            return true;
+                        }
+
+                        location.href = res.link;
+                        return true;
+                    }
+
+                    $('.alert').show().html(res.message);
+                    return false;
+                }
+            });
+
+            return false;
+        })
+    })
+</script>

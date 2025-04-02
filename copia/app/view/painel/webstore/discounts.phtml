@@ -1,0 +1,155 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-1">Descontos</h2>
+            <p class="mb-3">Gerencie os descontos em sua loja</p>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Adicionar cupom de desconto</h4>
+                    <br>
+                    <form method="post" class="row" id="register">
+                        <div class="form-group col-md-8">
+                            <label>Cupom</label>
+                            <input class="form-control" name="cupom" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Desconto</label>
+                            <input class="form-control" name="discount" type="number" step="any" required>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label>Servidor</label>
+                            <select class="form-control" name="server" id="server">
+                                <option selected disabled>Selecione</option>
+                                <?php
+
+                                $servers = $this->server->row();
+                                foreach ($servers as $server):
+                                    ?>
+                                    <option value="<?= $server->server_ID ?>"><?= $server->server_NAME ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Data de expiração</label>
+                            <input class="form-control" name="expire" type="date" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button class="btn btn-success">Adicionar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4>Cupons de desconto</h4>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID #</th>
+                                <th scope="col">Cupom</th>
+                                <th scope="col">Desconto</th>
+                                <th scope="col">Expiração</th>
+                                <th scope="col">Deletar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            $discounts = $this->discounts->data();
+
+                            if(count($discounts) == 0)
+                            {
+                                echo "<tr><th colspan='5'>Não há cupons de desconto</th></tr>";
+                            }
+
+                            foreach ($discounts as $discount):
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $discount->discount_ID ?></th>
+                                    <td><?= $discount->discount_CUPOM ?></td>
+                                    <td><?= $discount->discount_PERCENT ?></td>
+                                    <td><?= date("d/m/Y", strtotime($discount->discount_EXPIRE)) ?></td>
+                                    <td><button class="btn btn-danger btn-sm delete" id="<?= $discount->discount_ID ?>">Deletar</button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        $('#register').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/discounts/add',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (response) {
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2500);
+                    }else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('.delete').on('click', function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/discounts/delete',
+                method: 'POST',
+                data: { id: $(this).attr('id') },
+                complete: function () {
+                    location.reload();
+                }
+            });
+
+            return false;
+
+        });
+
+        $('#server').on('change', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/packages/categories',
+                method: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#categories').html(data);
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,84 @@
+<?php
+
+$products = $this->cart->products();
+
+if(count($products) == 0) {
+
+    echo $this->template->get('page_empty_cart');
+
+}else{
+
+    $table = "<table class=\"table table-bordered\"><thead><th>Pacote</th><th>Preço</th> <th>Quantidade</th><th>Subtotal</th></thead><tbody>";
+
+    foreach ($products as $product) {
+
+        $price = number_format($product['price'], 2, ',', '.');
+        $subtotal = number_format(($product['price'] * $product['qnt']), 2, ',', '.');
+
+        $table .= "<tr>
+            <td>
+                <div class=\"row\">
+                    <div class=\"col-md-3\">
+                        <img src=\"{$product['image']}\" class=\"img-fluid\" width=\"70px\">
+                    </div>
+                    <div class=\"col-md-9 pt-3\">
+                        <p>{$product['title']}<br><small>Servidor: {$product['server']}</small></p>
+                    </div>
+                </div>
+            </td>
+            <td style=\"padding-top: 35px\">R$ {$price}</td>
+            <td style=\"padding-top: 35px\" class=\"text-center\"><button class=\"btn btn-sm btn-light cart-minus\" id=\"{$product['id']}\"><i class=\"fa fa-angle-left\"></i></button> {$product['qnt']} <button class=\"btn btn-sm btn-light add-to-cart\" id=\"{$product['id']}\"><i class=\"fa fa-angle-right\"></i></button></td>
+            <td style=\"padding-top: 35px\">R$ {$subtotal}</td>
+            <td style=\"padding-top: 35px\" class=\"text-center\"><button class=\"btn btn-sm btn-danger cart-delete\" id=\"{$product['id']}\"><i class=\"fas fa-times\"></i></button></td>
+        </tr>";
+    }
+
+    $table .= "</tbody></table>";
+
+    $gtw = "";
+
+    $i = 0;
+    $gateways = new \app\api\webstores\Gateways($this->wid);
+
+    if($gateways->data()->pagseguro_SHOW == 1) {
+        $i++;
+        $gtw .= "<label><input type=\"radio\" name=\"gateway\" value=\"pagseguro\"> PagSeguro </label> <br>";
+    }
+
+    if($gateways->data()->mercadopago_SHOW == 1) {
+        $i++;
+        $gtw .= "<label><input type=\"radio\" name=\"gateway\" value=\"mercadopago\">MercadoPago</label><br>";
+    }
+
+    if($gateways->data()->paypal_SHOW == 1) {
+        $i++;
+        $gtw .= "<label><input type=\"radio\" name=\"gateway\" value=\"paypal\">PayPal</label>";
+    }
+
+    if($i == 0) {
+        $gtw .= "<p>Esta loja não possui nenhuma forma de pagamento configurada!</p>";
+    }
+
+
+    if($i > 0) {
+        $checkoutBtn = "<button class=\"btn btn-success\" onclick=\"checkout()\">Finalizar compra</button>";
+    }else{
+        $checkoutBtn = "<button class=\"btn btn-success\" disabled tabindex=\"-1\">Finalizar compra</button>";
+    }
+
+    echo str_replace([
+        '{{cart.packages}}',
+        '{{cart.gateways}}',
+        '{{cart.checkout_btn}}',
+        '{{cart.total}}',
+        "{{cart.subtotal}}",
+        "{{cart.discount}}"
+    ], [
+        $table,
+        $gtw,
+        $checkoutBtn,
+        number_format($this->cart->subtotal(), 2, ',', '.'),
+        number_format(($this->cart->subtotal() - $this->discountAmount), 2, ',', '.'),
+        number_format($this->discountAmount, 2, ',', '.')
+    ], $this->template->get('page_cart'));
+}

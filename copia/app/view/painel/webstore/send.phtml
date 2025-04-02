@@ -1,0 +1,96 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-1">Envio manual</h2>
+            <p class="mb-3">Envie pacotes de forma manual para seus clientes</p>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Adicionar código de brinde</h4>
+                    <br>
+                    <form method="post" class="row" id="register">
+                        <div class="form-group col-md-12">
+                            <label>Usuário</label>
+                            <input class="form-control" name="username" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Servidor</label>
+                            <select id="server" name="sid" class="form-control">
+                                <option selected disabled>Selecione</option>
+                                <?php
+
+                                $servers = $this->server->row();
+                                foreach ($servers as $server):
+                                    ?>
+                                    <option value="<?= $server->server_ID ?>"><?= $server->server_NAME ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Pacote</label>
+                            <select id="packages" name="pid" class="form-control">
+                                <option selected disabled>Selecione</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button class="btn btn-success">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        $('#register').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/send/add',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (response) {
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2500);
+                    }else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('#server').on('change', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/send/packages',
+                method: 'GET',
+                data: { sid: $(this).val() },
+                success: function (data) {
+                    $('#packages').html(data);
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

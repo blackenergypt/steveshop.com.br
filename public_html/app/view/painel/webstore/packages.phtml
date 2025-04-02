@@ -1,0 +1,382 @@
+<div class="content-wrapper">
+    <div class="row">
+
+        <div class="col-md-12">
+            <h2 class="mb-1">Gerenciar Pacotes</h2>
+            <p class="mb-3">
+                <?php if($this->getParams(0) == ''): ?>
+                    <a href="/webstore/packages/add" class="btn btn-sm btn-success float-right">Adicionar</a>
+                <?php else: ?>
+                    <a href="/webstore/packages" class="btn btn-sm btn-success float-right">Voltar</a>
+                <?php endif; ?>
+            </p>
+        </div>
+        <?php if($this->getParams(0) == ''): ?>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Seus pacotes</h4>
+                    <br>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID #</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Servidor</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+
+                        $packages = $this->packages->dataAll();
+
+                        foreach ($packages as $package):
+                            $server = new \app\api\webstores\admin\Servers();
+                            $server = $server->name($package->package_SERVER);
+                        ?>
+                        <tr>
+                            <th scope="row"><?= $package->package_ID ?></th>
+                            <td><?= $package->package_NAME ?></td>
+                            <td><?= $server ?></td>
+                            <td>R$ <?= number_format($package->package_PRICE, 2, ',', '.') ?></td>
+                            <td><a class="btn btn-primary btn-sm" href="/webstore/packages/edit/<?= $package->package_ID ?>">Editar</a> <button class="btn btn-danger btn-sm btn-delete" id="<?= $package->package_ID ?>">Deletar</button></td>
+                        </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if($this->getParams(0) == 'add'): ?>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Adicionar pacotes</h4>
+                    <br>
+                    <form method="POST" class="row" id="add" enctype="multipart/form-data">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label><b>Nome do pacote:</b></label>
+                                <input class="form-control" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label><b>Descrição:</b></label>
+                                <textarea class="summernote" name="description" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label><b>Imagem:</b></label>
+                                <div class="card mb-3">
+                                    <div class="card-body" id="imageUploaded">
+                                        <img id="fileUploaded" class="img-fluid">
+                                        <div class="fileEmpty">
+                                            <div class="text-center text-muted" style="font-size: 72px;">
+                                                <i class="fa fa-camera"></i>
+                                            </div>
+                                            <div class="mt-1 h3 text-muted text-center">Sem imagem</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div  style="display: none">
+                                    <input class="form-control-file" id="fileInput" onchange="readURL(this);" type="file" name="image">
+                                </div>
+                                <button class="btn btn-block btn-primary mb-3" type="button" onclick="fileupload()">Selecionar imagem</button>
+                                <p class="text-center text-muted m-0">
+                                    <b>Tamanho recomendado:</b><br> 190x165px
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="from-group col-md-4">
+                                    <label><b>Preço:</b></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text text-dark">$</div>
+                                        </div>
+                                        <input class="form-control" name="price" type="number" step="any" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><b>Servidor:</b></label>
+                                    <select class="form-control" name="server" id="server" required>
+                                        <option disabled selected>Selecione o servidor</option>
+                                        <?php
+
+                                            $servers = $this->server->row();
+                                            foreach ($servers as $server):
+                                        ?>
+                                        <option value="<?= $server->server_ID ?>"><?= $server->server_NAME ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><b>Categoria:</b></label>
+                                    <select class="form-control" name="category" id="categories">
+                                        <option disabled selected>Sem categoria</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="h5">Comandos <button class="btn btn-sm btn-success float-right" type="button" onclick="addCommands()">adicionar</button></div>
+                                <br>
+                                <div class="row addcomands"></div>
+                                <br>
+                                <small class="text-muted">Para informar o nome do jogador, utilize @p</small>
+                            </div>
+                            <br><br>
+                            <button class="btn btn-success btn-submit mr-2">Criar pacote</button>
+                            <button class="btn btn-light text-danger" type="button" onclick="location.href='/webstore/packages'">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+        <?php if($this->getParams(0) == 'edit'): ?>
+        <?php $data = $this->packages->data($this->getParams(1)); ?>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Editar pacotes</h4>
+                    <br>
+                    <form method="POST" class="row" id="edit" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $this->getParams(1) ?>">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label><b>Nome do pacote:</b></label>
+                                <input class="form-control" name="name" value="<?= $data->package_NAME ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label><b>Descrição:</b></label>
+                                <textarea class="summernote" name="description" required><?= $data->package_DESCRIPTION ?></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label><b>Imagem:</b></label>
+                                <div class="card mb-3">
+                                    <div class="card-body" id="imageUploaded">
+                                        <img id="fileUploaded" src="<?= $data->package_IMAGE ?>" class="img-fluid">
+                                    </div>
+                                </div>
+                                <div  style="display: none">
+                                    <input class="form-control-file" id="fileInput" onchange="readURL(this);" type="file" name="image">
+                                </div>
+                                <button class="btn btn-block btn-primary mb-3" type="button" onclick="fileupload()">Selecionar imagem</button>
+                                <p class="text-center text-muted m-0">
+                                    <b>Tamanho recomendado:</b><br> 190x165px
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="from-group col-md-4">
+                                    <label><b>Preço:</b></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text text-dark">$</div>
+                                        </div>
+                                        <input class="form-control" name="price" type="number" value="<?= $data->package_PRICE ?>" step="any" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><b>Servidor:</b></label>
+                                    <select class="form-control" name="server" id="server" required>
+                                        <option value="<?= $data->package_SERVER ?>" selected>Manter</option>
+                                        <?php
+
+                                        $servers = $this->server->row();
+                                        foreach ($servers as $server):
+                                            ?>
+                                            <option value="<?= $server->server_ID ?>"><?= $server->server_NAME ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label><b>Categoria:</b></label>
+                                    <select class="form-control" name="category" id="categories">
+                                        <option value="<?= $data->package_CATEGORY ?>" selected>Manter</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="mt-3">
+                                <div class="h5">Comandos <button class="btn btn-sm btn-success float-right" type="button">adicionar</button></div>
+                                <br>
+                                <div class="row addcomands"></div>
+                                <br>
+                                <small class="text-muted">Para informar o nome do jogador, utilize @p</small>
+                            </div>
+                            -->
+                            <br><br>
+                            <button class="btn btn-success btn-submit mr-2">Salvar alterações</button>
+                            <button class="btn btn-light text-danger" type="button" onclick="location.href='/webstore/packages'">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+
+        $('#add').on('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            var btn_submit = $('.btn-submit');
+
+            btn_submit.html('Enviando...');
+            btn_submit.prop('disabled', true);
+
+            $.ajax({
+                type:'POST',
+                url: '/webstore/actions/package/add',
+                data: formData,
+                dataType: 'JSON',
+                xhr: function() {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', function() {
+                            btn_submit.html('Fazendo upload...');
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                cache:false,
+                contentType: false,
+                processData: false,
+                complete: function (result) {
+                    console.log(result.responseText);
+
+                    let res = JSON.parse(result.responseText);
+
+                    btn_submit.prop('disabled', false);
+                    btn_submit.html("Criar pacote");
+
+                    if(res.status) {
+
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        });
+
+                        setTimeout(function () {
+                            location.href = '/webstore/packages';
+                        }, 1500);
+
+                    } else {
+
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('#edit').on('submit', function(e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            var btn_submit = $('.btn-submit');
+
+            btn_submit.html('Enviando...');
+            btn_submit.prop('disabled', true);
+
+            $.ajax({
+                type:'POST',
+                url: '/webstore/actions/package/edit',
+                data: formData,
+                dataType: 'JSON',
+                xhr: function() {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', function() {
+                            btn_submit.html('Fazendo upload...');
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                cache:false,
+                contentType: false,
+                processData: false,
+                complete: function (result) {
+                    console.log(result.responseText);
+
+                    let res = JSON.parse(result.responseText);
+
+                    btn_submit.prop('disabled', false);
+                    btn_submit.html("Salvar alterações");
+
+                    if(res.status) {
+
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        }).then(function () {
+                            location.href = '/webstore/packages';
+                        });
+
+                    } else {
+
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('#server').on('change', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/packages/categories',
+                method: 'GET',
+                data: { id: $(this).val() },
+                success: function (data) {
+                    $('#categories').html(data);
+                }
+            });
+
+            return false;
+        });
+
+        $('.btn-delete').on('click', function () {
+
+            $.ajax({
+                url: '/webstore/actions/package/delete',
+                method: 'post',
+                data: { id: $(this).attr('id') },
+                success: function () {
+                    location.reload();
+                }
+            })
+
+        });
+
+        $('.summernote').summernote({
+            height: 250
+        });
+    });
+</script>

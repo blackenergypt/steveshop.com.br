@@ -1,0 +1,97 @@
+<?php
+
+$seo = $this->seo->data();
+$config = $this->config->data();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="<?= $seo->seo_KEYWORDS ?>">
+    <meta name="description" content="<?= $seo->seo_DESCRIPTION ?>">
+    <meta name="author" content="SteveShop">
+    <link rel="icon" href="<?= $seo->seo_FAVICON ?>">
+
+    <title><?= $seo->seo_TITLE ?> | <?= $this->subtitle ?></title>
+
+    <link rel="stylesheet" href="/app/content/default_template/assets/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/app/content/default_template/assets/css/fontawesome/all.min.css">
+    <link rel="stylesheet" href="/external/css">
+</head>
+<body>
+<?php
+
+if(isset($_SESSION['Player'])) {
+    echo str_replace('{{user.name}}', $_SESSION['Player'], $this->template->get('user_logged_component'));
+}
+
+// HEADER
+echo str_replace([
+    '{{store.logo}}',
+    '{{store.name}}'
+], [
+    $seo->seo_LOGO,
+    $seo->seo_NAME
+], $this->template->get('header_component'));
+
+// navbar
+
+$servers = new \app\api\template\Servers($this->wid);
+$servers = $servers->listAll();
+
+$links = "";
+
+foreach ($servers as $server) {
+    if($server->server_SHOW == 1) {
+        $category = new \app\api\template\Categories($server->server_ID);
+        if(!$category->has()) {
+            $links.="<li class=\"nav-item\"><a class=\"nav-link\" href=\"/category?server={$server->server_ID}\">{$server->server_NAME}</a></li>";
+        }else{
+            $links.="<li class=\"nav-item dropdown\">
+                        <a class=\"nav-link dropdown-toggle\" href=\"#\" role=\"button\" data-toggle=\"dropdown\">
+                            {$server->server_NAME}
+                        </a>
+                        <div class=\"dropdown-menu\">
+                        ";
+            foreach ($category->listAll() as $category) {
+                if($category->category_SHOW == 1) {
+                    $links .= "<a class=\"dropdown-item\" href=\"/category?server={$server->server_ID}&category={$category->category_ID}\">{$category->category_NAME}</a>";
+                }
+            }
+            $links.="</div></li>";
+        }
+    }
+
+}
+
+$pages = $this->pages->data();
+foreach ($pages as $page) {
+    if($page->page_SHOW == 1) {
+        $links .= "<li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"/{$page->page_LINK}\">{$page->page_TITLE}</a>
+                    </li>";
+    }
+}
+
+echo str_replace([
+    '{{store.links}}',
+    '{{cart.count}}'
+], [
+    $links,
+    \app\api\webstores\Cart::count()
+], $this->template->get('navbar_component'));
+
+
+// PAGE
+echo $this->render();
+
+// FOOTER
+echo str_replace('{{store.name}}', $seo->seo_NAME, $this->template->get('footer_component'));
+?>
+<script src="/app/content/default_template/assets/js/jquery/jquery.min.js"></script>
+<script src="/app/content/default_template/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/app/content/default_template/assets/js/app.js"></script>
+<script src="/external/js"></script>
+</body>
+</html>

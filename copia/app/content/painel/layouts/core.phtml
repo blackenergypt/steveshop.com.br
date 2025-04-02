@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SteveShop | Dashboard</title>
+    <link rel="stylesheet" href="/app/content/painel/assets/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="/app/content/painel/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/app/content/painel/assets/css/vertical-layout-light/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <script>window.scripts = [];</script>
+</head>
+<body class="sidebar-dark">
+<div class="container-scroller">
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand" href="/"><img src="/app/content/site/assets/images/logo.png" style="width: 120px!important; height: auto!important;;"/></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="ti-layout-grid2"></span>
+            </button>
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                        Minha conta
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="/settings">
+                            <i class="ti-settings text-primary"></i>
+                            Configurações
+                        </a>
+                        <a class="dropdown-item" href="/account/logout">
+                            <i class="ti-power-off text-primary"></i>
+                            Sair
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid page-body-wrapper">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        <i class="ti-home menu-icon"></i>
+                        <span class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/webstore/servers">
+                        <i class="ti-harddrives menu-icon"></i>
+                        <span class="menu-title">Servidores</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#products" aria-expanded="false" aria-controls="products">
+                        <i class="ti-package menu-icon"></i>
+                        <span class="menu-title">Produtos</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="products">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="/webstore/categories">Categorias</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/webstore/packages">Pacotes</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/webstore/send">Envio manual</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/webstore/discounts">
+                        <i class="ti-receipt menu-icon"></i>
+                        <span class="menu-title">Descontos</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/webstore/gifts">
+                        <i class="ti-gift menu-icon"></i>
+                        <span class="menu-title">Gift Cards</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#analytics" aria-expanded="false" aria-controls="analytics">
+                        <i class="ti-stats-up menu-icon"></i>
+                        <span class="menu-title">Relatórios</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="analytics">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="/webstore/transactions">Transações</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/webstore/logs">Entregas</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/config/gateways">
+                        <i class="ti-credit-card menu-icon"></i>
+                        <span class="menu-title">Formas de pagamento</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/config/integration">
+                        <i class="ti-plug menu-icon"></i>
+                        <span class="menu-title">Integração</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/config/domain">
+                        <i class="ti-world menu-icon"></i>
+                        <span class="menu-title">Domínio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/template/pages">
+                        <i class="ti-file menu-icon"></i>
+                        <span class="menu-title">Páginas customizadas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/template">
+                        <i class="ti-brush-alt menu-icon"></i>
+                        <span class="menu-title">Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="true" aria-controls="ui-basic">
+                        <span class="menu-title">Minha Conta</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse show" id="ui-basic">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" href="/webstores">Lojas</a></li>
+                            <!--<li class="nav-item"><a class="nav-link" href="/billing">Financeiro</a></li>-->
+                            <li class="nav-item"><a class="nav-link" href="/settings">Configurações</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-panel">
+            <?= $this->render(); ?>
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019 <a href="https://steveshop.com.br/" target="_blank">SteveShop</a>. All rights reserved.</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+<script src="/app/content/painel/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="/app/content/painel/assets/vendors/chart.js/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="/app/content/painel/assets/js/off-canvas.js"></script>
+<script src="/app/content/painel/assets/js/hoverable-collapse.js"></script>
+<script src="/app/content/painel/assets/js/template.js"></script>
+<script src="/app/content/painel/assets/js/settings.js"></script>
+<script src="/app/content/painel/assets/js/todolist.js"></script>
+<script src="/app/content/painel/assets/js/dashboard.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+<script src="/app/content/painel/assets/jspages/init.js"></script>
+<script>
+    $('.login').on('click', function () {
+
+        $.ajax({
+            url: '/webstores/actions/login',
+            method: 'POST',
+            data: { id: $(this).attr('id') },
+            complete: function () {
+                location.reload();
+            }
+        })
+
+    });
+
+    function addCommands()
+    {
+        let count = $('.commands').length + 1;
+        $('.addcomands').append("<div class=\"col-md-3 commands ac-"+count+"\">\n" +
+            "                                        <br><select class=\"form-control\" name=\"types[]\">\n" +
+            "                                            <option class=\"1\">Aprovado</option>\n" +
+            "                                            <option class=\"2\">Chargeback</option>\n" +
+            "                                        </select>\n" +
+            "                                    </div>\n" +
+            "                                    <div class=\"col-md-7 cm-"+count+"\">\n" +
+            "                                        <br><input class=\"form-control\" name=\"commands[]\" placeholder=\"Insira o comando que será executado\">\n" +
+            "                                    </div>\n" +
+            "                                    <div class=\"col-md-2 rm-"+count+"\">\n" +
+            "                                        <br><button class=\"btn btn-light text-danger float-md-right\" onclick=\"removeThisCommand("+count+")\">Remover</button>\n" +
+            "                                    </div>");
+    }
+
+    function removeThisCommand(id)
+    {
+        $('.ac-' + id).remove();
+        $('.cm-' + id).remove();
+        $('.rm-' + id).remove();
+    }
+
+    function fileupload() {
+        $("#fileInput").click();
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fileUploaded').attr('src', e.target.result);
+                $('.fileEmpty').hide();
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function isNumberDecimalKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if ((charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    $(function() {
+        if(scripts instanceof Array) {
+            $.each(scripts, function (index, fn) {
+                if(typeof fn === 'function') fn();
+            });
+        }
+    });
+</script>
+</body>
+</html>

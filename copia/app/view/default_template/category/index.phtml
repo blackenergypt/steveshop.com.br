@@ -1,0 +1,26 @@
+<?php
+
+$productsStr = "";
+
+$category = (empty($_GET['category'])) ? null : $_GET['category'];
+$products = new \app\api\template\Products($this->wid, $_GET['server'], $category);
+$products = $products->listAll();
+
+foreach ($products as $product) {
+
+    $productsStr .= str_replace([
+        '{{product.image}}',
+        '{{product.name}}',
+        '{{product.price}}',
+        '{{product.id}}',
+        '{{product.description}}'
+    ], [
+        $product->package_IMAGE,
+        $product->package_NAME,
+        $product->package_PRICE,
+        $product->package_ID,
+        $product->package_DESCRIPTION
+    ], $this->template->get('package_component'));
+}
+
+echo str_replace('{{products}}', $productsStr, $this->template->get('page_products'));

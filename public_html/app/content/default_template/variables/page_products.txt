@@ -1,0 +1,9 @@
+<main role="main">
+    <div class="container">
+        <div class="card card-block mt-3" style="background: transparent; border: none;">
+            <div class="row">
+                {{products}}
+            </div>
+        </div>
+    </div>
+</main>

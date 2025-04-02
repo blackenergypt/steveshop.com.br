@@ -1,0 +1,7 @@
+<?php
+
+    $model = new \app\lib\Model();
+
+    $select = $model->select("SELECT * FROM `webstores` WHERE `webstore_SUBDOMAIN`='".SUBDOMAIN."'");
+?>
+<h1>Bem-vindo à loja <?= $select->webstore_ID_NAME ?></h1>

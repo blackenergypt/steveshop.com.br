@@ -1,0 +1,139 @@
+<?php
+
+$data = $this->seo->data();
+?>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-1">Template</h2>
+            <p class="mb-3">Configurações básicas</p>
+        </div>
+        <div class="col-md-12">
+            <div class="card mt-2">
+                <div class="card-body">
+                    <h4>Configurações básicas</h4>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form method="post" id="update" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Logo</h5>
+                                        <img src="<?= ($data->seo_LOGO == '-') ? 'https://via.placeholder.com/150x65&text=sua%20logo%20aqui' : $data->seo_LOGO ?>" class="img-fluid img-thumbnail" alt="Sem imagem">
+                                        <br><br>
+                                        <input type="file" name="logo" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Favicon</h5>
+                                        <img src="<?= ($data->seo_FAVICON == '-') ? 'https://via.placeholder.com/65x65&text=favicon' : $data->seo_FAVICON ?>" class="img-fluid img-thumbnail" alt="Sem imagem">
+                                        <br><br>
+                                        <input type="file" name="favicon" class="form-control">
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <h5>Configurações de SEO</h5>
+                                <br>
+                                <div class="form-group">
+                                    <label for="name">Nome do site</label>
+                                    <input class="form-control" name="name" id="name" value="<?= $data->seo_NAME ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Título do site</label>
+                                    <input class="form-control" name="title" id="title" value="<?= $data->seo_TITLE ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="keywords">Palavras chaves</label>
+                                    <input class="form-control" name="keywords" id="keywords" value="<?= $data->seo_KEYWORDS ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Descrição</label>
+                                    <textarea class="form-control" name="description" id="description" rows="4" required><?= $data->seo_DESCRIPTION ?></textarea>
+                                </div>
+                                <h5>Mensagem de boas vindas</h5>
+                                <textarea class="form-control mb-4" rows="5" name="welcome"><?= $data->seo_WELCOME ?></textarea>
+                                <button class="btn btn-success btn-submit">Salvar alterações</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="mb-4">Editor de Template</h4>
+                            <p>
+                                Para iniciar o uso do editor você precisa do codigo de acesso que está logo abaixo, esse codigo ele é restrito ao seu site. Isso
+                                quer dizer que se cair em mãos erradas o individuo terá o acesso total para modificar!
+                            </p>
+                            <h6>Seu codigo de acesso é</h6>
+                            <input class="form-control mb-3 text-center" readonly value="<?= $this->webstore->token() ?>">
+                            <p>
+                                Caso precise de ajuda para modificar o template de seu site, entre em contato com um de nossos suporte entrando em nosso
+                                discord.
+                            </p>
+                            <br>
+                            <a href="https://editor.steveshop.com.br/" class="btn btn-dark btn-block">Ir para o editor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        $('#update').on('submit', function (e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            var btn_submit = $('.btn-submit');
+
+            btn_submit.html('Enviando...');
+            btn_submit.prop('disabled', true);
+
+            $.ajax({
+                url: '/template/index/update',
+                method: 'POST',
+                data: formData,
+                dataType: 'JSON',
+                xhr: function() {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', function() {
+                            btn_submit.html('Fazendo upload...');
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                cache:false,
+                contentType: false,
+                processData: false,
+                complete: function (response) {
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        swal({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        }).then(()=>{
+                            location.reload();
+                        });
+
+                        btn_submit.html("Pronto!");
+
+                    }else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+
+                        btn_submit.prop('disabled', false);
+                        btn_submit.html("Tente novamente!");
+                    }
+                }
+            });
+
+            return false;
+        });
+
+    });
+</script>

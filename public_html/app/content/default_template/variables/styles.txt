@@ -1,0 +1,95 @@
+body {
+    background: #F5F5F5;
+}
+
+a:hover {
+    text-decoration: none;
+}
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.dropdown-item:focus {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+header.presentation {
+    position: relative;
+    height: 150px;
+    padding: 40px;
+}
+header.presentation .logo {
+    font-weight: 600;
+    font-size: 40px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.menu {
+    background-color: rgba(0,0,0,.01);
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.content {
+    background: #fff;
+    padding: 35px;
+    border-radius: 5px;
+}
+
+.package {
+    position: relative;
+    background: #FFF;
+    border-radius: 5px;
+    border: solid 1px rgba(0,0,0,.1);
+    margin-bottom: 20px;
+}
+.package .promotional {
+    position: absolute;
+    right: 0;
+    border-radius: 0 5px 0 0;
+    padding: 5px 10px;
+    background: limegreen;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.package .image {
+    padding: 30px;
+}
+.package .title {
+    padding: 0 30px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.package .price {
+    padding: 0 30px;
+}
+.package .buttons {
+    padding: 30px;
+    padding-top: 15px;
+}
+.package .buttons .btn {
+    width: 48.87%;
+}
+
+.logged {
+    background: #212121;
+    color: #616161;
+    padding: 10px;
+}
+
+footer {
+    padding: 35px 0;
+}

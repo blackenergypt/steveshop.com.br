@@ -1,0 +1,110 @@
+<div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+    <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v1" id="kt_login">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--desktop kt-grid--ver-desktop kt-grid--hor-tablet-and-mobile">
+            <div class="kt-grid__item kt-grid__item--order-tablet-and-mobile-2 kt-grid kt-grid--hor kt-login__aside" style="background-image: url(/app/content/painel/assets/auth/media/bg/bg-4.jpg);">
+                <div class="kt-grid__item">
+                    <a href="#" class="kt-login__logo" >
+                        <img src="https://steveshop.com.br/app/content/site/assets/images/logo.png" alt="..." height="36px">
+                    </a>
+                </div>
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
+                    <div class="kt-grid__item kt-grid__item--middle">
+                        <h3 class="kt-login__title">Bem-vindo à plataforma<br> SteveShop!</h3>
+                        <h4 class="kt-login__subtitle">A melhor forma de monetizar o seu servidor de Minecraft</h4>
+                    </div>
+                </div>
+                <div class="kt-grid__item">
+                    <div class="kt-login__info">
+                        <div class="kt-login__copyright">
+                            &copy 2019 SteveShop
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kt-grid__item kt-grid__item--fluid  kt-grid__item--order-tablet-and-mobile-1  kt-login__wrapper">
+                <div class="kt-login__head">
+                    <span class="kt-login__signup-label">Não tem uma conta?</span>&nbsp;&nbsp;
+                    <a href="/account/register" class="kt-link kt-login__signup-link">Cadastre-se!</a>
+                </div>
+                <div class="kt-login__body">
+                    <div class="kt-login__form">
+                        <div class="kt-login__title">
+                            <h3>Autentifique-se</h3>
+                        </div>
+                        <form class="kt-form" method="post" id="form-login" autocomplete="off">
+                            <div class="alert alert-danger" style="display: none;"></div>
+                            <div class="alert alert-success" style="display: none;"></div>
+                            <input name="<?= $this->tokenId ?>" value="<?= $this->tokenValue ?>" type="hidden">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="E-mail" name="<?= $this->inputs['email'] ?>" autocomplete="off" required>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="password" placeholder="Senha" name="<?= $this->inputs['password'] ?>" required>
+                            </div>
+                            <div class="kt-login__actions">
+                                <a href="/account/recovery" class="kt-link kt-login__link-forgot">
+                                    Perdeu a senha?
+                                </a>
+                                <button class="btn btn-primary btn-elevate kt-login__btn-primary g-recaptcha auth-form-btn"
+                                        data-sitekey="6LemDMQUAAAAAJf71cSs6GBZITh6ysiWmFJX4npN"
+                                        data-callback="onSubmit"
+                                        data-size="invisible">
+                                    Entrar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+
+        window.onSubmit = onSubmit;
+
+        function onSubmit()
+        {
+
+            let form = $('#form-login');
+            let dataForm = form.serialize();
+            let button = $('#form-login button');
+
+            button.prop('disabled', true);
+            button.html('Autenticando...');
+
+            $.ajax({
+
+                url: '/account/login/action',
+                method: 'POST',
+                data: dataForm,
+                dataType: 'JSON',
+                complete: function (response) {
+
+                    console.log(response.responseText);
+
+                    let res = JSON.parse(response.responseText);
+
+                    $('.alert').hide();
+
+                    button.html('Entrar');
+                    button.prop('disabled', false);
+
+                    if(res.success)
+                    {
+                        $('.alert-success').show().html(res.message);
+                        location.href = '/';
+                    }else{
+                        $('.alert-danger').show().html(res.message);
+                    }
+
+                    grecaptcha.reset();
+                }
+
+            });
+
+        }
+
+    });
+</script>

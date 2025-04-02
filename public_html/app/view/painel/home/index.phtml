@@ -1,0 +1,249 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <div class="row">
+                <div class="col-12 col-xl-5 mb-4 mb-xl-0">
+                    <h4 class="font-weight-bold mt-3">Bem-vindo de volta!</h4>
+                </div>
+                <div class="col-12 col-xl-7">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap">
+                        <div class="border-right pr-4 mb-3 mb-xl-0">
+                            <p class="text-muted">Vendas</p>
+                            <h4 class="mb-0 font-weight-bold">0</h4>
+                        </div>
+                        <div class="border-right pr-4 mb-3 mb-xl-0">
+                            <p class="text-muted">Receita</p>
+                            <h4 class="mb-0 font-weight-bold">R$0,00</h4>
+                        </div>
+                        <div class="border-right pr-4 mb-3 mb-xl-0">
+                            <p class="text-muted">Compradores</p>
+                            <h4 class="mb-0 font-weight-bold">0</h4>
+                        </div>
+                        <div class="mb-3 mb-xl-0">
+                            <a href="https://<?= \app\factory\webstores\WebstoresFactory::data()->webstore_SUBDOMAIN ?>.steveshop.com.br/" target="_blank" class="btn btn-warning rounded-0 text-white">Visitar loja</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title text-md-center text-xl-left">Compradores</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0"><?= $this->transactions->customers() ?></h3>
+                        <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                    </div>
+                    <p class="mb-0 mt-3 text-muted font-weight-light">Compradores únicos em sua loja</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title text-md-center text-xl-left">Vendas</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0"><?= $this->transactions->sales() ?></h3>
+                        <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                    </div>
+                    <p class="text-muted  mt-3 mb-0 font-weight-light"><?= $this->transactions->salesMonth() ?> vendas concluidas este mês</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title text-md-center text-xl-left">Renda</p>
+                    <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                        <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">R$<?= number_format($this->transactions->earns(), 2, ',', '.') ?></h3>
+                        <i class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+                    </div>
+                    <p class="text-muted mt-3 mb-0 font-weight-light"><?= $this->transactions->salesMonth() ?> vendas concluidas este mês</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <h4 class="card-title">Gráfico de Vendas</h4>
+                    </div>
+                    <div id="statistics-legend" class="chartjs-legend mt-2 mb-4"></div>
+                    <canvas id="statistics-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Últimas compras <b>aprovadas</b> <small><span class="text-muted">(mostrando até 15)</span></small></h4>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>N. Fatura</th>
+                                <th>Código de Transação</th>
+                                <th>Gateway</th>
+                                <th class="text-center">Valor</th>
+                                <th>Data e Hora</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                                $transactions = $this->transactions->data(15);
+
+                                if(count($transactions) == 0)
+                                {
+                                    echo "<tr><td colspan=\"6\">Não há transações</td></tr>";
+                                }
+
+                                foreach ($transactions as $transaction):
+                            ?>
+                            <tr>
+                                <td><?= $transaction->transaction_REFERENCE ?></td>
+                                <td><?= $transaction->transaction_CODE ?></td>
+                                <td><?= $transaction->transaction_GATEWAY ?></td>
+                                <td>R$ <?= number_format($transaction->transaction_GROSS_AMOUNT, 2, ',', '.') ?></td>
+                                <td><?= date('d/m/Y H:i', strtotime($transaction->transaction_DATE)) ?></td>
+                                <td><?= $transaction->transaction_PAID == 1 ? 'Pago' : 'Pendente' ?></td>
+                            </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        var areaData = {
+            labels: [
+                <?php
+
+                    $dateToStart = date("Y-m-d", strtotime(date("Y-m-d"). "-7 days"));
+                    for ($i=0; $i<7; $i++)
+                    {
+                        $date = date("Y-m-d", strtotime($dateToStart. "+{$i} days"));
+
+                        echo "'$date',";
+                    }
+                ?>
+            ],
+            datasets: [{
+                data: [
+                    <?php
+
+                    $dateToStart = date("Y-m-d", strtotime(date("Y-m-d"). "-7 days"));
+                    for ($i=1; $i<=7; $i++)
+                    {
+                        $date = date("Y-m-d", strtotime($dateToStart. "+{$i} days"));
+
+                        echo "{$this->transactions->earnsInDate($date, 'net')},";
+                    }
+                    ?>
+                ],
+                backgroundColor: [
+                    'rgba(68, 81, 158, .78)'
+                ],
+                borderColor: [
+                    'rgba(68, 81, 158, .78)'
+                ],
+                borderWidth: 1,
+                fill: 'origin',
+                label: "líquido"
+            },
+                {
+                    data: [
+                        <?php
+
+                        $dateToStart = date("Y-m-d", strtotime(date("Y-m-d"). "-7 days"));
+                        for ($i=1; $i<=7; $i++)
+                        {
+                            $date = date("Y-m-d", strtotime($dateToStart. "+{$i} days"));
+
+                            echo "{$this->transactions->earnsInDate($date, 'gross')},";
+                        }
+                        ?>
+                    ],
+                    backgroundColor: [
+                        '#fc5661'
+                    ],
+                    borderColor: [
+                        '#fc5661'
+                    ],
+                    borderWidth: 1,
+                    fill: 'origin',
+                    label: "bruto"
+                }
+            ]
+        };
+        var areaOptions = {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                filler: {
+                    propagate: false
+                }
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    ticks: {
+                        display: true
+                    },
+                    gridLines: {
+                        display: false,
+                        drawBorder: false,
+                        color: 'transparent',
+                        zeroLineColor: '#eeeeee'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        display: true,
+                        autoSkip: false,
+                        maxRotation: 0,
+                        stepSize: 100,
+                        min: 0,
+                        max: 300
+                    },
+                    gridLines: {
+                        drawBorder: false
+                    }
+                }]
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true
+            },
+            elements: {
+                line: {
+                    tension: .25
+                },
+                point: {
+                    radius: 0
+                }
+            }
+        }
+        var salesChartCanvas = $("#statistics-chart").get(0).getContext("2d");
+        var salesChart = new Chart(salesChartCanvas, {
+            type: 'line',
+            data: areaData,
+            options: areaOptions
+        });
+        document.getElementById('statistics-legend').innerHTML = salesChart.generateLegend();
+    });
+</script>

@@ -1,0 +1,70 @@
+<main>
+    <section class="navigation">
+        <img src="https://steveshop.com.br/app/content/site/assets/images/logo.png" alt="..." height="36px">
+        <div class="title"><a href="https://app.steveshop.com.br/template" style="color: tomato; text-decoration: none;">sair</a></div>
+        <p style="font-size: 12px; color: rgba(255,255,255,.5); text-align: left;">
+            <b>Modo de uso</b>
+            <br>
+            Ctrl+S para salvar <br>
+            Ctrl+Z corrigir
+        </p>
+        <ul class="nav">
+            <li class="nav-item nav-drop">
+                <a href="#" class="drop-link" id="drop-assets"><i class="far fa-folder-open text-white"></i> assets</a>
+                <ul id="nav-assets">
+                    <li><a href="#" class="setValue" id="styles:styles:css"><i class="fab fa-css3-alt text-blue"></i> styles</a></li>
+                    <li><a href="#" class="setValue" id="scripts:scripts:javascript"><i class="fab fa-js-square text-yellow"></i> scripts</a></li>
+                </ul>
+            </li>
+            <li class="nav-item nav-drop">
+                <a href="#" class="drop-link" id="drop-components"><i class="fas fa-database text-white"></i> components</a>
+                <ul id="nav-components">
+                    <li><a href="#" class="setValue" id="user_logged:user_logged_component:html"><i class="fab fa-html5 text-red"></i> user_logged</a></li>
+                    <li><a href="#" class="setValue" id="header:header_component:html"><i class="fab fa-html5 text-red"></i> header</a></li>
+                    <li><a href="#" class="setValue" id="navbar:navbar_component:html"><i class="fab fa-html5 text-red"></i> navbar</a></li>
+                    <li><a href="#" class="setValue" id="footer:footer_component:html"><i class="fab fa-html5 text-red"></i> footer</a></li>
+                    <li><a href="#" class="setValue" id="package:package_component:html"><i class="fab fa-html5 text-red"></i> package</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a href="#" class="setValue" id="home:page_home:html"><i class="fab fa-html5 text-red"></i> home</a></li>
+            <li class="nav-item"><a href="#" class="setValue" id="username:page_username:html"><i class="fab fa-html5 text-red"></i> username</a></li>
+            <li class="nav-item"><a href="#" class="setValue" id="products:page_products:html"><i class="fab fa-html5 text-red"></i> products</a></li>
+            <li class="nav-item"><a href="#" class="setValue" id="cart:page_cart:html"><i class="fab fa-html5 text-red"></i> cart</a></li>
+            <li class="nav-item"><a href="#" class="setValue" id="empty_cart:page_empty_cart:html"><i class="fab fa-html5 text-red"></i> empty_cart</a></li>
+        </ul>
+        <br>
+        <br>
+        <a style="color: rgba(255, 255, 255, .7); padding: 5px 10px; border-radius: 3px; background: rgba(0, 0, 0, .4); text-decoration: none; font-size: 12px" href="/home/reset">Resetar para configurações padrões</a>
+        <p style="font-size: 8px; color: rgba(255, 255, 255, .7); margin-top: 10px;">Atenção! Esta ação é irreversível! Certifique-se que realmente pretende fazer isto</p>
+    </section>
+    <section class="wrapper">
+        <header id="editor_title"></header>
+        <input type="hidden" name="value" value="">
+        <textarea id="editor"></textarea>
+    </section>
+</main>
+<script>
+    scripts.push(function () {
+
+        $('.setValue').on('click', function(e) {
+            e.preventDefault();
+
+            var $this = $(this);
+            var id = $this.attr('id');
+            var split = id.split(':');
+            var value = split[1];
+
+            $.ajax({
+                url: '/home/get',
+                method: 'POST',
+                data: { value },
+                complete: function (data) {
+                    set(data.responseText, split[0], `text/${split[2]}`);
+                    $('input[name=value]').val(value);
+                }
+            });
+
+            return false;
+        })
+    });
+</script>

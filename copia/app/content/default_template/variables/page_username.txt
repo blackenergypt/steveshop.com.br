@@ -1,0 +1,29 @@
+<main role="main">
+    <div class="container">
+        <div class="content mt-3">
+            <div class="row">
+                <div class="col-md-7 mx-auto">
+                    <h1 class="h5 mt-5">Digite seu usuário</h1>
+                    <form class="row mb-5" method="post">
+                        <div class="col-md-8">
+                            <input class="form-control form-control-lg" name="nickname" placeholder="Exemplo: Notch"  onkeyup="this.value = Trim( this.value )" maxlength="16" >
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-block btn-primary btn-lg">Confirmar</button>
+                        </div>
+                        <div class="col-md-12">
+                            <p class="m-0 text-muted">
+                                <small>Informe seu usuário <i>in-game</i> para continuar</small>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function Trim(str){
+        return str.replace(/^\s+|\s+$/g,"");
+    }
+</script>

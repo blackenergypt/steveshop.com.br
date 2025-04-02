@@ -1,0 +1,256 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                Gerenciar páginas
+                <?php if($this->getParams(0) == ''): ?>
+                    <a href="/template/pages/add" class="btn btn-sm btn-success float-right">Adicionar</a>
+                <?php else: ?>
+                    <a href="/template/pages" class="btn btn-sm btn-success float-right">Voltar</a>
+                <?php endif; ?>
+            </h1>
+            <br>
+        </div>
+        <?php if($this->getParams(0) == ''): ?>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Suas páginas</h4>
+                        <br>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID #</th>
+                                <th scope="col">Título</th>
+                                <th scope="col">Link</th>
+                                <th scope="col">Mostrar</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            $pages = $this->pages->data();
+
+                            if(count($pages) == 0)
+                            {
+                                echo "<tr><th colspan='5'>Não há páginas</th></tr>";
+                            }
+
+                            foreach ($pages as $page):
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $page->page_ID ?></th>
+                                    <td>
+                                        <?= $page->page_TITLE ?>
+                                    </td>
+                                    <td>
+                                        /<?= $page->page_LINK ?>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <label class="form-check-label text-muted">
+                                                <input type="checkbox" class="form-check-input switch-show" id="<?= $page->page_ID ?>" name="show" <?= $page->page_SHOW == 1 ? 'checked' : '' ?>>
+                                                Mostrar no site
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td><a class="btn btn-primary btn-sm" href="/template/pages/edit/<?= $page->page_ID ?>">Editar</a> <button class="btn btn-danger btn-sm delete" id="<?= $page->page_ID ?>">Deletar</button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if($this->getParams(0) == 'add'): ?>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Adicionar nova página</h4>
+                        <br>
+                        <form method="POST" class="row" id="add">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Título da página:</b></label>
+                                    <input class="form-control" name="title" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Link: (exemplo: termos-de-uso)</b></label>
+                                    <input class="form-control" name="link" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Conteúdo:</b></label>
+                                    <textarea class="summernote" name="content" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-success btn-submit mr-2">Criar página</button>
+                                <button class="btn btn-light text-danger" type="button" onclick="location.href='/template/pages'">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if($this->getParams(0) == 'edit'): ?>
+            <?php $data = $this->pages->getByID($this->getParams(1)); ?>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Editar página</h4>
+                        <br>
+                        <form method="POST" class="row" id="edit">
+                            <input type="hidden" name="id" value="<?= $this->getParams(1) ?>">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Título da página:</b></label>
+                                    <input class="form-control" name="title" value="<?= $data->page_TITLE ?>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Link: (exemplo: termos-de-uso)</b></label>
+                                    <input class="form-control" name="link" value="<?= $data->page_LINK ?>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Conteúdo:</b></label>
+                                    <textarea class="summernote" name="content" required><?= $data->page_CONTENT ?></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-success btn-submit mr-2">Salvar alterações</button>
+                                <button class="btn btn-light text-danger" type="button" onclick="location.href='/template/pages'">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+
+        $('#add').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type:'POST',
+                url: '/template/pages/actions/add',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (result) {
+                    console.log(result.responseText);
+
+                    let res = JSON.parse(result.responseText);
+
+                    if(res.success) {
+
+                        swal({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        }).then(()=>{
+                            location.href = '/template/pages';
+                        });
+
+                    } else {
+
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('#edit').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type:'POST',
+                url: '/template/pages/actions/update',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (result) {
+                    console.log(result.responseText);
+
+                    let res = JSON.parse(result.responseText);
+
+                    if(res.success) {
+
+                        swal({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        }).then(()=>{
+                            location.href = '/template/pages';
+                        });
+
+                    } else {
+
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('.delete').on('click', function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                url: '/template/pages/actions/delete',
+                method: 'POST',
+                data: { id: $(this).attr('id') },
+                complete: function () {
+                    location.reload();
+                }
+            });
+
+            return false;
+
+        });
+
+        $('.switch-show').on('click', function (e) {
+
+            var set = $(this).is(':checked') ? 'on' : 'off';
+            let id = $(this).attr('id');
+
+            $.ajax({
+                url: '/template/pages/actions/show',
+                method: 'POST',
+                data: { id: id, mode: set },
+                complete: function () {
+
+                }
+            })
+
+        });
+
+        $('.summernote').summernote({
+            height: 250
+        });
+
+    });
+</script>

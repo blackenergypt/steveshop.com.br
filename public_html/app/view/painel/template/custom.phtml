@@ -1,0 +1,153 @@
+<?php
+
+$data = $this->config->data();
+?>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Template</h1>
+            <br>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Gerenciar template <button class="btn btn-dark btn-sm float-md-right" disabled title="Desabilitado">Editor avançado</button></h4>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5 class="mb-3">Background</h5>
+                            <form method="post" class="update-file" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="background_image">Imagem</label>
+                                    <input class="form-control" id="background_image" name="config_BACKGROUND_IMAGE" type="file">
+                                </div>
+                                <div class="form-group">
+                                    <label for="background_color">Cor <small class="text-muted">(código da cor)</small></label>
+                                    <input class="form-control" id="background_color" name="config_BACKGROUND_COLOR" value="<?= $data->config_BACKGROUND_COLOR ?>" required>
+                                </div>
+                                <button class="btn btn-primary btn-block btn-submit">Salvar alterações</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="mb-3">Menu</h5>
+                            <form method="post" class="update">
+                                <div class="form-group">
+                                    <label for="menu_bg">Cor do menu</label>
+                                    <input class="form-control" id="menu_bg" name="config_MENU_BACKGROUND" value="<?= $data->config_MENU_BACKGROUND ?>" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="menu_color">Cor dos caracteres</label>
+                                    <input class="form-control" id="menu_color" name="config_MENU_COLOR" value="<?= $data->config_MENU_COLOR ?>" required>
+                                </div>
+                                <button class="btn btn-primary btn-block">Salvar alterações</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="mb-3">Cor primária</h5>
+                            <form method="post" class="update">
+                                <div class="form-group">
+                                    <label for="primary_color">Informe a cor</label>
+                                    <input class="form-control" id="primary_color" name="config_PRIMARY_COLOR" value="<?= $data->config_PRIMARY_COLOR ?>" required>
+                                </div>
+                                <button class="btn btn-primary btn-block">Salvar alterações</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        $('.update').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/template/custom/update',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (response) {
+                    console.log(response.responseText);
+
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        swal({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        });
+                    }else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('.update-file').on('submit', function (e) {
+            e.preventDefault();
+
+            let formData = new FormData(this);
+            var btn_submit = $('.btn-submit');
+
+            btn_submit.html('Enviando...');
+            btn_submit.prop('disabled', true);
+
+            $.ajax({
+                url: '/template/custom/update',
+                method: 'POST',
+                data: formData,
+                dataType: 'JSON',
+                xhr: function() {
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) {
+                        myXhr.upload.addEventListener('progress', function() {
+                            btn_submit.html('Fazendo upload...');
+                        }, false);
+                    }
+                    return myXhr;
+                },
+                cache:false,
+                contentType: false,
+                processData: false,
+                complete: function (response) {
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        swal({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        }).then(()=>{
+                            location.reload();
+                        });
+
+                        btn_submit.html("Pronto!");
+
+                    }else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+
+                        btn_submit.prop('disabled', false);
+                        btn_submit.html("Tente novamente!");
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

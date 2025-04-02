@@ -1,0 +1,59 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-1">Log de atividade</h2>
+            <p class="mb-3">Acompanhe todos passos que nossa plataforma executa</p>
+        </div>
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table datatable table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID #</th>
+                                <th scope="col">Usuário</th>
+                                <th scope="col">Servidor</th>
+                                <th scope="col">Pacote</th>
+                                <th scope="col">Data</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            $model = new \app\lib\Model();
+                            $logs = $model->select("SELECT * FROM `webstores_dispense` WHERE `dispense_WID`={$_SESSION['WebstoreLogged']}", 'all');
+
+                            foreach ($logs as $log):
+
+                                $products = new \app\api\webstores\admin\Packages();
+                                $package = $products->dataWID($log->dispense_PID)->package_NAME;
+
+                                $server = new \app\api\webstores\admin\Servers();
+                                $server = $server->name($log->dispense_SID);
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $log->dispense_ID ?></th>
+                                    <td><?= $log->dispense_USERNAME ?></td>
+                                    <td><?= $server ?></td>
+                                    <td><?= $package ?></td>
+                                    <td><?= date("d/m/Y H:i:s", strtotime($log->dispense_DATE)) ?></td>
+                                    <td><?= ($log->dispense_ACTIVED == 1) ? 'Resgatado' : 'Pendente' ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        $(document).ready(function() {
+            $('.datatable').DataTable();
+        });
+    })
+</script>

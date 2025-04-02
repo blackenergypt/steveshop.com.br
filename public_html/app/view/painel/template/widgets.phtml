@@ -1,0 +1,124 @@
+<?php
+
+$data = $this->config->data();
+?>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Template</h1>
+            <br>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Gerenciar widgets</h4>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5 class="mb-3">Jogadores online</h5>
+                                    <form method="post" class="update">
+                                        <input type="hidden" name="unique" value="players">
+                                        <div class="row">
+                                            <div class="form-group col-md-7">
+                                                <label for="ip">Endereço IP <small class="text-muted">(ou domínio)</small></label>
+                                                <input class="form-control" name="ip" id="ip" value="<?= isset(json_decode($this->widgets->get('players')->widget_CONFIGURATION)->ip) ? json_decode($this->widgets->get('players')->widget_CONFIGURATION)->ip : '' ?>" required>
+                                            </div>
+                                            <div class="form-group col-md-5">
+                                                <label for="port">Porta</label>
+                                                <input class="form-control" name="port" id="port" value="<?= isset(json_decode($this->widgets->get('players')->widget_CONFIGURATION)->port) ? json_decode($this->widgets->get('players')->widget_CONFIGURATION)->port : '' ?>" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mode">
+                                                <input type="checkbox" name="mode" id="mode" <?= (isset($this->widgets->get('players')->widget_ACTIVED) || ($this->widgets->get('players')->widget_ACTIVED == 1)) ? 'checked' : '' ?>> Habilitar widget
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-primary">Salvar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5 class="mb-3">Twitter</h5>
+                                    <form method="post" class="update">
+                                        <input type="hidden" name="unique" value="twitter">
+                                        <div class="form-group">
+                                            <label for="profile">Perfil (@)</label>
+                                            <input class="form-control" name="profile" id="profile" value="<?= isset(json_decode($this->widgets->get('twitter')->widget_CONFIGURATION)->profile) ? json_decode($this->widgets->get('twitter')->widget_CONFIGURATION)->profile : '' ?>" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mode2">
+                                                <input type="checkbox" name="mode" id="mode2" <?= (isset($this->widgets->get('twitter')->widget_ACTIVED) || ($this->widgets->get('twitter')->widget_ACTIVED == 1)) ? 'checked' : '' ?>> Habilitar widget
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-primary">Salvar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h5 class="mb-3">Discord</h5>
+                                    <form method="post" class="update">
+                                        <input type="hidden" name="unique" value="discord">
+                                        <div class="form-group">
+                                            <label for="discord_id">ID do servidor</label>
+                                            <input class="form-control" name="discord_id" id="discord_id" value="<?= isset(json_decode($this->widgets->get('discord')->widget_CONFIGURATION)->discord_id) ? json_decode($this->widgets->get('discord')->widget_CONFIGURATION)->discord_id : '' ?>" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mode3">
+                                                <input type="checkbox" name="mode" id="mode3" <?= (isset($this->widgets->get('discord')->widget_ACTIVED) || ($this->widgets->get('discord')->widget_ACTIVED == 1)) ? 'checked' : '' ?>> Habilitar widget
+                                            </label>
+                                        </div>
+                                        <button class="btn btn-primary">Salvar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        $('.update').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/template/widgets/update',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (response) {
+                    console.log(response.responseText);
+
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        swal({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        });
+                    }else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
+</script>

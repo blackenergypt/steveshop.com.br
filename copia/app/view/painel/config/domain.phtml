@@ -1,0 +1,86 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-1">Conecte seu domínio</h2>
+            <p class="mb-3">Aponte seu dominio prório para ser utilizado em sua loja!</p>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <?php if($this->webstore->plan() != 3): ?>
+                    <div class="text-center text-muted mt-5 mb-5">
+                        <h2 class="m-0 h5">Para acessar esse recurso, é necessário ter um plano enterprise.</h2>
+                    </div>
+                    <?php else: ?>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5>Aponte seu domínio para:</h5>
+                            <input class="form-control bg-light" value="62.141.32.218" readonly>
+                            <br>
+                            <h5>Libere o domínio para ser apontado</h5>
+                            <form class="update" method="post">
+                                <div class="form-group">
+                                    <label for="domain">Domínio:</label>
+                                    <input class="form-control" id="domain" name="domain" placeholder="Exemplo: loja.meudominio.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Liberar migração</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-globe mb-4 <?= (empty($this->webstore->domain()) ? 'text-muted' : 'text-success') ?>" style="font-size: 124px;"></i>
+                            <br>
+                            <?php if(empty($this->webstore->domain())): ?>
+                            Não há nenhum domínio conectado a loja
+                            <?php else: ?>
+                            Domínio <b class="text-dark"><?= $this->webstore->domain() ?></b> conectado ao site
+                            <?php endif ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php if($this->webstore->plan() == 3): ?>
+<script>
+    scripts.push(function () {
+        $('.update').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/config/domain/update',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (response) {
+                    console.log(response.responseText);
+
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        swal({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        }).then(() => {
+                            location.reload();
+                        });
+                    }else {
+                        swal({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+<?php endif; ?>

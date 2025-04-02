@@ -1,0 +1,122 @@
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-1">Códigos de brinde</h2>
+            <p class="mb-3">Gerencie os códigos de presente</p>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Adicionar código de brinde</h4>
+                    <br>
+                    <form method="post" class="row" id="register">
+                        <div class="form-group col-md-8">
+                            <label>Cupom</label>
+                            <input class="form-control" name="cupom" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Desconto (valor em R$)</label>
+                            <input class="form-control" name="discount" type="number" step="any" required>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button class="btn btn-success">Adicionar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h4>Códigos</h4>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID #</th>
+                                <th scope="col">Cupom</th>
+                                <th scope="col">Desconto</th>
+                                <th scope="col">Deletar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            $gifts = $this->gifts->data();
+
+                            if(count($gifts) == 0)
+                            {
+                                echo "<tr><th colspan='5'>Não há códigos cadastrados</th></tr>";
+                            }
+
+                            foreach ($gifts as $gift):
+                                ?>
+                                <tr>
+                                    <th scope="row"><?= $gift->gift_ID ?></th>
+                                    <td><?= $gift->gift_CUPOM ?></td>
+                                    <td>R$ <?= number_format($gift->gift_DISCOUNT, 2, ',', '.') ?></td>
+                                    <td><button class="btn btn-danger btn-sm delete" id="<?= $gift->gift_ID ?>">Deletar</button></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    scripts.push(function () {
+        $('#register').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/gifts/add',
+                method: 'POST',
+                data: $(this).serialize(),
+                dataType: 'JSON',
+                complete: function (response) {
+                    var res = JSON.parse(response.responseText);
+
+                    if(res.success)
+                    {
+                        Swal.fire({
+                            type: 'success',
+                            title: 'Pronto!',
+                            text: res.message,
+                        });
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2500);
+                    }else {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: res.message,
+                        });
+                    }
+                }
+            });
+
+            return false;
+        });
+
+        $('.delete').on('click', function (e) {
+
+            e.preventDefault();
+
+            $.ajax({
+                url: '/webstore/gifts/delete',
+                method: 'POST',
+                data: { id: $(this).attr('id') },
+                complete: function () {
+                    location.reload();
+                }
+            });
+
+            return false;
+
+        });
+
+    });
+</script>
