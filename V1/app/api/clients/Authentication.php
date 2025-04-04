@@ -143,7 +143,7 @@ class Authentication extends Model
 
     public static function logged()
     {
-        return (isset($_SESSION['P2P_Account_Login'])) ? true : (isset($_COOKIE['P2P_Account_Login'])) ? true : false;
+        return (isset($_SESSION['P2P_Account_Login'])) ? true : (isset($_COOKIE['P2P_Account_Login']) ? true : false);
     }
 
     public static function logout()

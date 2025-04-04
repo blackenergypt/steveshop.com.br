@@ -5,7 +5,7 @@ namespace app\lib;
 class Config {
 
     const DBHOST = 'localhost';
-    const DBUSER = 'root';
+    const DBUSER = 'steveshop';
     const DBPASS = 'as123as321';
     const DBNAME = 'steveshop';
 
