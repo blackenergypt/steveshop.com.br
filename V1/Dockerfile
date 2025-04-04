@@ -5,7 +5,10 @@ FROM php:7.2-apache
 RUN apt-get update && apt-get install -y \
     libonig-dev \
     && docker-php-ext-install pdo_mysql \
-    && a2enmod rewrite  # Habilitar mod_rewrite para .htaccess
+    && a2enmod rewrite \
+    && a2enmod headers \
+    && a2enmod expires \
+    && a2enmod deflate
 
 # Instalar Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

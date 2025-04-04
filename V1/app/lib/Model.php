@@ -13,7 +13,9 @@ class Model extends Config {
             $this->con = new PDO("mysql:host=".self::DBHOST.";dbname=".self::DBNAME, self::DBUSER, self::DBPASS);
             $this->con->exec("set names utf8");
         } catch (\PDOException $e) {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -24,7 +26,9 @@ class Model extends Config {
             $this->con = new PDO("mysql:host=".$host.";dbname=".$db, $user, $pass);
             $this->con->exec("set names utf8");
         } catch (\PDOException $e) {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -40,7 +44,9 @@ class Model extends Config {
             {
                 $erros .= $error." - ";
             }
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$erros."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$erros."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -59,7 +65,9 @@ class Model extends Config {
             return $state->fetchAll(PDO::FETCH_OBJ);
         }catch (\PDOException $e)
         {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -74,7 +82,9 @@ class Model extends Config {
             return $state->rowCount();
         }catch (\PDOException $e)
         {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -89,7 +99,9 @@ class Model extends Config {
             return $state->rowCount();
         }catch (\PDOException $e)
         {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -104,7 +116,9 @@ class Model extends Config {
             $state->execute();
         }catch (\PDOException $e)
         {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -132,7 +146,9 @@ class Model extends Config {
             $state->execute(array('widgets'));
         }catch (\PDOException $e)
         {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -156,7 +172,9 @@ class Model extends Config {
             $state->execute(array('widgets'));
         }catch (\PDOException $e)
         {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }
@@ -170,7 +188,9 @@ class Model extends Config {
             $state = $state->fetchObject();
         }catch (\PDOException $e)
         {
-            define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            if (!defined('APP_ERROR')) {
+                define('APP_ERROR', 'Erro na conexão com o banco de dados: <br><pre>'.$e->getMessage()."</pre>");
+            }
             include("./app/content/site/layouts/error.phtml");
             exit();
         }

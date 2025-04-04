@@ -1,13 +1,11 @@
 <?php
-if (!isset($_SESSION)) {
+// Configurações de sessão PRIMEIRO
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.cookie_secure', 1);
 
-    // server should keep session data for AT LEAST 24 hour
-    ini_set('session.gc_maxlifetime', 60 * 60 * 24);
-    
-    // each client should remember their session id for EXACTLY 24 hour
-    session_set_cookie_params(60 * 60 * 24);
-    session_start();
-    }
+// DEPOIS inicie a sessão
+session_start();
 
 header("Access-Control-Allow-Origin: *");
 
@@ -15,9 +13,6 @@ header_remove( 'X-Powered-By' );
 header("X-XSS-Protection: 1; mode=block");
 header("X-WebKit-CSP: policy");
 header('Content-Type: text/html; charset=utf-8');
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', 1);
 
 ini_set('display_errors', 0);
 ini_set('display_startup_erros', 0);
