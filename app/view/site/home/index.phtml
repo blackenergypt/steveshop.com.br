@@ -2,13 +2,13 @@
     <div class="container">
         <div class="hero-content">
             <div class="hero-badge">
-                🎉 Teste grátis por 3 dias nosso plano Super <i class="fa-solid fa-arrow-right"></i>
+                <?= \App\Lib\I18n::t('home.hero.badge') ?> <i class="fa-solid fa-arrow-right"></i>
             </div>
-            <h1>Crie sua loja e <span class="highlight">monetize seu servidor</span> de forma automática.</h1>
-            <p>O SteveShop automatiza e gerencia seu servidor, assim deixando de lado o trabalho de entregar os produtos manualmente!</p>
+            <h1><?= \App\Lib\I18n::t('home.hero.title') ?></h1>
+            <p><?= \App\Lib\I18n::t('home.hero.description') ?></p>
             <div class="hero-buttons">
-                <a href="https://app.steveshop.com.br/account/register" class="btn">Começar agora</a>
-                <a href="#" class="btn btn-outline btn-video"><i class="fas fa-play"></i> Ver vídeo</a>
+                <a href="https://app.steveshop.com.br/account/register" class="btn"><?= \App\Lib\I18n::t('home.hero.button.start') ?></a>
+                <a href="#" class="btn btn-outline btn-video"><i class="fas fa-play"></i> <?= \App\Lib\I18n::t('home.hero.button.video') ?></a>
             </div>
         </div>
         <div class="hero-illustration">
@@ -21,7 +21,7 @@
 
 <section class="clients">
     <div class="container">
-        <h2>Confiado por mais de 250 servidores</h2>
+        <h2><?= \App\Lib\I18n::t('home.clients.title') ?></h2>
         <div class="client-logos">
             <img src="https://via.placeholder.com/120x30" alt="Logo Cliente PlaceHolder Minecraft" class="client-logo">
             <img src="https://via.placeholder.com/120x30" alt="Logo Cliente PlaceHolder Minecraft" class="client-logo">
@@ -35,9 +35,9 @@
 <section class="features" id="recursos">
     <div class="container">
         <div class="section-title">
-            <span class="subtitle">O que há de novo?</span>
-            <h2>Recursos do SteveShop</h2>
-            <p>Veja os recursos exclusivos que vão impulsionar seu servidor</p>
+            <span class="subtitle"><?= \App\Lib\I18n::t('home.features.subtitle') ?></span>
+            <h2><?= \App\Lib\I18n::t('home.features.title') ?></h2>
+            <p><?= \App\Lib\I18n::t('home.features.description') ?></p>
         </div>
         <div class="features-container">
             <div class="features-text">
@@ -89,6 +89,36 @@
                     <rect x="45" y="110" width="230" height="80" rx="4" fill="#424c70" opacity="0.5" />
                     <path d="M60,150 L90,130 L120,160 L150,120 L180,140 L210,130 L240,150" stroke="#00c3ff" stroke-width="2" fill="none" />
                 </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <div class="stat-count" data-count="258">0</div>
+                <h3><?= \App\Lib\I18n::t('home.stats.clients') ?></h3>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-count" data-count="1523">0</div>
+                <h3><?= \App\Lib\I18n::t('home.stats.users') ?></h3>
+            </div>
+            
+            <div class="stat-item">
+                <div class="stat-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="stat-count" data-count="437">0</div>
+                <h3><?= \App\Lib\I18n::t('home.stats.resources') ?></h3>
             </div>
         </div>
     </div>
@@ -296,6 +326,135 @@
                     <p>Agora é possível integrar sua loja diretamente com o Discord, facilitando a notificação de novas vendas para sua equipe.</p>
                     <a href="#" class="blog-link">Ler mais <i class="fas fa-arrow-right"></i></a>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="container">
+        <div class="section-title">
+            <span class="subtitle"><?= \App\Lib\I18n::t('home.testimonials.subtitle') ?></span>
+            <h2><?= \App\Lib\I18n::t('home.testimonials.title') ?></h2>
+        </div>
+        
+        <div class="testimonials-slider">
+            <div class="testimonials-track">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <?php 
+                        $client1Image = APP_PATH . "app/content/site/assets/images/client1.png";
+                        if (file_exists($client1Image)): 
+                        ?>
+                            <img src="<?= APP_ROOT ?>app/content/site/assets/images/client1.png" alt="Cliente 1" class="client-avatar">
+                        <?php else: ?>
+                            <svg viewBox="0 0 100 100" class="client-avatar" width="60" height="60">
+                                <circle cx="50" cy="40" r="25" fill="#0051cc" />
+                                <circle cx="50" cy="100" r="40" fill="#0051cc" />
+                                <rect x="0" y="65" width="100" height="35" fill="#0051cc" />
+                            </svg>
+                        <?php endif; ?>
+                        <div>
+                            <h3>ServerCraft MC</h3>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"O SteveShop revolucionou a maneira como gerenciamos nosso servidor. As vendas automáticas nos poupam horas de trabalho todos os dias!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <?php 
+                        $client2Image = APP_PATH . "app/content/site/assets/images/client2.png";
+                        if (file_exists($client2Image)): 
+                        ?>
+                            <img src="<?= APP_ROOT ?>app/content/site/assets/images/client2.png" alt="Cliente 2" class="client-avatar">
+                        <?php else: ?>
+                            <svg viewBox="0 0 100 100" class="client-avatar" width="60" height="60">
+                                <circle cx="50" cy="40" r="25" fill="#0051cc" />
+                                <circle cx="50" cy="100" r="40" fill="#0051cc" />
+                                <rect x="0" y="65" width="100" height="35" fill="#0051cc" />
+                            </svg>
+                        <?php endif; ?>
+                        <div>
+                            <h3>DiamondRealm</h3>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Desde que implementamos o SteveShop, nossas vendas aumentaram em 200%. A plataforma é intuitiva e os jogadores adoram a experiência de compra!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <?php 
+                        $client3Image = APP_PATH . "app/content/site/assets/images/client3.png";
+                        if (file_exists($client3Image)): 
+                        ?>
+                            <img src="<?= APP_ROOT ?>app/content/site/assets/images/client3.png" alt="Cliente 3" class="client-avatar">
+                        <?php else: ?>
+                            <svg viewBox="0 0 100 100" class="client-avatar" width="60" height="60">
+                                <circle cx="50" cy="40" r="25" fill="#0051cc" />
+                                <circle cx="50" cy="100" r="40" fill="#0051cc" />
+                                <rect x="0" y="65" width="100" height="35" fill="#0051cc" />
+                            </svg>
+                        <?php endif; ?>
+                        <div>
+                            <h3>CubeCraft Network</h3>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"O suporte ao cliente é excepcional! Sempre que tivemos alguma dúvida, a equipe do SteveShop esteve pronta para nos ajudar. Recomendamos fortemente!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <?php 
+                        $client4Image = APP_PATH . "app/content/site/assets/images/client4.png";
+                        if (file_exists($client4Image)): 
+                        ?>
+                            <img src="<?= APP_ROOT ?>app/content/site/assets/images/client4.png" alt="Cliente 4" class="client-avatar">
+                        <?php else: ?>
+                            <svg viewBox="0 0 100 100" class="client-avatar" width="60" height="60">
+                                <circle cx="50" cy="40" r="25" fill="#0051cc" />
+                                <circle cx="50" cy="100" r="40" fill="#0051cc" />
+                                <rect x="0" y="65" width="100" height="35" fill="#0051cc" />
+                            </svg>
+                        <?php endif; ?>
+                        <div>
+                            <h3>PixelPvP</h3>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"A integração com nosso servidor foi extremamente fácil. Em menos de uma hora, já estávamos vendendo itens automaticamente. Simplesmente incrível!"</p>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </div>

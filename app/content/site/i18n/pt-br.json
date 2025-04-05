@@ -1,0 +1,51 @@
+{
+  "home.hero.title": "Crie sua loja e monetize seu servidor de forma automática.",
+  "home.hero.badge": "🎉 Teste grátis por 3 dias nosso plano Super",
+  "home.hero.description": "O SteveShop automatiza e gerencia seu servidor, assim deixando de lado o trabalho de entregar os produtos manualmente!",
+  "home.hero.button.start": "Começar agora",
+  "home.hero.button.video": "Ver vídeo",
+  
+  "home.stats.clients": "Clientes Cadastrados",
+  "home.stats.users": "Usuários Cadastrados",
+  "home.stats.resources": "Resources Protegidos",
+  
+  "home.clients.title": "Confiado por mais de 250 servidores",
+  
+  "home.testimonials.title": "Clientes que recomendam o SteveShop",
+  "home.testimonials.subtitle": "CONFIAM EM NÓS",
+  
+  "home.features.title": "Recursos do SteveShop",
+  "home.features.subtitle": "O que há de novo?",
+  "home.features.description": "Veja os recursos exclusivos que vão impulsionar seu servidor",
+  
+  "affiliate.hero.title": "Ganhe uma renda extra agora mesmo.",
+  "affiliate.hero.description": "Faça parte do Programa de Afiliados e receba comissões que podem chegar até 5%, seja com assinatura ou renovação!",
+  "affiliate.hero.button": "Cadastrar",
+  
+  "affiliate.process.title": "Para começar é muito fácil",
+  "affiliate.process.subtitle": "COMO FUNCIONA",
+  "affiliate.process.description": "Siga os passos abaixo e comece a ganhar comissões hoje mesmo.",
+  
+  "affiliate.process.step1.title": "Cadastre-se",
+  "affiliate.process.step1.description": "Crie sua conta gratuita no programa de afiliados e obtenha seu link personalizado.",
+  
+  "affiliate.process.step2.title": "Compartilhe",
+  "affiliate.process.step2.description": "Divulgue seu link nas redes sociais, site, blog ou para seu servidor de Minecraft.",
+  
+  "affiliate.process.step3.title": "Receba",
+  "affiliate.process.step3.description": "Ganhe comissões quando comprarem pelo seu link! Saque a partir de R$ 50,00.",
+  
+  "affiliate.benefits.title": "Por que se tornar um afiliado?",
+  "affiliate.benefits.subtitle": "VANTAGENS",
+  
+  "general.footer.copyright": "© {{year}} SteveShop. Todos os direitos reservados.",
+  "general.footer.disclaimer": "Não afiliado à Mojang/Minecraft.",
+  
+  "general.navigation.home": "Início",
+  "general.navigation.plans": "Planos",
+  "general.navigation.features": "Recursos",
+  "general.navigation.affiliates": "Afiliados",
+  "general.navigation.support": "Suporte",
+  "general.navigation.login": "Login",
+  "general.navigation.register": "Criar Loja"
+} 

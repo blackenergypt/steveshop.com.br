@@ -1,0 +1,51 @@
+{
+  "home.hero.title": "Create your store and monetize your server automatically.",
+  "home.hero.badge": "🎉 Try our Super plan free for 3 days",
+  "home.hero.description": "SteveShop automates and manages your server, eliminating the manual work of delivering products!",
+  "home.hero.button.start": "Get started",
+  "home.hero.button.video": "Watch video",
+  
+  "home.stats.clients": "Registered Clients",
+  "home.stats.users": "Registered Users",
+  "home.stats.resources": "Protected Resources",
+  
+  "home.clients.title": "Trusted by over 250 servers",
+  
+  "home.testimonials.title": "Clients who recommend SteveShop",
+  "home.testimonials.subtitle": "THEY TRUST US",
+  
+  "home.features.title": "SteveShop Features",
+  "home.features.subtitle": "What's new?",
+  "home.features.description": "Check out the exclusive features that will boost your server",
+  
+  "affiliate.hero.title": "Earn extra income right now.",
+  "affiliate.hero.description": "Join the Affiliate Program and receive commissions of up to 5%, whether from subscriptions or renewals!",
+  "affiliate.hero.button": "Sign up",
+  
+  "affiliate.process.title": "Getting started is very easy",
+  "affiliate.process.subtitle": "HOW IT WORKS",
+  "affiliate.process.description": "Follow the steps below and start earning commissions today.",
+  
+  "affiliate.process.step1.title": "Register",
+  "affiliate.process.step1.description": "Create your free account in the affiliate program and get your personalized link.",
+  
+  "affiliate.process.step2.title": "Share",
+  "affiliate.process.step2.description": "Share your link on social media, website, blog, or with your Minecraft server.",
+  
+  "affiliate.process.step3.title": "Receive",
+  "affiliate.process.step3.description": "Earn commissions when people buy through your link! Withdraw from $10.00.",
+  
+  "affiliate.benefits.title": "Why become an affiliate?",
+  "affiliate.benefits.subtitle": "BENEFITS",
+  
+  "general.footer.copyright": "© {{year}} SteveShop. All rights reserved.",
+  "general.footer.disclaimer": "Not affiliated with Mojang/Minecraft.",
+  
+  "general.navigation.home": "Home",
+  "general.navigation.plans": "Plans",
+  "general.navigation.features": "Features",
+  "general.navigation.affiliates": "Affiliates",
+  "general.navigation.support": "Support",
+  "general.navigation.login": "Login",
+  "general.navigation.register": "Create Store"
+} 

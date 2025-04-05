@@ -48,7 +48,21 @@ class System extends Router {
 
     private function setUrl()
     {
-        $this->url = isset($_GET['url']) ? trim(strip_tags($_GET['url'])) : 'home/index';
+        if (isset($_GET['url'])) {
+            $this->url = trim(strip_tags($_GET['url']));
+        } else {
+            $requestUri = $_SERVER['REQUEST_URI'];
+            $baseDir = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
+            $uri = str_replace($baseDir, '', $requestUri);
+            $uri = explode('?', $uri)[0];
+            $this->url = trim($uri, '/');
+        }
+        
+        $this->url = empty($this->url) ? 'home/index' : $this->url;
+        
+        if (preg_match('/(affiliate|account\/login|account\/register)/', $this->url)) {
+            $this->area = 'site';
+        }
     }
 
     private function setExploder()
@@ -209,7 +223,10 @@ class System extends Router {
                 $this->controller = 'home';
             }
 
-        }else{
+        } else if($this->area == 'site' && $this->exploder[0] == 'affiliate') {
+            // Caso especial para páginas de afiliados
+            $this->controller = 'affiliate';
+        } else{
             $this->controller = $this->onRaiz ? $this->exploder[0] :
                 (empty($this->exploder[1]) || is_null($this->exploder[1]) || !isset($this->exploder[1]) ? 'home' : $this->exploder[1]);
         }

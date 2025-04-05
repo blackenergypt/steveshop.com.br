@@ -1,0 +1,50 @@
+<section class="auth-section">
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-form-container">
+                <h1 class="auth-title">Entrar</h1>
+                <p class="auth-description">Entre na sua conta para acessar o painel de controle</p>
+                
+                <form class="auth-form" method="post" action="">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Lembrar-me</label>
+                        </div>
+                        <a href="<?= APP_ROOT ?>account/recover" class="forgot-password">Esqueceu a senha?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-full">Entrar</button>
+                </form>
+                
+                <div class="auth-links">
+                    <p>Não tem uma conta? <a href="<?= APP_ROOT ?>account/register">Criar conta</a></p>
+                </div>
+            </div>
+            
+            <div class="auth-illustration">
+                <img src="<?= APP_ROOT ?>app/content/site/assets/images/login-illustration.svg" alt="Login">
+                <div class="auth-features">
+                    <h3>Benefícios do SteveShop</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Loja personalizável</li>
+                        <li><i class="fas fa-check"></i> Integração com servidores Minecraft</li>
+                        <li><i class="fas fa-check"></i> Diversas formas de pagamento</li>
+                        <li><i class="fas fa-check"></i> Dashboard completo</li>
+                        <li><i class="fas fa-check"></i> Suporte 24/7</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 

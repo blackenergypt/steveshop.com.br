@@ -5,8 +5,9 @@ DirectoryIndex index.php
 AddDefaultCharset UTF-8
 Options +FollowSymLinks -MultiViews
 
-Options -Indexes
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+# Ativação do motor de reescrita
+RewriteEngine On
+RewriteBase /
 
 # Proteção do arquivo .htaccess
 <Files .htaccess>
@@ -14,17 +15,18 @@ RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
   deny from all
 </Files>
 
-# Ativação do motor de reescrita
-RewriteEngine On
-RewriteBase /
+# Proteção contra listagem de diretório
+Options -Indexes
 
-# Forçar HTTPS (requisito de segurança do Google)
-RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Suporte para subdomínios - importante manter antes das outras regras
+# Processar subdomínios e enviar para o controlador principal
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTP_HOST} ^([^.]+)\.steveshop\.com\.br$ [NC]
+RewriteRule ^(.*)$ index.php?subdomain=%1&url=$1 [QSA,L]
 
-# Redirecionar www para não-www (evitar conteúdo duplicado)
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+# Forçar HTTPS (requisito de segurança do Google) - descomente se necessário
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Handle Authorization Header
 RewriteCond %{HTTP:Authorization} .
@@ -56,37 +58,17 @@ RewriteCond %{HTTP_USER_AGENT} Googlebot|bingbot|Baiduspider|DuckDuckBot|Slurp|S
 RewriteRule \.css$ - [L]
 RewriteRule \.js$ - [L]
 
-# Não permitir hotlinking de imagens
+# Não permitir hotlinking de imagens (exceto de subdomínios)
 RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^https?://(www\.)?steveshop\.com\.br/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^https?://([^.]+\.)?steveshop\.com\.br/.*$ [NC]
 RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F]
 
-# Regras para arquivos PHP, HTML e CGI
+# Verificar se o arquivo ou diretório não existe
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/$1.php -f
-RewriteRule ^(.+?)/?$ /$1.php [L]
 
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-RewriteRule ^(.+?)/?$ /$1.html [L]
-
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{DOCUMENT_ROOT}/$1.cgi -f       
-RewriteRule ^(.+?)/?$ /$1.cgi [L]
-
-# Regra de fallback para URL amigáveis
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^ %{REQUEST_FILENAME} [L]
-
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_FILENAME}/index.php -f
-RewriteRule ^ %{REQUEST_FILENAME}/index.php [L]
-
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_FILENAME}/index.php !-f
-RewriteRule ^ 404/ [L]
-
-RewriteRule ^(.*[^/]) index.php?url=$1 [QSA,L]
+# Regra principal para URLs amigáveis - DEVE estar no final
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # Compressão GZIP para melhorar velocidade de carregamento (Core Web Vitals)
 <IfModule mod_deflate.c>

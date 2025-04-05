@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="<?= \App\Lib\I18n::getCurrentLang() ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SteveShop | Monetize seu servidor de forma automática</title>
+    <title>SteveShop | <?= \App\Lib\I18n::t('home.hero.title') ?></title>
     
     <!-- Meta Tags SEO -->
-    <meta name="description" content="Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop. Entrega de produtos e pagamentos automáticos para seu servidor.">
+    <meta name="description" content="<?= \App\Lib\I18n::t('home.hero.description') ?>">
     <meta name="keywords" content="SteveShop, monetização, servidor Minecraft, loja virtual, plugins, scripts, automatização, pagamentos automáticos">
     <meta name="author" content="SteveShop">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="language" content="Portuguese">
+    <meta name="language" content="<?= \App\Lib\I18n::getCurrentLang() === 'pt-br' ? 'Portuguese' : 'English' ?>">
     <meta name="revisit-after" content="7 days">
     
     <!-- Core Web Vitals & Page Experience -->
@@ -39,19 +39,19 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://steveshop.com.br/">
-    <meta property="og:title" content="SteveShop | Monetize seu servidor de forma automática">
-    <meta property="og:description" content="Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop. Entregas automáticas, múltiplas formas de pagamento.">
+    <meta property="og:title" content="SteveShop | <?= \App\Lib\I18n::t('home.hero.title') ?>">
+    <meta property="og:description" content="<?= \App\Lib\I18n::t('home.hero.description') ?>">
     <meta property="og:image" content="<?= APP_ROOT ?>app/content/site/assets/images/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:locale" content="pt_BR">
+    <meta property="og:locale" content="<?= \App\Lib\I18n::getCurrentLang() === 'pt-br' ? 'pt_BR' : 'en_US' ?>">
     <meta property="og:site_name" content="SteveShop">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://steveshop.com.br/">
-    <meta property="twitter:title" content="SteveShop | Monetize seu servidor de forma automática">
-    <meta property="twitter:description" content="Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop. Entregas automáticas, múltiplas formas de pagamento.">
+    <meta property="twitter:title" content="SteveShop | <?= \App\Lib\I18n::t('home.hero.title') ?>">
+    <meta property="twitter:description" content="<?= \App\Lib\I18n::t('home.hero.description') ?>">
     <meta property="twitter:image" content="<?= APP_ROOT ?>app/content/site/assets/images/twitter-image.jpg">
     <meta name="twitter:creator" content="@steveshop">
     
@@ -67,997 +67,7 @@
     <link rel="preconnect" href="<?= APP_ROOT ?>">
 
     <link rel="stylesheet" href="<?= APP_ROOT ?>app/content/site/assets/css/style.css">
-    <style>
-        
-:root {
-    --primary-color: #00c3ff;
-    --primary-glow: rgba(0, 195, 255, 0.15);
-    --secondary-color: #0051cc;
-    --text-color: #ffffff;
-    --text-secondary: #a0a8c0;
-    --dark-bg: #060d1d;
-    --darker-bg: #040b1a;
-    --card-bg: rgba(15, 23, 42, 0.5);
-    --header-bg: rgba(5, 9, 26, 0.8);
-    --border-color: rgba(79, 134, 198, 0.2);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
-
-body {
-    background: linear-gradient(180deg, #050c1d 0%, #030818 100%);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-}
-
-/* Efeitos de luz de fundo */
-.bg-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(100px);
-    z-index: -1;
-}
-
-.bg-glow-1 {
-    width: 500px;
-    height: 500px;
-    background: rgba(0, 85, 255, 0.15);
-    top: 0;
-    left: -200px;
-}
-
-.bg-glow-2 {
-    width: 600px;
-    height: 600px;
-    background: rgba(79, 70, 229, 0.1);
-    top: 400px;
-    right: -300px;
-}
-
-/* Header e navegação */
-header {
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo svg {
-    width: 140px;
-    height: 36px;
-}
-
-.logo svg path {
-    stroke: #00a3ff;
-    stroke-width: 2.5;
-}
-
-.logo svg text {
-    fill: var(--primary-color);
-    font-weight: 700;
-    font-size: 18px;
-    x: 55px;
-    y: 18px;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    align-items: center;
-}
-
-.nav-links li {
-    margin-left: 30px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--primary-color);
-}
-
-.btn {
-    background-color: #00a3ff;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: background-color 0.2s ease;
-    border: none;
-    box-shadow: none;
-    text-transform: none;
-    letter-spacing: 0;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.btn:hover {
-    background-color: #0090e0;
-    transform: none;
-    box-shadow: none;
-}
-
-.btn-outline {
-    background-color: transparent;
-    border: 1px solid #00a3ff;
-    color: #00a3ff;
-    padding: 12px 24px;
-}
-
-.btn-outline:hover {
-    background-color: rgba(0, 163, 255, 0.05);
-    color: #00a3ff;
-}
-
-.btn::after {
-    display: none; /* Remover o efeito de brilho que estava exagerado */
-}
-
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-.pricing-card .btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-}
-
-/* Hero Section */
-.hero {
-    padding: 180px 0 100px;
-    position: relative;
-    overflow: visible;
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-}
-
-.hero-image {
-    width: 200px;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-    position: relative;
-    z-index: 2;
-}
-
-.hero-badge {
-    background: rgba(0, 85, 255, 0.15);
-    color: #ffffff;
-    border-radius: 50px;
-    padding: 8px 16px;
-    font-size: 0.8rem;
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.hero-badge i {
-    margin-left: 6px;
-    color: #a0a8c0;
-}
-
-
-.hero h1 {
-    font-size: 3.1rem;
-    letter-spacing: -0.5px;
-    line-height: 1.1;
-}
-
-.hero h1 .highlight {
-    color: #00a3ff;
-    -webkit-text-fill-color: #00a3ff;
-    background: none;
-    font-weight: 700;
-}
-
-.hero p {
-    color: #a0a8c0;
-    font-size: 1rem;
-    max-width: 550px;
-    margin: 25px auto 40px;
-}
-
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.hero-buttons .btn-video {
-    display: flex;
-    align-items: center;
-}
-
-.hero-buttons .btn-video i {
-    margin-right: 8px;
-}
-
-.hero-illustration {
-    position: absolute;
-    right: -2%;
-    top: 70%;
-    transform: translateY(-50%);
-    z-index: 1;
-}
-
-@media (max-width: 1200px) {
-    .hero-illustration {
-        display: none;
-    }
-}
-
-/* Clients Section */
-.clients {
-    padding: 40px 0;
-    text-align: center;
-}
-
-.clients h2 {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin-bottom: 30px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.client-logos {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-
-.client-logo {
-    height: 26px;
-    opacity: 0.7;
-}
-
-/* Features Section */
-.features {
-    padding: 120px 0;
-    position: relative;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
-.section-title .subtitle {
-    color: #00a3ff;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-}
-
-.section-title h2 {
-    font-size: 2.2rem;
-    letter-spacing: -0.5px;
-}
-
-.section-title p {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.features-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.features-text {
-    flex: 1;
-    min-width: 300px;
-}
-
-.features-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.feature-list {
-    margin-top: 30px;
-}
-
-.feature-item {
-    display: flex;
-    margin-bottom: 30px;
-}
-
-.feature-icon {
-    width: 50px;
-    height: 50px;
-    background: var(--primary-glow);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-    flex-shrink: 0;
-}
-
-.feature-icon i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-}
-
-.feature-content h4 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.feature-content p {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-}
-
-.features-image {
-    flex: 1;
-    min-width: 300px;
-    position: relative;
-}
-
-.image-decoration {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: var(--primary-glow);
-    filter: blur(60px);
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.dashboard-image {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 2;
-}
-
-.image-decoration {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: var(--primary-glow);
-    filter: blur(60px);
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* Advantages Section */
-.advantages {
-    padding: 120px 0;
-    background: linear-gradient(0deg, rgba(9, 16, 38, 0.8), transparent);
-    position: relative;
-}
-
-.advantages-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.advantage-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 30px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.advantage-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.advantage-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--primary-glow);
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 25px;
-}
-
-.advantage-icon i {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-}
-
-.advantage-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.advantage-card p {
-    color: var(--text-secondary);
-    line-height: 1.7;
-}
-
-/* Pricing Section */
-.pricing {
-    padding: 120px 0;
-    position: relative;
-}
-
-.pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.pricing-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 40px 30px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.pricing-card.featured {
-    border-color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(0, 195, 255, 0.15);
-}
-
-.pricing-card.featured::before {
-    content: 'RECOMENDADO';
-    position: absolute;
-    top: 30px;
-    right: -40px;
-    background: var(--primary-color);
-    color: var(--darker-bg);
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 5px 40px;
-    transform: rotate(45deg);
-}
-
-.pricing-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.pricing-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 25px;
-    font-weight: 700;
-}
-
-.price-value {
-    margin-bottom: 25px;
-}
-
-.price-original {
-    font-size: 1.2rem;
-    text-decoration: line-through;
-    color: var(--text-secondary);
-    margin-bottom: 5px;
-}
-
-.price {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    font-weight: 700;
-}
-
-.price span {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    font-weight: 400;
-}
-
-.pricing-description {
-    color: var(--text-secondary);
-    margin-bottom: 30px;
-    min-height: 50px;
-}
-
-.feature-list-pricing {
-    list-style: none;
-    margin-bottom: 30px;
-}
-
-.feature-list-pricing li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    color: var(--text-secondary);
-}
-
-.feature-list-pricing i {
-    color: var(--primary-color);
-    margin-right: 10px;
-}
-
-.pricing-card .btn {
-    width: 100%;
-    text-align: center;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.cta {
-    margin: 160px 220px;
-    background: url('https://ccdn.g-portal.com/Gallery_MC_lushcave_0009_0d34f8ce09.png');
-    background-size: cover;
-    background-position: center;
-    border-radius: 12px;
-    padding: 60px 0;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.336);
-}
-
-.cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, rgba(5, 12, 29, 0.651) 0%, rgba(5, 12, 29, 0) 100%);
-    z-index: 1;
-}
-
-.cta-content {
-    position: relative;
-    z-index: 2;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.cta h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-.cta p {
-    font-size: 1rem;
-    color: #ffffff;
-    margin-bottom: 30px;
-}
-
-.cta .btn {
-    background-color: #00a3ff;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 12px 30px;
-    border-radius: 4px;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-/* Footer */
-footer {
-    background-color: var(--darker-bg);
-    padding: 80px 0 30px;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 50px;
-    margin-bottom: 50px;
-}
-
-.footer-brand p {
-    color: var(--text-secondary);
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.footer-heading {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-}
-
-.footer-links {
-    list-style: none;
-}
-
-.footer-links li {
-    margin-bottom: 15px;
-}
-
-.footer-links a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s;
-    font-size: 0.9rem;
-}
-
-.footer-links a:hover {
-    color: var(--primary-color);
-}
-
-.footer-bottom {
-    border-top: 1px solid var(--border-color);
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 15px;
-}
-
-.social-link {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--card-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color);
-    transition: all 0.3s;
-    text-decoration: none;
-}
-
-.social-link:hover {
-    background: var(--primary-color);
-    color: var(--darker-bg);
-}
-
-/* Animations */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-}
-
-.floating {
-    animation: float 6s ease-in-out infinite;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-    }
-    
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .features-container, .pricing-grid {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
-    .mobile-menu-toggle {
-        display: block;
-    }
-    
-    .hero h1 {
-        font-size: 2rem;
-    }
-    
-    .section-title h2 {
-        font-size: 2rem;
-    }
-    
-    .footer-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-bottom {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-}
-
-.nav-links .btn-outline {
-    border: 1px solid #00a3ff;
-    color: #ffffff;
-    background-color: transparent;
-    padding: 8px 20px;
-}
-
-.nav-links .btn {
-    padding: 8px 20px;
-    font-weight: 500;
-}
-
-.dropdown-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.dropdown-menu {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    min-width: 210px;
-}
-
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-color);
-    padding: 8px 16px;
-}
-
-.dropdown-item:hover {
-    background-color: rgba(0, 163, 255, 0.1);
-    color: var(--primary-color);
-}
-
-/* Adicionando regras para corrigir o dropdown */
-.nav-item.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    display: none;
-}
-
-.dropdown-menu.show {
-    display: block;
-}
-
-/* Fazer o dropdown aparecer também no hover */
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-}
-
-/* Estilização da Scrollbar */
-/* Webkit (Chrome, Safari, Opera) */
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--darker-bg);
-    border-radius: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
-    border-radius: 8px;
-    border: 2px solid var(--darker-bg);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color);
-}
-
-/* Firefox */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-color) var(--darker-bg);
-}
-
-/* Edge */
-@supports (-ms-overflow-style: none) {
-    html {
-        -ms-overflow-style: scrollbar;
-    }
-    
-    *::-ms-scrollbar {
-        width: 12px;
-        height: 12px;
-    }
-    
-    *::-ms-scrollbar-track {
-        background: var(--darker-bg);
-    }
-    
-    *::-ms-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 8px;
-    }
-}
-
-/* Estilização da seção Blog */
-.blog {
-    padding: 120px 0;
-    position: relative;
-    background: linear-gradient(0deg, transparent, rgba(9, 16, 38, 0.3));
-}
-
-.blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.blog-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.blog-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.blog-image {
-    position: relative;
-    overflow: hidden;
-    height: auto;
-    top: -4px;
-}
-
-.blog-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
-}
-
-.blog-card:hover .blog-image img {
-    transform: scale(1.1);
-}
-
-.blog-category {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: var(--primary-color);
-    color: var(--darker-bg);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.blog-content {
-    padding: 25px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.blog-date {
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    margin-bottom: 15px;
-}
-
-.blog-card h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    line-height: 1.4;
-}
-
-.blog-card p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-    flex-grow: 1;
-}
-
-.blog-link {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    transition: opacity 0.3s;
-}
-
-.blog-link i {
-    margin-left: 8px;
-    transition: transform 0.3s;
-}
-
-.blog-link:hover {
-    opacity: 0.8;
-}
-
-.blog-link:hover i {
-    transform: translateX(5px);
-}
-
-@media (max-width: 992px) {
-    .blog-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    }
-}
-
-@media (max-width: 768px) {
-    .blog-grid {
-        grid-template-columns: 1fr;
-    }
-}
-    </style>
-
+  
 </head>
 <body>
     <!-- Efeitos de fundo -->
@@ -1071,17 +81,14 @@ footer {
                     <h1>SteveShop</h1>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#recursos">Recursos</a></li>
-                    <li><a href="#planos">Planos</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#documentacao">Documentação</a></li>
-                    <li><a href="#afiliados">Afiliados</a></li>
-                    <li><a href="https://app.steveshop.com.br/account/login" class="btn btn-outline">Entrar</a></li>
-                    <li><a href="https://app.steveshop.com.br/account/register" class="btn">Criar conta</a></li>
+                    <li><a href="#home"><?= \App\Lib\I18n::t('general.navigation.home') ?></a></li>
+                    <li><a href="#planos"><?= \App\Lib\I18n::t('general.navigation.plans') ?></a></li>
+                    <li><a href="#recursos"><?= \App\Lib\I18n::t('general.navigation.features') ?></a></li>
+                    <li><a href="/affiliate"><?= \App\Lib\I18n::t('general.navigation.affiliates') ?></a></li>
+                    <li><a href="/suporte"><?= \App\Lib\I18n::t('general.navigation.support') ?></a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php if (\App\Lib\I18n::getCurrentLang() === 'pt-br'): ?>
                             <!-- SVG Bandeira do Brasil -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
                                 <g fill-rule="evenodd" stroke-width="1pt">
@@ -1089,13 +96,36 @@ footer {
                                     <path fill="#f8e509" d="M321.4 436l301.5-195.7L319.6 44 17.1 240.7 321.4 436z"/>
                                     <path fill="#2b49a3" d="M452.8 240c0 70.3-57.1 127.3-127.6 127.3A127.4 127.4 0 1 1 452.8 240z"/>
                                     <path fill="#ffffef" d="M283.3 316.3l-4-2.3-4 2 .9-4.5-3.2-3.4 4.5-.5 2.2-4 1.9 4.2 4.4.8-3.3 3m86 26.3l-3.9-2.3-4 2 .8-4.5-3.1-3.3 4.5-.5 2.1-4.1 2 4.2 4.4.8-3.4 3m-36.2-30l-3.4-2-3.5 1.8.8-3.9-2.8-2.9 4-.4 1.8-3.6 1.6 3.7 3.9.7-3 2.7m87-8.5l-3.4-2-3.5 1.8.8-3.9-2.7-2.8 3.9-.4 1.8-3.5 1.6 3.6 3.8.7-2.9 2.6m-87.3-22l-4-2.2-4 2 .8-4.6-3.1-3.3 4.5-.5 2.1-4.1 2 4.2 4.4.8-3.4 3.1m-104.6-35l-4-2.2-4 2 1-4.6-3.3-3.3 4.6-.5 2-4.1 2 4.2 4.4.8-3.3 3.1m13.3 57.2l-4-2.3-4 2 .9-4.5-3.2-3.3 4.5-.6 2.1-4 2 4.2 4.4.8-3.3 3.1m132-67.3l-3.6-2-3.6 1.8.8-4-2.8-3 4-.5 1.9-3.6 1.7 3.8 4 .7-3 2.7m-6.7 38.3l-2.7-1.6-2.9 1.4.6-3.2-2.2-2.3 3.2-.4 1.5-2.8 1.3 3 3 .5-2.2 2.2m-142.2 50.4l-2.7-1.5-2.7 1.3.6-3-2.1-2.2 3-.4 1.4-2.7 1.3 2.8 3 .6-2.3 2m200.2 15.3l-2.2-1.1-2.2 1 .5-2.3-1.7-1.6 2.4-.3 1.2-2 1 2 2.5.5-1.9 1.6m-11.3 22.2l-2-1.2-2.1 1 .5-2.3-1.6-1.7 2.3-.3 1-2.1 1 2.2 2.3.5-1.8 1.6m-28 2l-2-1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2.1 1 2.1 2.3.5-1.8 1.6m-37.9-15.3l-2-1.2-2.1 1 .5-2.2-1.6-1.7 2.3-.3 1-2.1 1 2.1 2.3.5-1.8 1.6m-39.3-15l-1.8-1-1.8 1 .4-2.2-1.5-1.6 2.2-.2 1-2 1 2 2.1.4-1.6 1.6m-9.7 32l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.2 1.1-2.1 1 2.1 2.2.5-1.7 1.6m57.5-81.3l-2-1.1-2 1 .5-2.3-1.6-1.7 2.2-.2 1.1-2.1 1 2.1 2.1.4-1.7 1.6m-28.9 0l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-27.5 10.5l-1.7-1-1.7 1 .4-2-1.4-1.4 1.9-.3 1-1.8 .8 1.9 1.9.4-1.5 1.4m16 60.5l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6"/>
-                                <path fill="#ffffef" d="M219.3 287.6l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6"/>
-                                <path fill="#ffffef" d="M219.3 287.6l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m42.3-3l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-4.8 17l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m87.4-22.2l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-16.8 8.6l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-6.7-71.9l-1.6-.9-1.6.9.4-1.8-1.4-1.3 1.9-.2.9-1.7.8 1.7 1.8.4-1.4 1.3m-69.2-39.4l-1.6-.9-1.6.9.4-1.8-1.4-1.3 1.9-.2.9-1.7.8 1.7 1.8.4-1.4 1.3m-4 31.1l-1.8-1-1.8 1 .4-2-1.5-1.5 2-.3 1-1.8.9 1.8 2 .5-1.6 1.4m-15.5 12.7l-1.8-1-1.8 1 .4-2-1.5-1.5 2-.3 1-1.8.9 1.8 2 .5-1.6 1.4m-14.4 20.6l-1.8-1-1.8 1 .4-2-1.5-1.5 2-.3 1-1.8.9 1.8 2 .5-1.6 1.4m-33 10l-1.2-.7-1.2.6.3-1.3-1-1 1.3-.2.6-1.2.6 1.2 1.3.3-1 1m2.6 23.3l-1.3-.7-1.3.7.3-1.5-1-1.1 1.4-.2.7-1.3.6 1.3 1.5.3-1.2 1m147.4-51l-1.2-.6-1.2.7.2-1.4-1-1 1.4-.2.7-1.3.6 1.3 1.4.3-1.1 1M218 216.4l-1-.6-1.1.6.2-1.2-.8-.9 1.2-.1.5-1 .5 1.1 1.1.2-.9.8m4.9-34.7l-1.3-.7-1.3.7.3-1.5-1.1-1.1 1.5-.2.6-1.3.7 1.3 1.4.3-1.1 1m-60.2 1.5l-3-1.7-3 1.6.7-3.4-2.3-2.5 3.4-.4 1.6-3.1 1.4 3.2 3.3.6-2.5 2.3"/>
+                                </g>
                             </svg>
                             <span>Português</span>
+                            <?php elseif (\App\Lib\I18n::getCurrentLang() === 'pt-pt'): ?>
+                            <!-- SVG Bandeira de Portugal -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                                <path fill="red" d="M256 0h384v480H256z"/>
+                                <path fill="#060" d="M0 0h256v480H0z"/>
+                                <g fill="#ff0" fill-rule="evenodd" stroke="#000" stroke-width="0.573" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M339.5 306.2c-33-26-71.8-21.5-93-21.5-21.3 0-60 4.5-93.2 21.5 27.7-56.6 56.8-113 93.2-172.2 36.4 59.3 65.5 115.6 93 172.2z"/>
+                                    <path d="M142.9 270.6c40.9 13.5 62.3 13.2 103 0"/>
+                                    <path d="M152.1 294.6c31.7 13.1 52.4 13.3 84.3 0"/>
+                                    <path d="M220 263.4c0-7.7-6.3-13.8-14-13.8s-13.8 6.2-13.8 13.8 6.2 14 13.9 14 14-6.3 14-14z"/>
+                                </g>
+                                <path fill="#fff" fill-rule="evenodd" stroke="#000" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" d="M232.6 213.3c-7.4-2.5-12.8-4.2-14.5-11-1.7-8.7 7.3-21.7 7.8-22.5 2.8-4 1.8-5 .4-9.7l-4.5-7.5c-1.9-2.6-3.1-5.2-1.4-8.6 1.7-3.5 5.5-4.5 8.6-3.2a21 21 0 0 1 7 4.7l5.3-7.5c-5.3-5.5-16.4-9.8-19.2-10.4-11.8-3-19.5 2.9-21.3 7.4-2.4 5.7-.3 11.8 2.7 16.3 3.8 5.8 3.5 6.8 2.2 8.7-1.2 1.8-10.5 15-11.7 24.3-1.2 10.2 4.5 18.8 11.6 22.7 5.2 3.1 12.3 5.2 23.2 5.7l3.8-9.4z"/>
+                            </svg>
+                            <span>Português (PT)</span>
+                            <?php else: ?>
+                            <!-- SVG Bandeira dos EUA -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                                <path fill="#bd3d44" d="M0 0h640v480H0"/>
+                                <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203.3h640M0 277.3h640M0 351.3h640M0 425.3h640"/>
+                                <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+                                <path fill="#fff" d="M30.4 11l3.4 10.3h10.6l-8.6 6.3 3.3 10.3-8.7-6.4-8.6 6.3L25 27.6l-8.7-6.3h10.9zm60.8 0l3.3 10.3h10.6l-8.6 6.3 3.2 10.3-8.6-6.4-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3H166l-8.6 6.3 3.3 10.3-8.7-6.4-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.3h10.7l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 37l3.3 10.2h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7z"/>
+                            </svg>
+                            <span>English</span>
+                            <?php endif; ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="languageDropdown">
-                            <a class="dropdown-item" href="#pt-br">
+                            <a class="dropdown-item" href="javascript:void(0)" onclick="changeLanguage('pt-br')">
                                 <!-- SVG Bandeira do Brasil -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
                                     <g fill-rule="evenodd" stroke-width="1pt">
@@ -1106,7 +136,7 @@ footer {
                                 </svg>
                                 Português (Brasil)
                             </a>
-                            <a class="dropdown-item" href="#pt-pt">
+                            <a class="dropdown-item" href="javascript:void(0)" onclick="changeLanguage('pt-pt')">
                                 <!-- SVG Bandeira de Portugal -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
                                     <path fill="red" d="M256 0h384v480H256z"/>
@@ -1121,18 +151,20 @@ footer {
                                 </svg>
                                 Português (Portugal)
                             </a>
-                            <a class="dropdown-item" href="#en">
+                            <a class="dropdown-item" href="javascript:void(0)" onclick="changeLanguage('en')">
                                 <!-- SVG Bandeira dos EUA -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
                                     <path fill="#bd3d44" d="M0 0h640v480H0"/>
                                     <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203.3h640M0 277.3h640M0 351.3h640M0 425.3h640"/>
                                     <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
-                                    <path fill="#fff" d="M30.4 11l3.4 10.3h10.6l-8.6 6.3 3.3 10.3-8.7-6.4-8.6 6.3L25 27.6l-8.7-6.3h10.9zm60.8 0l3.3 10.3h10.6l-8.6 6.3 3.2 10.3-8.6-6.4-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3H166l-8.6 6.3 3.3 10.3-8.7-6.4-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.3h10.7l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 37l3.3 10.2h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zM30.4 62.6l3.4 10.4h10.6l-8.6 6.2 3.3 10.3-8.7-6.3-8.6 6.3L25 79.2l-8.7-6.2h10.9zm60.8 0l3.3 10.4h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.4H166l-8.6 6.2 3.3 10.3-8.7-6.3-8.7 6.3 3.3-10.3-8.7-6.2h10.9zm60.8 0l3.4 10.4h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.4h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.4h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zM60.8 88.6l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM30.4 114.5l3.4 10.2h10.6l-8.6 6.3 3.3 10.2-8.7-6.3-8.6 6.3L25 131l-8.7-6.3h10.9zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2H166l-8.6 6.3 3.3 10.2-8.7-6.3-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 140.3l3.3 10.3h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.4 10.3h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zM30.4 166.1l3.4 10.3h10.6l-8.6 6.3 3.3 10.2-8.7-6.3-8.6 6.3L25 182.7l-8.7-6.3h10.9zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3H166l-8.6 6.3 3.3 10.2-8.7-6.3-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.3h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 192l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM30.4 217.9l3.4 10.2h10.6l-8.6 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.7-6.3h10.9zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2H166l-8.6 6.3 3.3 10.2-8.7-6.3-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7z"/>
+                                    <path fill="#fff" d="M30.4 11l3.4 10.3h10.6l-8.6 6.3 3.3 10.3-8.7-6.4-8.6 6.3L25 27.6l-8.7-6.3h10.9zm60.8 0l3.3 10.3h10.6l-8.6 6.3 3.2 10.3-8.6-6.4-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3H166l-8.6 6.3 3.3 10.3-8.7-6.4-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.3h10.7l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 37l3.3 10.2h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7z"/>
                                 </svg>
                                 English
                             </a>
                         </div>
                     </li>
+                    <li><a href="/login" class="btn-outline"><?= \App\Lib\I18n::t('general.navigation.login') ?></a></li>
+                    <li><a href="/registrar" class="btn"><?= \App\Lib\I18n::t('general.navigation.register') ?></a></li>
                 </ul>
             </nav>
         </div>
@@ -1140,7 +172,7 @@ footer {
 
    
     <main>
-        <?= $this->render(); ?>
+        <?= $this->render($viewFile); ?>
     </main>
     
     <footer>
@@ -1179,7 +211,7 @@ footer {
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Copyright © 2022-<?= date('Y') ?> • Todos os direitos reservados</p>
+                <p><?= \App\Lib\I18n::t('general.footer.copyright', ['year' => date('Y')]) ?> • <?= \App\Lib\I18n::t('general.footer.disclaimer') ?></p>
                 <div class="social-links">
                     <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -1323,6 +355,18 @@ footer {
     <!-- Script de carregamento otimizado -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <script>
+        // Função para trocar o idioma
+        function changeLanguage(lang) {
+            // Obter a URL atual
+            let currentUrl = new URL(window.location.href);
+            
+            // Adicionar ou atualizar o parâmetro lang
+            currentUrl.searchParams.set('lang', lang);
+            
+            // Redirecionar para a URL com o parâmetro lang
+            window.location.href = currentUrl.toString();
+        }
+        
         // Lazy loading de imagens para melhorar performance
         document.addEventListener('DOMContentLoaded', function() {
             const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));

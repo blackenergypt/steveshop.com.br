@@ -54,11 +54,6 @@ RUN echo '<VirtualHost *:80>\n\
     \n\
     ErrorLog ${APACHE_LOG_DIR}/error.log\n\
     CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
-    \n\
-    RewriteEngine On\n\
-    RewriteCond %{HTTP_HOST} ^(.+)\.atm10\.pt$\n\
-    RewriteCond %{REQUEST_URI} !^/index\.php\n\
-    RewriteRule ^(.*)$ /index.php [L]\n\
 </VirtualHost>' > /etc/apache2/sites-available/steveshop.conf
 
 # Configurar VirtualHost para HTTPS (porta 443) usando os certificados da pasta ssl/certs
@@ -80,11 +75,6 @@ RUN echo '<VirtualHost *:443>\n\
     SSLEngine on\n\
     SSLCertificateFile /etc/ssl/certs/steveshop.crt\n\
     SSLCertificateKeyFile /etc/ssl/certs/steveshop.key\n\
-    \n\
-    RewriteEngine On\n\
-    RewriteCond %{HTTP_HOST} ^(.+)\.steveshop\.com\.br$\n\
-    RewriteCond %{REQUEST_URI} !^/index\.php\n\
-    RewriteRule ^(.*)$ /index.php [L]\n\
 </VirtualHost>' > /etc/apache2/sites-available/steveshop-ssl.conf
 
 # Ativar os VirtualHosts

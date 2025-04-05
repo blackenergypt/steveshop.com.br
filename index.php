@@ -33,11 +33,23 @@ if (! empty($_SERVER['HTTPS'])) {
 $http_host = $_SERVER['HTTP_HOST'];
 $www = explode('.'.DOMAIN, $http_host)[0];
 
+// Define APP_ROOT como URL para uso em HTML/CSS
 define('APP_ROOT', $config['base_url']);
+
+// Define APP_PATH como caminho local para inclusão de arquivos
+define('APP_PATH', $_SERVER['DOCUMENT_ROOT'] . '/');
 
 require_once 'app/helper/Autoload.php';
 require_once 'vendor/autoload.php';
 
+require "./app/helpers/general.php";
+require "./app/helpers/config.php";
+require "./app/lib/I18n.php";
+
+// Inicializando o sistema de tradução
+// Verifica se existe o parâmetro GET lang
+$lang = isset($_GET['lang']) ? $_GET['lang'] : null;
+\App\Lib\I18n::init($lang);
 
 use app\lib\System;
 
