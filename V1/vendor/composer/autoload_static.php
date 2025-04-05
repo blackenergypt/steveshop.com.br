@@ -44,8 +44,8 @@ class ComposerStaticInit60fcdc48c89238cf090c9f738e883803
         ),
         'SendGrid\\' => 
         array (
-            0 => __DIR__ . '/..' . '/sendgrid/php-http-client/lib',
-            1 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib',
+            0 => __DIR__ . '/..' . '/sendgrid/sendgrid/lib',
+            1 => __DIR__ . '/..' . '/sendgrid/php-http-client/lib',
         ),
         'PagSeguro\\' => 
         array (
@@ -62,9 +62,7 @@ class ComposerStaticInit60fcdc48c89238cf090c9f738e883803
     );
 
     public static $classMap = array (
-        'MP' => __DIR__ . '/..' . '/mercadopago/sdk/lib/mercadopago.php',
-        'MPRestClient' => __DIR__ . '/..' . '/mercadopago/sdk/lib/mercadopago.php',
-        'MercadoPagoException' => __DIR__ . '/..' . '/mercadopago/sdk/lib/mercadopago.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

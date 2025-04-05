@@ -1,9 +1,8 @@
 {
   
     "require": {
-        "phpmailer/phpmailer": "v6.0.5",
+        "phpmailer/phpmailer": "^6.9",
         "sendgrid/sendgrid": "7.0.0",
-        "mercadopago/sdk": "v0.5.2",
         "pagseguro/pagseguro-php-sdk": "4.2.1",
         "africc/pdns-client": "^0.2.0"
     }

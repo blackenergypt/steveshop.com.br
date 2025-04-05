@@ -1,67 +1,329 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <title>SteveShop | Não encontramos esta página</title>
-
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Faça do seu servidor uma máquina de ganhar dinheiro!">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="robots" content="index, follow">
-
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="CashMarket" />
-    <meta property="og:description" content="Faça do seu servidor uma máquina de ganhar dinheiro!" />
-    <meta property="og:url" content="https://cashmarket.com.br" />
-    <meta property="og:site_name" content="CashMarket" />
-    <meta property="og:image" content="<?= APP_ROOT ?>/app/content/site/assets/images/logo.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="/app/content/site/assets/images/logo.png" />
-    <meta name="twitter:description" content="Faça do seu servidor uma máquina de ganhar dinheiro!" />
-    <meta name="twitter:title" content="CashMarket" />
-    <meta name="twitter:site" content="https://cashmarket.com.br" />
-
-    <link rel="canonical" href="https://cashmarket.com.br" />
-    <link rel="stylesheet" href="<?= APP_ROOT ?>app/content/site/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SteveShop | Página não encontrada</title>
+    
+    <!-- Meta Tags SEO -->
+    <meta name="description" content="Página não encontrada no SteveShop - A forma mais prática para monetizar seu servidor Minecraft.">
+    <meta name="keywords" content="SteveShop, erro 404, página não encontrada, servidor Minecraft">
+    <meta name="author" content="SteveShop">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Core Web Vitals & Page Experience -->
+    <meta name="theme-color" content="#050c1d">
+    <meta name="color-scheme" content="dark">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://steveshop.com.br/">
+    <meta property="og:title" content="SteveShop | Página não encontrada">
+    <meta property="og:description" content="Página não encontrada no SteveShop - A forma mais prática para monetizar seu servidor Minecraft.">
+    <meta property="og:image" content="<?= APP_ROOT ?>app/content/site/assets/images/og-image.jpg">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="SteveShop">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://steveshop.com.br/">
+    <meta property="twitter:title" content="SteveShop | Página não encontrada">
+    <meta property="twitter:description" content="Página não encontrada no SteveShop - A forma mais prática para monetizar seu servidor Minecraft.">
+    <meta property="twitter:image" content="<?= APP_ROOT ?>app/content/site/assets/images/twitter-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= APP_ROOT ?>app/content/site/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= APP_ROOT ?>app/content/site/assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= APP_ROOT ?>app/content/site/assets/images/apple-touch-icon.png">
+    
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="<?= APP_ROOT ?>app/content/site/assets/css/main.css">
+    
+    <style>
+        :root {
+            --primary-color: #00c3ff;
+            --primary-glow: rgba(0, 195, 255, 0.15);
+            --secondary-color: #0051cc;
+            --text-color: #ffffff;
+            --text-secondary: #a0a8c0;
+            --dark-bg: #060d1d;
+            --darker-bg: #040b1a;
+            --card-bg: rgba(15, 23, 42, 0.5);
+            --header-bg: rgba(5, 9, 26, 0.8);
+            --border-color: rgba(79, 134, 198, 0.2);
+        }
+        
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        html, body {
+            height: 100%;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #050c1d 0%, #030818 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Layout and containers */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        /* Error page specific styles */
+        .error-page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .error-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .error-message {
+            font-size: 1.125rem;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--primary-glow);
+        }
+        
+        /* Night and moon animation */
+        .night {
+            position: relative;
+            margin-bottom: 30px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .moon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f9f3db;
+            box-shadow: 0 0 20px rgba(249, 243, 219, 0.8);
+            position: relative;
+        }
+        
+        .spot1, .spot2 {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+        }
+        
+        .spot1 {
+            width: 15px;
+            height: 15px;
+            top: 15px;
+            left: 15px;
+        }
+        
+        .spot2 {
+            width: 10px;
+            height: 10px;
+            top: 30px;
+            right: 15px;
+        }
+        
+        .night ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: absolute;
+            bottom: -10px;
+        }
+        
+        .night ul li {
+            width: 3px;
+            height: 3px;
+            background: var(--text-color);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 1.5s infinite alternate;
+        }
+        
+        .night ul li:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+        
+        .night ul li:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+        
+        .night ul li:nth-child(4) {
+            animation-delay: 0.9s;
+        }
+        
+        .night ul li:nth-child(5) {
+            animation-delay: 1.2s;
+        }
+        
+        @keyframes twinkle {
+            0% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.5);
+            }
+        }
+        
+        /* Background glow effects */
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+        }
+        
+        .bg-glow-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 85, 255, 0.15);
+            top: 0;
+            left: -200px;
+        }
+        
+        .bg-glow-2 {
+            width: 600px;
+            height: 600px;
+            background: rgba(79, 70, 229, 0.1);
+            top: 400px;
+            right: -300px;
+        }
+        
+        /* Media queries */
+        @media (max-width: 768px) {
+            .error-container {
+                padding: 30px 20px;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-message {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-title {
+                font-size: 1.75rem;
+            }
+            
+            .btn-primary {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body class="error">
-<main>
-    <div class="container">
-        <div class="row" style="margin-top: 22vh;">
-            <div class="col-md-6 mx-auto">
-                <div class="night">
-                    <span class="moon"></span>
-                    <span class="spot1"></span>
-                    <span class="spot2"></span>
-                    <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <h1 class="font-weight-bold text-right mt--50 mb-4" style="font-size: 58px; line-height: 54px;">Página não encontrada</h1>
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="font-weight-bold mt-3">
-                            Não encontramos esta página! <br>Ela foi removida ou nunca existiu.
-                        </div>
-                    </div>
-                    <div class="col-md-5 pt-4">
-                        <a href="https://steveshop.com.br/" style="background: rgba(113, 89, 193, 1); padding: 13px 25px; color: #FFF; border-radius: 8px; font-weight: 600;">Voltar à homepage</a>
-                    </div>
-                </div>
-
+    <!-- Background glow effects -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    
+    <div class="error-page">
+        <div class="error-container">
+            <div class="night">
+                <span class="moon"></span>
+                <span class="spot1"></span>
+                <span class="spot2"></span>
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
             </div>
+            
+            <h1 class="error-title">Página não encontrada</h1>
+            
+            <p class="error-message">
+                Não encontramos esta página! Ela foi removida ou nunca existiu.
+            </p>
+            
+            <a href="https://steveshop.com.br/" class="btn-primary">
+                <i class="fas fa-home"></i> Voltar à homepage
+            </a>
         </div>
     </div>
-</main>
-<script src="<?= APP_ROOT ?>app/content/site/assets/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?= APP_ROOT ?>app/content/site/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?= APP_ROOT ?>app/content/site/assets/js/app.js"></script>
+    
+    <script>
+        // Animation for stars
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.night ul li');
+            stars.forEach((star, index) => {
+                star.style.animationDelay = `${index * 0.3}s`;
+            });
+        });
+    </script>
 </body>
 </html>

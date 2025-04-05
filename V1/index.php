@@ -18,10 +18,10 @@ ini_set('display_errors', 0);
 ini_set('display_startup_erros', 0);
 error_reporting(E_ALL);
 
-setlocale(LC_TIME, 'pt_PT', 'pt_PT.UTF-8', 'pt_PT.utf-8', 'portuguese');
-date_default_timezone_set('Europe/Lisbon');
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.UTF-8', 'pt_BR.utf-8', 'brazilian');
+date_default_timezone_set('America/Sao_Paulo');
 
-define('DOMAIN', "localhost");
+define('DOMAIN', "atm10.pt");
 
 
 if (! empty($_SERVER['HTTPS'])) {
