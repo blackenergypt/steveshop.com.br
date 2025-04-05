@@ -1,0 +1,36 @@
+# Composer dependencies
+/vendor/
+composer.phar
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Docker data
+/docker/data/
+
+# Server logs
+/logs/
+*.log
+
+# Generated files
+/cdn/*
+!/cdn/.gitkeep
+
+# Cache and temp files
+*.cache
+*.tmp
+.phpunit.result.cache
+
+# IDE and editor files
+.idea/
+.vscode/
+*.sublime-*
+.phpintel/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db 

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  steveshop:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: steveshop
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./cdn:/var/www/html/cdn
+    environment:
+      - PHP_MEMORY_LIMIT=256M
+      - UPLOAD_MAX_FILESIZE=40M
+      - POST_MAX_SIZE=40M
+    networks:
+      - steveshop_network
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: as123as321
+      MYSQL_DATABASE: steveshop
+      MYSQL_USER: steveshop
+      MYSQL_PASSWORD: as123as321
+    volumes:
+      - dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8585:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: steveshop
+      PMA_PASSWORD: as123as321
+      PMA_PORT: 3306
+    depends_on:
+      - db
+
+volumes:
+  cdn-data:
+  dbdata:
+
+networks:
+  steveshop_network:
+    driver: bridge

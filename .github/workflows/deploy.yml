@@ -1,0 +1,61 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ main ]  # Or master, depending on your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: false
+          tags: steveshop:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          outputs: type=docker,dest=/tmp/steveshop-image.tar
+          
+      - name: Upload image as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: steveshop-image
+          path: /tmp/steveshop-image.tar
+          
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            # Create app directory if it doesn't exist
+            mkdir -p /var/www/steveshop
+            
+            # Clone or pull the latest code
+            if [ -d "/var/www/steveshop/.git" ]; then
+              cd /var/www/steveshop
+              git pull
+            else
+              git clone ${{ secrets.REPO_URL }} /var/www/steveshop
+            fi
+            
+            # Copy Docker Compose file if you have one
+            cd /var/www/steveshop
+            
+            # Build and start the containers
+            docker compose down
+            docker compose up -d --build
+            
+            # Optional: Clean up old images
+            docker image prune -af 

@@ -1,7 +1,0 @@
-<main role="main">
-    <div class="container">
-        <div class="content mt-3">
-            <h1 class="h5">Seu carrinho está vazio</h1>
-        </div>
-    </div>
-</main>

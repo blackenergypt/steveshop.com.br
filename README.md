@@ -1,1 +1,0 @@
-# steveshop.com.br
