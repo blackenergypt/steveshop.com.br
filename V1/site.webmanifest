@@ -1,0 +1,65 @@
+{
+    "name": "SteveShop - Monetize seu servidor Minecraft",
+    "short_name": "SteveShop",
+    "description": "Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#050c1d",
+    "theme_color": "#00c3ff",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "orientation": "portrait",
+    "lang": "pt-BR",
+    "dir": "ltr",
+    "categories": ["business", "shopping", "games"],
+    "shortcuts": [
+        {
+            "name": "Começar agora",
+            "short_name": "Começar",
+            "description": "Crie sua loja",
+            "url": "/account/register",
+            "icons": [{ "src": "/shortcut-icon.png", "sizes": "96x96" }]
+        },
+        {
+            "name": "Ver planos",
+            "short_name": "Planos",
+            "description": "Veja nossos planos",
+            "url": "/#planos",
+            "icons": [{ "src": "/plan-icon.png", "sizes": "96x96" }]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/screenshot1.jpg",
+            "sizes": "1080x1920",
+            "type": "image/jpeg",
+            "platform": "wide",
+            "label": "Tela inicial do SteveShop"
+        },
+        {
+            "src": "/screenshot2.jpg",
+            "sizes": "1080x1920",
+            "type": "image/jpeg",
+            "platform": "wide",
+            "label": "Dashboard de vendas"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "web"
+        }
+    ],
+    "prefer_related_applications": false
+} 

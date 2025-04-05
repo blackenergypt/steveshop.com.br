@@ -25,26 +25,43 @@ $(document).ready(function() {
         $("#plan2 .promo-flag div").css({ 'background': '#ffffff', 'color': '#181124' });
     });
 
-    $('.customer-logos').slick({
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 1500,
-        arrows: false,
-        dots: false,
-        pauseOnHover: false,
-        responsive: [{
-            breakpoint: 768,
-            settings: {
-                slidesToShow: 4
-            }
-        }, {
-            breakpoint: 520,
-            settings: {
-                slidesToShow: 3
-            }
-        }]
-    });
+    // Verifica se Slick está disponível
+    if (typeof $.fn.slick === 'undefined') {
+        console.error('Slick não está disponível. Verifique se o arquivo foi carregado corretamente.');
+        // Carregar dinamicamente
+        var script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js';
+        script.onload = initSlick;
+        document.head.appendChild(script);
+    } else {
+        initSlick();
+    }
+
+    function initSlick() {
+        if ($('.customer-logos').length) {
+            $('.customer-logos').slick({
+                slidesToShow: 6,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 1500,
+                arrows: false,
+                dots: false,
+                pauseOnHover: false,
+                responsive: [{
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 4
+                    }
+                }, {
+                    breakpoint: 520,
+                    settings: {
+                        slidesToShow: 3
+                    }
+                }]
+            });
+        }
+    }
+
     /*----------------------*/
     /*    Live Chat         */
     /*----------------------*/

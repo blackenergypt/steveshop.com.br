@@ -1,81 +1,64 @@
-Header always set Content-Security-Policy "upgrade-insecure-requests;"
+# SteveShop - Configurações de otimização e segurança
 
-<IfModule mod_security.c>
-  SecFilterEngine Off
-  SecFilterScanPOST Off
-</IfModule>
-
-<IfModule pagespeed_module>
-    ModPagespeed off
-</IfModule>
-
-AddType text/CSS .css 
-AddHandler text/css .css 
-
-
+# Configurações básicas
 DirectoryIndex index.php
-
-<Files .htaccess>
-order allow,deny
-deny from all
-</Files>
-
-
-DirectoryIndex index.php
-
 AddDefaultCharset UTF-8
-
 Options -Indexes
 
+# Proteção do arquivo .htaccess
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
 
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
-
- RewriteEngine On
+# Ativação do motor de reescrita
+RewriteEngine On
 RewriteBase /
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# Forçar HTTPS (requisito de segurança do Google)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Redirecionar www para não-www (evitar conteúdo duplicado)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
+# Handle Authorization Header
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
+# Headers de segurança
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(self), interest-cohort=()"
+    Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src * data:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;"
+    Header always set Content-Security-Policy "upgrade-insecure-requests;"
+    
+    # Permitir Cross-Origin para fontes (necessário para carregar fontes do Google Fonts)
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+</IfModule>
 
-#RewriteCond %{SCRIPT_FILENAME} !-f
-#RewriteCond %{SCRIPT_FILENAME} !-d
-#RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+# Regras específicas para idiomas
+RewriteRule ^en/?$ /index.php?lang=en [L,QSA]
+RewriteRule ^pt-pt/?$ /index.php?lang=pt-pt [L,QSA]
+RewriteRule ^pt-br/?$ /index.php?lang=pt-br [L,QSA]
 
+# Regras para rastreadores de SEO - permitir CSS e JS
+RewriteCond %{HTTP_USER_AGENT} Googlebot|bingbot|Baiduspider|DuckDuckBot|Slurp|Sogou [NC]
+RewriteRule \.css$ - [L]
+RewriteRule \.js$ - [L]
 
+# Não permitir hotlinking de imagens
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?steveshop\.com\.br/.*$ [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F]
 
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^ %{REQUEST_FILENAME} [L]
-# invalid code - and useless if the ^ and % were joined
-
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_FILENAME}/index.php -f
-RewriteRule ^ %{REQUEST_FILENAME}/index.php [L]
-# invalid code as the second condition can NEVER happen and the Rule is flawed (regex of ^ !!!).
-
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteCond %{REQUEST_FILENAME}/index.php !-f
-RewriteRule ^ 404/ [L]
-# ditto
-RewriteRule ^(.*[^/]) index.php?url=$1 [QSA,L]
-
-#RewriteCond %{HTTPS}s ^on(s)|
-
-#RewriteCond %{HTTP_HOST} !^*\. [NC]
-#RewriteRule ^(.*)$ http://*.%{HTTP_HOST}/$1 [R=301,L]
-
-
-#RewriteCond %{HTTPS} off
-#RewriteRule ^(.*)$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
-# Redirect to www
-#RewriteCond %{HTTP_HOST} !^www\.
-#RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
-
+# Regras para arquivos PHP, HTML e CGI
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f
 RewriteRule ^(.+?)/?$ /$1.php [L]
@@ -88,6 +71,96 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{DOCUMENT_ROOT}/$1.cgi -f       
 RewriteRule ^(.+?)/?$ /$1.cgi [L]
 
+# Regra de fallback para URL amigáveis
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ %{REQUEST_FILENAME} [L]
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.php -f
+RewriteRule ^ %{REQUEST_FILENAME}/index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.php !-f
+RewriteRule ^ 404/ [L]
+
+RewriteRule ^(.*[^/]) index.php?url=$1 [QSA,L]
+
+# Compressão GZIP para melhorar velocidade de carregamento (Core Web Vitals)
+<IfModule mod_deflate.c>
+    # Compress HTML, CSS, JavaScript, Text, XML and fonts
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+    AddOutputFilterByType DEFLATE application/x-font
+    AddOutputFilterByType DEFLATE application/x-font-opentype
+    AddOutputFilterByType DEFLATE application/x-font-otf
+    AddOutputFilterByType DEFLATE application/x-font-truetype
+    AddOutputFilterByType DEFLATE application/x-font-ttf
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE font/opentype
+    AddOutputFilterByType DEFLATE font/otf
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE image/x-icon
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+
+    # Remove browser bugs (only needed for ancient browsers)
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    Header append Vary User-Agent
+</IfModule>
+
+# Servir gzip comprimido se disponível
+<IfModule mod_headers.c>
+    RewriteCond "%{HTTP:Accept-encoding}" "gzip"
+    RewriteCond "%{REQUEST_FILENAME}\.gz" -s
+    RewriteRule "^(.*)\.(css|js)" "$1\.$2\.gz" [QSA]
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule "\.css\.gz$" "-" [T=text/css,E=no-gzip:1]
+    RewriteRule "\.js\.gz$" "-" [T=text/javascript,E=no-gzip:1]
+</IfModule>
+
+# Cache de navegador para recursos estáticos (Core Web Vitals)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Imagens
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Fontes
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+    ExpiresByType application/x-font-woff "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    
+    # Outros recursos
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/html "access plus 1 day"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    
+    ExpiresDefault "access plus 1 month"
+</IfModule>
+
+# Proteção contra bots maliciosos
 RewriteCond %{HTTP_USER_AGENT} ^BlackWidow [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Bot\ mailto:craftbot@yahoo.com [OR]
 RewriteCond %{HTTP_USER_AGENT} ^ChinaClaw [OR]
@@ -166,94 +239,14 @@ RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Zeus
 RewriteRule ^.* - [F,L]
 
-</IfModule>
-
-<IfModule mod_headers.c>
-  Header set Cache-Control "no-cache, no-store, must-revalidate"
-  Header set Pragma "no-cache"
-  Header set Expires 0
-  # Serve gzip compressed CSS and JS files if they exist
-  # and the client accepts gzip.
-  RewriteCond "%{HTTP:Accept-encoding}" "gzip"
-  RewriteCond "%{REQUEST_FILENAME}\.gz" -s
-  RewriteRule "^(.*)\.(css|js)"         "$1\.$2\.gz" [QSA]
-
-  # Serve correct content types, and prevent mod_deflate double gzip.
-  RewriteRule "\.css\.gz$" "-" [T=text/css,E=no-gzip:1]
-  RewriteRule "\.js\.gz$"  "-" [T=text/javascript,E=no-gzip:1]
-
-</IfModule>
-
-# ########################
-# Leverage browser caching
-# ########################
-## EXPIRES CACHING ##
-<IfModule mod_expires.c>
-ExpiresActive On
-ExpiresByType image/jpg "access 1 year"
-ExpiresByType image/jpeg "access 1 year"
-ExpiresByType image/gif "access 1 year"
-ExpiresByType image/png "access 1 year"
-ExpiresByType text/css "access 1 month"
-ExpiresByType text/html "access 1 month"
-ExpiresByType application/pdf "access 1 month"
-ExpiresByType text/x-javascript "access 1 month"
-ExpiresByType application/x-shockwave-flash "access 1 month"
-ExpiresByType image/x-icon "access 1 year"
-ExpiresDefault "access 1 month"
-</IfModule>
-# 1 Month for most static assets
-<filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
-Header set Cache-Control "max-age=2592000, public"
-</filesMatch>
-
+# Configuração para HTTPS proxy
 <IfModule mod_setenvif.c>
   SetEnvIf X-Forwarded-Proto "^https$" HTTPS
 </IfModule>
 
-<ifModule mod_gzip.c>
-mod_gzip_on Yes
-mod_gzip_dechunk Yes
-mod_gzip_item_include file .(html?|txt|css|js|php|pl)$
-mod_gzip_item_include handler ^cgi-script$
-mod_gzip_item_include mime ^text/.*
-mod_gzip_item_include mime ^application/x-javascript.*
-mod_gzip_item_exclude mime ^image/.*
-mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
-</ifModule>
-
-# ########################
-# Enable compression
-# ########################
-
-<IfModule mod_deflate.c>
-  # Compress HTML, CSS, JavaScript, Text, XML and fonts
-  AddOutputFilterByType DEFLATE application/javascript
-  AddOutputFilterByType DEFLATE application/rss+xml
-  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
-  AddOutputFilterByType DEFLATE application/x-font
-  AddOutputFilterByType DEFLATE application/x-font-opentype
-  AddOutputFilterByType DEFLATE application/x-font-otf
-  AddOutputFilterByType DEFLATE application/x-font-truetype
-  AddOutputFilterByType DEFLATE application/x-font-ttf
-  AddOutputFilterByType DEFLATE application/x-javascript
-  AddOutputFilterByType DEFLATE application/xhtml+xml
-  AddOutputFilterByType DEFLATE application/xml
-  AddOutputFilterByType DEFLATE font/opentype
-  AddOutputFilterByType DEFLATE font/otf
-  AddOutputFilterByType DEFLATE font/ttf
-  AddOutputFilterByType DEFLATE image/svg+xml
-  AddOutputFilterByType DEFLATE image/x-icon
-  AddOutputFilterByType DEFLATE text/css
-  AddOutputFilterByType DEFLATE text/html
-  AddOutputFilterByType DEFLATE text/javascript
-  AddOutputFilterByType DEFLATE text/plain
-  AddOutputFilterByType DEFLATE text/xml  
-
-  # Remove browser bugs (only needed for ancient browsers)
-  BrowserMatch ^Mozilla/4 gzip-only-text/html
-  BrowserMatch ^Mozilla/4\.0[678] no-gzip
-  BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
-  Header append Vary User-Agent
+# Desativação de mod_security para evitar falsos positivos
+<IfModule mod_security.c>
+  SecFilterEngine Off
+  SecFilterScanPOST Off
 </IfModule>
 

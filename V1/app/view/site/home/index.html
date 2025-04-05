@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SteveShop | Monetize seu servidor de forma automática</title>
+    
+    <!-- Meta Tags SEO -->
+    <meta name="description" content="Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop. Entrega de produtos e pagamentos automáticos para seu servidor.">
+    <meta name="keywords" content="SteveShop, monetização, servidor Minecraft, loja virtual, plugins, scripts, automatização, pagamentos automáticos">
+    <meta name="author" content="SteveShop">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="language" content="Portuguese">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Core Web Vitals & Page Experience -->
+    <meta name="theme-color" content="#050c1d">
+    <meta name="color-scheme" content="dark">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://steveshop.com.br/">
+    
+    <!-- Hreflang para Internacionalização -->
+    <link rel="alternate" hreflang="pt-BR" href="https://steveshop.com.br/">
+    <link rel="alternate" hreflang="pt-PT" href="https://steveshop.com.br/pt-pt/">
+    <link rel="alternate" hreflang="en" href="https://steveshop.com.br/en/">
+    <link rel="alternate" hreflang="x-default" href="https://steveshop.com.br/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#00c3ff">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://steveshop.com.br/">
+    <meta property="og:title" content="SteveShop | Monetize seu servidor de forma automática">
+    <meta property="og:description" content="Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop. Entregas automáticas, múltiplas formas de pagamento.">
+    <meta property="og:image" content="https://steveshop.com.br/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="SteveShop">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://steveshop.com.br/">
+    <meta property="twitter:title" content="SteveShop | Monetize seu servidor de forma automática">
+    <meta property="twitter:description" content="Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop. Entregas automáticas, múltiplas formas de pagamento.">
+    <meta property="twitter:image" content="https://steveshop.com.br/twitter-image.jpg">
+    <meta name="twitter:creator" content="@steveshop">
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" as="style">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" as="script">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <!-- Preconectar a domínios externos para melhorar performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <style>
+        :root {
+            --primary-color: #00c3ff;
+            --primary-glow: rgba(0, 195, 255, 0.15);
+            --secondary-color: #0051cc;
+            --text-color: #ffffff;
+            --text-secondary: #a0a8c0;
+            --dark-bg: #060d1d;
+            --darker-bg: #040b1a;
+            --card-bg: rgba(15, 23, 42, 0.5);
+            --header-bg: rgba(5, 9, 26, 0.8);
+            --border-color: rgba(79, 134, 198, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #050c1d 0%, #030818 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* Efeitos de luz de fundo */
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+        }
+        
+        .bg-glow-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 85, 255, 0.15);
+            top: 0;
+            left: -200px;
+        }
+        
+        .bg-glow-2 {
+            width: 600px;
+            height: 600px;
+            background: rgba(79, 70, 229, 0.1);
+            top: 400px;
+            right: -300px;
+        }
+        
+        /* Header e navegação */
+        header {
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo svg {
+            width: 140px;
+            height: 36px;
+        }
+        
+        .logo svg path {
+            stroke: #00a3ff;
+            stroke-width: 2.5;
+        }
+        
+        .logo svg text {
+            fill: var(--primary-color);
+            font-weight: 700;
+            font-size: 18px;
+            x: 55px;
+            y: 18px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            background-color: #00a3ff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: background-color 0.2s ease;
+            border: none;
+            box-shadow: none;
+            text-transform: none;
+            letter-spacing: 0;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #0090e0;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #00a3ff;
+            color: #00a3ff;
+            padding: 12px 24px;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(0, 163, 255, 0.05);
+            color: #00a3ff;
+        }
+        
+        .btn::after {
+            display: none; /* Remover o efeito de brilho que estava exagerado */
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image {
+            width: 200px;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            background: rgba(0, 85, 255, 0.15);
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .hero-badge i {
+            margin-left: 6px;
+            color: #a0a8c0;
+        }
+       
+    
+        .hero h1 {
+            font-size: 3.1rem;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        
+        .hero h1 .highlight {
+            color: #00a3ff;
+            -webkit-text-fill-color: #00a3ff;
+            background: none;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            color: #a0a8c0;
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 25px auto 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .hero-buttons .btn-video {
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-buttons .btn-video i {
+            margin-right: 8px;
+        }
+        
+        .hero-illustration {
+            position: absolute;
+            right: -2%;
+            top: 70%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        @media (max-width: 1200px) {
+            .hero-illustration {
+                display: none;
+            }
+        }
+        
+        /* Clients Section */
+        .clients {
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .clients h2 {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .client-logo {
+            height: 26px;
+            opacity: 0.7;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-title .subtitle {
+            color: #00a3ff;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .features-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .features-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .feature-list {
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .features-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .image-decoration {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--primary-glow);
+            filter: blur(60px);
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .dashboard-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .image-decoration {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--primary-glow);
+            filter: blur(60px);
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Advantages Section */
+        .advantages {
+            padding: 120px 0;
+            background: linear-gradient(0deg, rgba(9, 16, 38, 0.8), transparent);
+            position: relative;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .advantage-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-glow);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .advantage-icon i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .advantage-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .advantage-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 195, 255, 0.15);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'RECOMENDADO';
+            position: absolute;
+            top: 30px;
+            right: -40px;
+            background: var(--primary-color);
+            color: var(--darker-bg);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .price-value {
+            margin-bottom: 25px;
+        }
+        
+        .price-original {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .pricing-description {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            min-height: 50px;
+        }
+        
+        .feature-list-pricing {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list-pricing li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .feature-list-pricing i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .cta {
+            margin: 160px 220px;
+            background: url('https://ccdn.g-portal.com/Gallery_MC_lushcave_0009_0d34f8ce09.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.336);
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(5, 12, 29, 0.651) 0%, rgba(5, 12, 29, 0) 100%);
+            z-index: 1;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .cta p {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        
+        .cta .btn {
+            background-color: #00a3ff;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-brand p {
+            color: var(--text-secondary);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--primary-color);
+            color: var(--darker-bg);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-container, .pricing-grid {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        .nav-links .btn-outline {
+            border: 1px solid #00a3ff;
+            color: #ffffff;
+            background-color: transparent;
+            padding: 8px 20px;
+        }
+
+        .nav-links .btn {
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-menu {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            min-width: 210px;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+            padding: 8px 16px;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(0, 163, 255, 0.1);
+            color: var(--primary-color);
+        }
+        
+        /* Adicionando regras para corrigir o dropdown */
+        .nav-item.dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        /* Fazer o dropdown aparecer também no hover */
+        .nav-item.dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        /* Estilização da Scrollbar */
+        /* Webkit (Chrome, Safari, Opera) */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+            border-radius: 8px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 8px;
+            border: 2px solid var(--darker-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+        
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--darker-bg);
+        }
+        
+        /* Edge */
+        @supports (-ms-overflow-style: none) {
+            html {
+                -ms-overflow-style: scrollbar;
+            }
+            
+            *::-ms-scrollbar {
+                width: 12px;
+                height: 12px;
+            }
+            
+            *::-ms-scrollbar-track {
+                background: var(--darker-bg);
+            }
+            
+            *::-ms-scrollbar-thumb {
+                background: var(--primary-color);
+                border-radius: 8px;
+            }
+        }
+        
+        /* Estilização da seção Blog */
+        .blog {
+            padding: 120px 0;
+            position: relative;
+            background: linear-gradient(0deg, transparent, rgba(9, 16, 38, 0.3));
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .blog-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .blog-image {
+            position: relative;
+            overflow: hidden;
+            height: auto;
+            top: -4px;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
+        }
+        
+        .blog-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-color);
+            color: var(--darker-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .blog-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .blog-date {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .blog-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .blog-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .blog-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            transition: opacity 0.3s;
+        }
+        
+        .blog-link i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .blog-link:hover {
+            opacity: 0.8;
+        }
+        
+        .blog-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        @media (max-width: 992px) {
+            .blog-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Efeitos de fundo -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>SteveShop</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#documentacao">Documentação</a></li>
+                    <li><a href="#afiliados">Afiliados</a></li>
+                    <li><a href="https://app.steveshop.com.br/account/login" class="btn btn-outline">Entrar</a></li>
+                    <li><a href="https://app.steveshop.com.br/account/register" class="btn">Criar conta</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- SVG Bandeira do Brasil -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                                <g fill-rule="evenodd" stroke-width="1pt">
+                                    <path fill="#229e45" d="M0 0h640v480H0z"/>
+                                    <path fill="#f8e509" d="M321.4 436l301.5-195.7L319.6 44 17.1 240.7 321.4 436z"/>
+                                    <path fill="#2b49a3" d="M452.8 240c0 70.3-57.1 127.3-127.6 127.3A127.4 127.4 0 1 1 452.8 240z"/>
+                                    <path fill="#ffffef" d="M283.3 316.3l-4-2.3-4 2 .9-4.5-3.2-3.4 4.5-.5 2.2-4 1.9 4.2 4.4.8-3.3 3m86 26.3l-3.9-2.3-4 2 .8-4.5-3.1-3.3 4.5-.5 2.1-4.1 2 4.2 4.4.8-3.4 3m-36.2-30l-3.4-2-3.5 1.8.8-3.9-2.8-2.9 4-.4 1.8-3.6 1.6 3.7 3.9.7-3 2.7m87-8.5l-3.4-2-3.5 1.8.8-3.9-2.7-2.8 3.9-.4 1.8-3.5 1.6 3.6 3.8.7-2.9 2.6m-87.3-22l-4-2.2-4 2 .8-4.6-3.1-3.3 4.5-.5 2.1-4.1 2 4.2 4.4.8-3.4 3.1m-104.6-35l-4-2.2-4 2 1-4.6-3.3-3.3 4.6-.5 2-4.1 2 4.2 4.4.8-3.3 3.1m13.3 57.2l-4-2.3-4 2 .9-4.5-3.2-3.3 4.5-.6 2.1-4 2 4.2 4.4.8-3.3 3.1m132-67.3l-3.6-2-3.6 1.8.8-4-2.8-3 4-.5 1.9-3.6 1.7 3.8 4 .7-3 2.7m-6.7 38.3l-2.7-1.6-2.9 1.4.6-3.2-2.2-2.3 3.2-.4 1.5-2.8 1.3 3 3 .5-2.2 2.2m-142.2 50.4l-2.7-1.5-2.7 1.3.6-3-2.1-2.2 3-.4 1.4-2.7 1.3 2.8 3 .6-2.3 2m200.2 15.3l-2.2-1.1-2.2 1 .5-2.3-1.7-1.6 2.4-.3 1.2-2 1 2 2.5.5-1.9 1.6m-11.3 22.2l-2-1.2-2.1 1 .5-2.3-1.6-1.7 2.3-.3 1-2.1 1 2.2 2.3.5-1.8 1.6m-28 2l-2-1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2.1 1 2.1 2.3.5-1.8 1.6m-37.9-15.3l-2-1.2-2.1 1 .5-2.2-1.6-1.7 2.3-.3 1-2.1 1 2.1 2.3.5-1.8 1.6m-39.3-15l-1.8-1-1.8 1 .4-2.2-1.5-1.6 2.2-.2 1-2 1 2 2.1.4-1.6 1.6m-9.7 32l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.2 1.1-2.1 1 2.1 2.2.5-1.7 1.6m57.5-81.3l-2-1.1-2 1 .5-2.3-1.6-1.7 2.2-.2 1.1-2.1 1 2.1 2.1.4-1.7 1.6m-28.9 0l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-27.5 10.5l-1.7-1-1.7 1 .4-2-1.4-1.4 1.9-.3 1-1.8 .8 1.9 1.9.4-1.5 1.4m16 60.5l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6"/>
+                                <path fill="#ffffef" d="M219.3 287.6l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6"/>
+                                <path fill="#ffffef" d="M219.3 287.6l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m42.3-3l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-4.8 17l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m87.4-22.2l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-16.8 8.6l-2-1.1-2 1 .5-2.3-1.7-1.7 2.3-.3 1.1-2 1 2 2.1.5-1.7 1.6m-6.7-71.9l-1.6-.9-1.6.9.4-1.8-1.4-1.3 1.9-.2.9-1.7.8 1.7 1.8.4-1.4 1.3m-69.2-39.4l-1.6-.9-1.6.9.4-1.8-1.4-1.3 1.9-.2.9-1.7.8 1.7 1.8.4-1.4 1.3m-4 31.1l-1.8-1-1.8 1 .4-2-1.5-1.5 2-.3 1-1.8.9 1.8 2 .5-1.6 1.4m-15.5 12.7l-1.8-1-1.8 1 .4-2-1.5-1.5 2-.3 1-1.8.9 1.8 2 .5-1.6 1.4m-14.4 20.6l-1.8-1-1.8 1 .4-2-1.5-1.5 2-.3 1-1.8.9 1.8 2 .5-1.6 1.4m-33 10l-1.2-.7-1.2.6.3-1.3-1-1 1.3-.2.6-1.2.6 1.2 1.3.3-1 1m2.6 23.3l-1.3-.7-1.3.7.3-1.5-1-1.1 1.4-.2.7-1.3.6 1.3 1.5.3-1.2 1m147.4-51l-1.2-.6-1.2.7.2-1.4-1-1 1.4-.2.7-1.3.6 1.3 1.4.3-1.1 1M218 216.4l-1-.6-1.1.6.2-1.2-.8-.9 1.2-.1.5-1 .5 1.1 1.1.2-.9.8m4.9-34.7l-1.3-.7-1.3.7.3-1.5-1.1-1.1 1.5-.2.6-1.3.7 1.3 1.4.3-1.1 1m-60.2 1.5l-3-1.7-3 1.6.7-3.4-2.3-2.5 3.4-.4 1.6-3.1 1.4 3.2 3.3.6-2.5 2.3"/>
+                            </svg>
+                            <span>Português</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <a class="dropdown-item" href="#pt-br">
+                                <!-- SVG Bandeira do Brasil -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                                    <g fill-rule="evenodd" stroke-width="1pt">
+                                        <path fill="#229e45" d="M0 0h640v480H0z"/>
+                                        <path fill="#f8e509" d="M321.4 436l301.5-195.7L319.6 44 17.1 240.7 321.4 436z"/>
+                                        <path fill="#2b49a3" d="M452.8 240c0 70.3-57.1 127.3-127.6 127.3A127.4 127.4 0 1 1 452.8 240z"/>
+                                    </g>
+                                </svg>
+                                Português (Brasil)
+                            </a>
+                            <a class="dropdown-item" href="#pt-pt">
+                                <!-- SVG Bandeira de Portugal -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                                    <path fill="red" d="M256 0h384v480H256z"/>
+                                    <path fill="#060" d="M0 0h256v480H0z"/>
+                                    <g fill="#ff0" fill-rule="evenodd" stroke="#000" stroke-width="0.573" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M339.5 306.2c-33-26-71.8-21.5-93-21.5-21.3 0-60 4.5-93.2 21.5 27.7-56.6 56.8-113 93.2-172.2 36.4 59.3 65.5 115.6 93 172.2z"/>
+                                        <path d="M142.9 270.6c40.9 13.5 62.3 13.2 103 0"/>
+                                        <path d="M152.1 294.6c31.7 13.1 52.4 13.3 84.3 0"/>
+                                        <path d="M220 263.4c0-7.7-6.3-13.8-14-13.8s-13.8 6.2-13.8 13.8 6.2 14 13.9 14 14-6.3 14-14z"/>
+                                    </g>
+                                    <path fill="#fff" fill-rule="evenodd" stroke="#000" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" d="M232.6 213.3c-7.4-2.5-12.8-4.2-14.5-11-1.7-8.7 7.3-21.7 7.8-22.5 2.8-4 1.8-5 .4-9.7l-4.5-7.5c-1.9-2.6-3.1-5.2-1.4-8.6 1.7-3.5 5.5-4.5 8.6-3.2a21 21 0 0 1 7 4.7l5.3-7.5c-5.3-5.5-16.4-9.8-19.2-10.4-11.8-3-19.5 2.9-21.3 7.4-2.4 5.7-.3 11.8 2.7 16.3 3.8 5.8 3.5 6.8 2.2 8.7-1.2 1.8-10.5 15-11.7 24.3-1.2 10.2 4.5 18.8 11.6 22.7 5.2 3.1 12.3 5.2 23.2 5.7l3.8-9.4z"/>
+                                </svg>
+                                Português (Portugal)
+                            </a>
+                            <a class="dropdown-item" href="#en">
+                                <!-- SVG Bandeira dos EUA -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewBox="0 0 640 480">
+                                    <path fill="#bd3d44" d="M0 0h640v480H0"/>
+                                    <path stroke="#fff" stroke-width="37" d="M0 55.3h640M0 129h640M0 203.3h640M0 277.3h640M0 351.3h640M0 425.3h640"/>
+                                    <path fill="#192f5d" d="M0 0h364.8v258.5H0"/>
+                                    <path fill="#fff" d="M30.4 11l3.4 10.3h10.6l-8.6 6.3 3.3 10.3-8.7-6.4-8.6 6.3L25 27.6l-8.7-6.3h10.9zm60.8 0l3.3 10.3h10.6l-8.6 6.3 3.2 10.3-8.6-6.4-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3H166l-8.6 6.3 3.3 10.3-8.7-6.4-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.3h10.7l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.3-8.7-6.4-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 37l3.3 10.2h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zM30.4 62.6l3.4 10.4h10.6l-8.6 6.2 3.3 10.3-8.7-6.3-8.6 6.3L25 79.2l-8.7-6.2h10.9zm60.8 0l3.3 10.4h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.4H166l-8.6 6.2 3.3 10.3-8.7-6.3-8.7 6.3 3.3-10.3-8.7-6.2h10.9zm60.8 0l3.4 10.4h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.4h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.4h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zM60.8 88.6l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM30.4 114.5l3.4 10.2h10.6l-8.6 6.3 3.3 10.2-8.7-6.3-8.6 6.3L25 131l-8.7-6.3h10.9zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2H166l-8.6 6.3 3.3 10.2-8.7-6.3-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 140.3l3.3 10.3h10.8l-8.7 6.2 3.2 10.3-8.6-6.3-8.7 6.3 3.3-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.4 10.3h10.7l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.3-10.3-8.7-6.2h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.2 3.3 10.3-8.7-6.3-8.6 6.3 3.2-10.3-8.6-6.2h10.7zM30.4 166.1l3.4 10.3h10.6l-8.6 6.3 3.3 10.2-8.7-6.3-8.6 6.3L25 182.7l-8.7-6.3h10.9zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3H166l-8.6 6.3 3.3 10.2-8.7-6.3-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.3h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.3h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM60.8 192l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zM30.4 217.9l3.4 10.2h10.6l-8.6 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.7-6.3h10.9zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.2 10.2-8.6-6.3-8.7 6.3 3.3-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2H166l-8.6 6.3 3.3 10.2-8.7-6.3-8.7 6.3 3.3-10.2-8.7-6.3h10.9zm60.8 0l3.4 10.2h10.7l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.3-10.2-8.7-6.3h10.8zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7zm60.8 0l3.3 10.2h10.8l-8.7 6.3 3.3 10.2-8.7-6.3-8.6 6.3 3.2-10.2-8.6-6.3h10.7z"/>
+                                </svg>
+                                English
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    🎉 Teste grátis por 3 dias nosso plano Super <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <h1>Crie sua loja e <span class="highlight">monetize seu servidor</span> de forma automática.</h1>
+                <p>O SteveShop automatiza e gerencia seu servidor, assim deixando de lado o trabalho de entregar os produtos manualmente!</p>
+                <div class="hero-buttons">
+                    <a href="https://app.steveshop.com.br/account/register" class="btn">Começar agora</a>
+                    <a href="#" class="btn btn-outline btn-video"><i class="fas fa-play"></i> Ver vídeo</a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <img class="hero-image" src="hero_bg.png" alt="Personagem Steve do Minecraft com produtos da loja virtual SteveShop">
+                <div class="image-decoration"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="clients">
+        <div class="container">
+            <h2>Confiado por mais de 250 servidores</h2>
+            <div class="client-logos">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente PlaceHolder Minecraft" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente PlaceHolder Minecraft" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente PlaceHolder Minecraft" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente PlaceHolder Minecraft" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente PlaceHolder Minecraft" class="client-logo">
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="recursos">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle">O que há de novo?</span>
+                <h2>Recursos do SteveShop</h2>
+                <p>Veja os recursos exclusivos que vão impulsionar seu servidor</p>
+            </div>
+            <div class="features-container">
+                <div class="features-text">
+                    <h3>Monetize seu servidor</h3>
+                    <p>Configure sua loja virtual, crie seus produtos, conecte-se ao seu servidor de jogos e comece a gerar receita em minutos.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Sua loja automatizada</h4>
+                                <p>No SteveShop, os produtos são entregues automaticamente assim que o cliente efetua o pagamento, tornando a experiência de compra mais rápida e eficiente.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Personalização</h4>
+                                <p>Ajuste a aparência e o funcionamento da sua loja com facilidade usando o SteveShop, tornando-a única e adaptada às suas necessidades.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Controle seus ganhos</h4>
+                                <p>Através do SteveShop, você terá acesso a um painel com gráficos em tempo real de suas vendas, além da gestão simplificada de métodos de pagamento e muito mais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-image">
+                    <div class="image-decoration"></div>
+                    <svg width="600" height="400" viewBox="0 0 600 400" class="dashboard-image floating">
+                        <rect x="10" y="10" width="580" height="380" rx="8" fill="#111936" />
+                        <rect x="30" y="50" width="260" height="160" rx="6" fill="#1a2547" />
+                        <rect x="310" y="50" width="260" height="160" rx="6" fill="#1a2547" />
+                        <rect x="30" y="230" width="540" height="140" rx="6" fill="#1a2547" />
+                        <circle cx="60" cy="30" r="6" fill="#ff5c5c" />
+                        <circle cx="80" cy="30" r="6" fill="#ffbd2e" />
+                        <circle cx="100" cy="30" r="6" fill="#28c941" />
+                        <rect x="45" y="70" width="150" height="10" rx="2" fill="#00c3ff" />
+                        <rect x="45" y="90" width="230" height="6" rx="2" fill="#424c70" />
+                        <rect x="45" y="110" width="230" height="80" rx="4" fill="#424c70" opacity="0.5" />
+                        <path d="M60,150 L90,130 L120,160 L150,120 L180,140 L210,130 L240,150" stroke="#00c3ff" stroke-width="2" fill="none" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="advantages" id="sobre">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle">Por que escolher</span>
+                <h2>Vantagens de usar o SteveShop</h2>
+                <p>Descubra o porque a maioria dos servidores preferem o SteveShop para monetizar seu servidor</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Segurança e proteção</h3>
+                    <p>O SteveShop usa os recursos mais modernos para garantir uma boa performance e maior segurança para seu servidor. Seus dados e transações estão sempre protegidos.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Múltiplos meios de pagamentos</h3>
+                    <p>Possuímos os meios de pagamentos mais convencionais, dando uma ampla variedade de opções ao seu comprador, aumentando suas chances de conversão.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Integração com plataformas</h3>
+                    <p>O SteveShop tem integração com as maiores plataformas do mercado, desde redes sociais até chat online para sua loja, proporcionando uma experiência completa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="planos">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle">Escolha seu plano</span>
+                <h2>Nossos planos</h2>
+                <p>O seu servidor merece o melhor e nós temos o plano perfeito para você!</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Plano Básico</h3>
+                    <div class="price-value">
+                        <div class="price-original">R$50,00</div>
+                        <div class="price">R$45,00<span>/mês</span></div>
+                    </div>
+                    <p class="pricing-description">Venda scripts, modelagens, mapas, etc... de forma automatizada!</p>
+                    <ul class="feature-list-pricing">
+                        <li><i class="fas fa-check"></i> Website para vendas automáticas</li>
+                        <li><i class="fas fa-check"></i> Proteção básica para scripts</li>
+                        <li><i class="fas fa-check"></i> Ativação automática</li>
+                        <li><i class="fas fa-check"></i> Gerenciamento de equipe</li>
+                        <li><i class="fas fa-check"></i> Personalização da loja</li>
+                        <li><i class="fas fa-check"></i> Suporte por e-mail</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Selecionar</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Plano Premium</h3>
+                    <div class="price-value">
+                        <div class="price-original">R$80,00</div>
+                        <div class="price">R$70,00<span>/mês</span></div>
+                    </div>
+                    <p class="pricing-description">A melhor opção para servidores em crescimento!</p>
+                    <ul class="feature-list-pricing">
+                        <li><i class="fas fa-check"></i> Todas as funcionalidades do Plano Básico</li>
+                        <li><i class="fas fa-check"></i> Proteção avançada para scripts</li>
+                        <li><i class="fas fa-check"></i> Obfuscação extra para proteção</li>
+                        <li><i class="fas fa-check"></i> Templates de sites exclusivos</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário 24/7</li>
+                        <li><i class="fas fa-check"></i> Relatórios avançados de vendas</li>
+                        <li><i class="fas fa-check"></i> Integrações premium com plataformas</li>
+                    </ul>
+                    <a href="#" class="btn">Selecionar</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Plano Super</h3>
+                    <div class="price-value">
+                        <div class="price-original">R$120,00</div>
+                        <div class="price">R$99,00<span>/mês</span></div>
+                    </div>
+                    <p class="pricing-description">Para servidores que precisam de recursos ilimitados!</p>
+                    <ul class="feature-list-pricing">
+                        <li><i class="fas fa-check"></i> Todas as funcionalidades do Plano Premium</li>
+                        <li><i class="fas fa-check"></i> Número ilimitado de produtos</li>
+                        <li><i class="fas fa-check"></i> Domínio personalizado gratuito</li>
+                        <li><i class="fas fa-check"></i> Suporte VIP com atendimento dedicado</li>
+                        <li><i class="fas fa-check"></i> Personalização completa da loja</li>
+                        <li><i class="fas fa-check"></i> API avançada para integrações</li>
+                        <li><i class="fas fa-check"></i> Treinamento personalizado</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Selecionar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova seção de Blog -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle">Fique por dentro</span>
+                <h2>Últimas do Blog</h2>
+                <p>Confira as novidades, tutoriais e dicas para monetizar seu servidor Minecraft</p>
+            </div>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+                            <rect width="600" height="400" fill="#0d1a36"/>
+                            <path d="M300 80l180 120-180 120-180-120z" fill="#00c3ff" opacity="0.7"/>
+                            <path d="M300 100l150 100-150 100-150-100z" fill="#0051cc" opacity="0.9"/>
+                            <circle cx="300" cy="200" r="40" fill="#fff"/>
+                            <path d="M290 180h20v40h-20z" fill="#fff"/>
+                            <path d="M280 190h40v20h-40z" fill="#fff"/>
+                            <path d="M350 170l30 20-30 20z" fill="#fff"/>
+                            <path d="M250 170l-30 20 30 20z" fill="#fff"/>
+                            <path d="M300 130l-20 20 20 20 20-20z" fill="#00c3ff"/>
+                            <path d="M300 230l20 20-20 20-20-20z" fill="#00c3ff"/>
+                        </svg>
+                        <div class="blog-category">Tutorial</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">12 Ago 2023</div>
+                        <h3>Como aumentar suas vendas no servidor Minecraft</h3>
+                        <p>Descubra as estratégias mais efetivas para aumentar a conversão e as vendas na loja do seu servidor.</p>
+                        <a href="#" class="blog-link">Ler mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+                            <rect width="600" height="400" fill="#0d1a36"/>
+                            <rect x="150" y="100" width="300" height="200" rx="10" fill="#0051cc" opacity="0.8"/>
+                            <rect x="170" y="120" width="260" height="160" rx="5" fill="#050c1d"/>
+                            
+                            <!-- Plugin 1 -->
+                            <circle cx="210" cy="160" r="20" fill="#00c3ff"/>
+                            <path d="M204 154h12v12h-12z" fill="#fff"/>
+                            <text x="240" y="165" font-family="Arial" font-size="14" fill="#fff">Proteção</text>
+                            
+                            <!-- Plugin 2 -->
+                            <circle cx="210" cy="200" r="20" fill="#ff6b6b"/>
+                            <path d="M200 200l7-7 7 7-7 7z" fill="#fff"/>
+                            <text x="240" y="205" font-family="Arial" font-size="14" fill="#fff">Economia</text>
+                            
+                            <!-- Plugin 3 -->
+                            <circle cx="210" cy="240" r="20" fill="#feca57"/>
+                            <path d="M210 230v20 M200 240h20" stroke="#fff" stroke-width="4"/>
+                            <text x="240" y="245" font-family="Arial" font-size="14" fill="#fff">Admin Tools</text>
+                            
+                            <!-- Decorative elements -->
+                            <circle cx="450" cy="130" r="5" fill="#00c3ff"/>
+                            <circle cx="450" cy="150" r="5" fill="#00c3ff"/>
+                            <circle cx="450" cy="170" r="5" fill="#00c3ff"/>
+                        </svg>
+                        <div class="blog-category">Dicas</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">05 Ago 2023</div>
+                        <h3>5 plugins essenciais para seu servidor Minecraft</h3>
+                        <p>Uma lista dos plugins mais importantes que todo servidor de Minecraft deveria ter para melhorar a experiência dos jogadores.</p>
+                        <a href="#" class="blog-link">Ler mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+                            <rect width="600" height="400" fill="#0d1a36"/>
+                            
+                            <!-- Discord logo stylized -->
+                            <circle cx="300" cy="200" r="100" fill="#5865F2" opacity="0.7"/>
+                            <path d="M230 165c30-15 50-15 70-15 20 0 40 0 70 15 5 25 10 50 5 90-20 15-40 20-75 20-35 0-55-5-75-20-5-40 0-65 5-90z" fill="#7289da"/>
+                            <circle cx="260" cy="205" r="15" fill="#fff"/>
+                            <circle cx="340" cy="205" r="15" fill="#fff"/>
+                            
+                            <!-- Minecraft block -->
+                            <rect x="400" y="100" width="40" height="40" fill="#8B5927"/>
+                            <rect x="400" y="100" width="40" height="10" fill="#A07035" opacity="0.8"/>
+                            <rect x="400" y="130" width="40" height="10" fill="#704012" opacity="0.8"/>
+                            <rect x="400" y="100" width="10" height="40" fill="#A07035" opacity="0.5"/>
+                            <rect x="430" y="100" width="10" height="40" fill="#704012" opacity="0.5"/>
+                            
+                            <!-- SteveShop logo simplified -->
+                            <rect x="150" y="100" width="50" height="50" fill="#00c3ff" opacity="0.9"/>
+                            <path d="M160 110h30v30h-30z" fill="#0051cc"/>
+                            <path d="M165 115h20v20h-20z" fill="#00c3ff"/>
+                            
+                            <!-- Connection lines -->
+                            <path d="M200 125h80 M370 200h30" stroke="#00c3ff" stroke-width="3" stroke-dasharray="5,5"/>
+                        </svg>
+                        <div class="blog-category">Novidades</div>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">28 Jul 2023</div>
+                        <h3>Novidades do SteveShop: Integração com Discord</h3>
+                        <p>Agora é possível integrar sua loja diretamente com o Discord, facilitando a notificação de novas vendas para sua equipe.</p>
+                        <a href="#" class="blog-link">Ler mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>VAMOS COMEÇAR?</h2>
+                <p>O seu servidor merece o melhor e nós temos o plano perfeito para você!</p>
+                <a href="https://app.steveshop.com.br/account/register" class="btn">Começar agora</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <h1 class="footer-title">SteveShop</h1>
+                    </div>
+                    <p>🚀 SteveShop, transformando o mundo com a melhor automatização jamais vista no mercado!</p>
+                </div>
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Empresa</h3>
+                    <ul class="footer-links">
+                        <li><a href="#planos">Planos</a></li>
+                        <li><a href="#afiliados">Afiliados</a></li>
+                        <li><a href="#">Termos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Como começar?</a></li>
+                        <li><a href="#">Fale conosco</a></li>
+                        <li><a href="#documentacao">Documentação</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Documentação</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Como integrar?</a></li>
+                        <li><a href="#">Como criar métodos?</a></li>
+                        <li><a href="#">Como criar produtos?</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2022-2025 • Todos os direitos reservados</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "SteveShop",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "45.00",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock",
+            "validFrom": "2023-01-01"
+        },
+        "description": "Crie sua loja e monetize seu servidor Minecraft de forma automática com o SteveShop. Entrega de produtos e pagamentos automáticos para seu servidor.",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "250",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "featureList": "Entregas automáticas, Suporte 24/7, Integração com múltiplas plataformas",
+        "screenshot": "https://steveshop.com.br/screenshot.jpg",
+        "softwareVersion": "2.5"
+    }
+    </script>
+
+    <!-- Organização Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SteveShop",
+        "url": "https://steveshop.com.br",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://steveshop.com.br/logo.png",
+            "width": "180",
+            "height": "60"
+        },
+        "sameAs": [
+            "https://facebook.com/steveshop",
+            "https://twitter.com/steveshop",
+            "https://instagram.com/steveshop",
+            "https://discord.gg/steveshop",
+            "https://linkedin.com/company/steveshop"
+        ],
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "telephone": "+55-11-99999-9999",
+                "contactType": "customer service",
+                "availableLanguage": ["Portuguese", "English"],
+                "contactOption": "TollFree",
+                "areaServed": ["BR", "PT", "US"]
+            },
+            {
+                "@type": "ContactPoint",
+                "email": "suporte@steveshop.com.br",
+                "contactType": "technical support",
+                "availableLanguage": ["Portuguese", "English"]
+            }
+        ]
+    }
+    </script>
+
+    <!-- BreadcrumbList Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Início",
+                "item": "https://steveshop.com.br/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Recursos",
+                "item": "https://steveshop.com.br/#recursos"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Planos",
+                "item": "https://steveshop.com.br/#planos"
+            }
+        ]
+    }
+    </script>
+
+    <!-- FAQ Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Como o SteveShop funciona?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O SteveShop automatiza a venda e entrega de produtos para seu servidor Minecraft. Quando um cliente faz uma compra, o sistema processa o pagamento e entrega automaticamente o produto no servidor."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Quais métodos de pagamento são aceitos?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "O SteveShop aceita diversos métodos de pagamento, incluindo cartões de crédito, PayPal, PIX, boleto bancário e outros métodos locais."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Como integrar o SteveShop ao meu servidor?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A integração é simples e pode ser feita em poucos minutos seguindo nossa documentação. Oferecemos plugins para servidores Minecraft que se conectam diretamente à nossa API."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Script de carregamento otimizado -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script>
+        // Lazy loading de imagens para melhorar performance
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            if (lazyImage.dataset.srcset) {
+                                lazyImage.srcset = lazyImage.dataset.srcset;
+                            }
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
+            
+            // Inicializar os dropdowns do Bootstrap
+            const dropdownElementList = document.querySelectorAll('.dropdown-toggle');
+            const dropdownList = [...dropdownElementList].map(dropdownToggleEl => {
+                return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+            
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId !== '#') {
+                        document.querySelector(targetId).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Create mobile menu
+            const nav = document.querySelector('nav');
+            const mobileToggle = document.createElement('div');
+            mobileToggle.classList.add('mobile-menu-toggle');
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileToggle.style.display = 'none';
+            mobileToggle.style.fontSize = '1.5rem';
+            mobileToggle.style.color = '#fff';
+            mobileToggle.style.cursor = 'pointer';
+            
+            nav.appendChild(mobileToggle);
+            
+            const navLinks = document.querySelector('.nav-links');
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+            
+            function handleScreenChange(e) {
+                if (e.matches) {
+                    mobileToggle.style.display = 'block';
+                    navLinks.style.display = 'none';
+                    navLinks.style.position = 'fixed';
+                    navLinks.style.top = '0';
+                    navLinks.style.right = '-100%';
+                    navLinks.style.width = '80%';
+                    navLinks.style.maxWidth = '300px';
+                    navLinks.style.height = '100vh';
+                    navLinks.style.backgroundColor = 'var(--darker-bg)';
+                    navLinks.style.padding = '80px 20px 20px';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.zIndex = '900';
+                    navLinks.style.transition = 'right 0.3s ease';
+                    
+                    // Reset mobile menu when screen size changes
+                    navLinks.style.right = '-100%';
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                } else {
+                    mobileToggle.style.display = 'none';
+                    navLinks.style.display = 'flex';
+                }
+            }
+            
+            mediaQuery.addEventListener('change', handleScreenChange);
+        });
+    </script>
+</body>
+</html>

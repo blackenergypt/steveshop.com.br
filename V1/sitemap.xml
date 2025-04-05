@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    <!-- Página principal -->
+    <url>
+        <loc>https://steveshop.com.br/</loc>
+        <lastmod>2023-06-15T12:30:45+00:00</lastmod>
+        <priority>1.00</priority>
+        <changefreq>weekly</changefreq>
+    </url>
+    
+    <!-- Outras páginas importantes -->
+    <url>
+        <loc>https://steveshop.com.br/recursos/</loc>
+        <lastmod>2023-06-14T10:15:20+00:00</lastmod>
+        <priority>0.80</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/planos/</loc>
+        <lastmod>2023-06-14T10:15:20+00:00</lastmod>
+        <priority>0.90</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/documentacao/</loc>
+        <lastmod>2023-06-12T15:45:10+00:00</lastmod>
+        <priority>0.70</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/afiliados/</loc>
+        <lastmod>2023-06-10T09:30:15+00:00</lastmod>
+        <priority>0.60</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/sobre/</loc>
+        <lastmod>2023-06-08T14:20:30+00:00</lastmod>
+        <priority>0.70</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/contato/</loc>
+        <lastmod>2023-06-05T11:10:25+00:00</lastmod>
+        <priority>0.60</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/termos/</loc>
+        <lastmod>2023-05-20T16:55:40+00:00</lastmod>
+        <priority>0.40</priority>
+        <changefreq>yearly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/politica-de-privacidade/</loc>
+        <lastmod>2023-05-20T16:55:40+00:00</lastmod>
+        <priority>0.40</priority>
+        <changefreq>yearly</changefreq>
+    </url>
+    
+    <!-- Páginas de documentação/tutoriais -->
+    <url>
+        <loc>https://steveshop.com.br/documentacao/como-integrar/</loc>
+        <lastmod>2023-06-10T13:40:35+00:00</lastmod>
+        <priority>0.65</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/documentacao/como-criar-produtos/</loc>
+        <lastmod>2023-06-10T13:40:35+00:00</lastmod>
+        <priority>0.65</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    
+    <url>
+        <loc>https://steveshop.com.br/documentacao/como-configurar-pagamentos/</loc>
+        <lastmod>2023-06-10T13:40:35+00:00</lastmod>
+        <priority>0.65</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+</urlset>

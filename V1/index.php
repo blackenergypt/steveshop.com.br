@@ -21,7 +21,7 @@ error_reporting(E_ALL);
 setlocale(LC_TIME, 'pt_PT', 'pt_PT.UTF-8', 'pt_PT.utf-8', 'portuguese');
 date_default_timezone_set('Europe/Lisbon');
 
-define('DOMAIN', "steveshop.com.br");
+define('DOMAIN', "localhost");
 
 
 if (! empty($_SERVER['HTTPS'])) {

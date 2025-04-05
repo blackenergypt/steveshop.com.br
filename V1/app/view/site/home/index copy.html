@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SteveShop | Monetize seu servidor de forma automática</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00c3ff;
+            --primary-glow: rgba(0, 195, 255, 0.15);
+            --secondary-color: #0051cc;
+            --text-color: #ffffff;
+            --text-secondary: #a0a8c0;
+            --dark-bg: #060d1d;
+            --darker-bg: #040b1a;
+            --card-bg: rgba(15, 23, 42, 0.5);
+            --header-bg: rgba(5, 9, 26, 0.8);
+            --border-color: rgba(79, 134, 198, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(180deg, #050c1d 0%, #030818 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* Efeitos de luz de fundo */
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+        }
+        
+        .bg-glow-1 {
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 85, 255, 0.15);
+            top: 0;
+            left: -200px;
+        }
+        
+        .bg-glow-2 {
+            width: 600px;
+            height: 600px;
+            background: rgba(79, 70, 229, 0.1);
+            top: 400px;
+            right: -300px;
+        }
+        
+        /* Header e navegação */
+        header {
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo svg {
+            width: 140px;
+            height: 36px;
+        }
+        
+        .logo svg path {
+            stroke: #00a3ff;
+            stroke-width: 2.5;
+        }
+        
+        .logo svg text {
+            fill: var(--primary-color);
+            font-weight: 700;
+            font-size: 18px;
+            x: 55px;
+            y: 18px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .btn {
+            background-color: #00a3ff;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: background-color 0.2s ease;
+            border: none;
+            box-shadow: none;
+            text-transform: none;
+            letter-spacing: 0;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #0090e0;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #00a3ff;
+            color: #00a3ff;
+            padding: 12px 24px;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(0, 163, 255, 0.05);
+            color: #00a3ff;
+        }
+        
+        .btn::after {
+            display: none; /* Remover o efeito de brilho que estava exagerado */
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image {
+            width: 200px;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            background: rgba(0, 85, 255, 0.15);
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .hero-badge i {
+            margin-left: 6px;
+            color: #a0a8c0;
+        }
+       
+    
+        .hero h1 {
+            font-size: 3.1rem;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        
+        .hero h1 .highlight {
+            color: #00a3ff;
+            -webkit-text-fill-color: #00a3ff;
+            background: none;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            color: #a0a8c0;
+            font-size: 1rem;
+            max-width: 550px;
+            margin: 25px auto 40px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .hero-buttons .btn-video {
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-buttons .btn-video i {
+            margin-right: 8px;
+        }
+        
+        .hero-illustration {
+            position: absolute;
+            right: -2%;
+            top: 70%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        @media (max-width: 1200px) {
+            .hero-illustration {
+                display: none;
+            }
+        }
+        
+        /* Clients Section */
+        .clients {
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .clients h2 {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .client-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .client-logo {
+            height: 26px;
+            opacity: 0.7;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-title .subtitle {
+            color: #00a3ff;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .features-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .features-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .feature-list {
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .features-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .image-decoration {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--primary-glow);
+            filter: blur(60px);
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .dashboard-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .image-decoration {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: var(--primary-glow);
+            filter: blur(60px);
+            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Advantages Section */
+        .advantages {
+            padding: 120px 0;
+            background: linear-gradient(0deg, rgba(9, 16, 38, 0.8), transparent);
+            position: relative;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .advantage-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-glow);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .advantage-icon i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .advantage-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .advantage-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 40px 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 195, 255, 0.15);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'RECOMENDADO';
+            position: absolute;
+            top: 30px;
+            right: -40px;
+            background: var(--primary-color);
+            color: var(--darker-bg);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .price-value {
+            margin-bottom: 25px;
+        }
+        
+        .price-original {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .pricing-description {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            min-height: 50px;
+        }
+        
+        .feature-list-pricing {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list-pricing li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .feature-list-pricing i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+        }
+        
+        .cta {
+            margin: 160px 220px;
+            background: url('https://ccdn.g-portal.com/Gallery_MC_lushcave_0009_0d34f8ce09.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.336);
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(5, 12, 29, 0.651) 0%, rgba(5, 12, 29, 0) 100%);
+            z-index: 1;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .cta p {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        
+        .cta .btn {
+            background-color: #00a3ff;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-brand p {
+            color: var(--text-secondary);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--primary-color);
+            color: var(--darker-bg);
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-container, .pricing-grid {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        .nav-links .btn-outline {
+            border: 1px solid #00a3ff;
+            color: #ffffff;
+            background-color: transparent;
+            padding: 8px 20px;
+        }
+
+        .nav-links .btn {
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Efeitos de fundo -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>SteveShop</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#documentacao">Documentação</a></li>
+                    <li><a href="#afiliados">Afiliados</a></li>
+                    <li><a href="https://app.steveshop.com.br/account/login" class="btn btn-outline">Entrar</a></li>
+                    <li><a href="https://app.steveshop.com.br/account/register" class="btn">Criar conta</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    🎉 Teste grátis por 3 dias nosso plano Super <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <h1>Crie sua loja e <span class="highlight">monetize seu servidor</span> de forma automática.</h1>
+                <p>O SteveShop automatiza e gerencia seu servidor, assim deixando de lado o trabalho de entregar os produtos manualmente!</p>
+                <div class="hero-buttons">
+                    <a href="https://app.steveshop.com.br/account/register" class="btn">Começar agora</a>
+                    <a href="#" class="btn btn-outline btn-video"><i class="fas fa-play"></i> Ver vídeo</a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <img class="hero-image" src="hero_bg.png" alt="Ilustração do SteveShop">
+                <div class="image-decoration"></div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="clients">
+        <div class="container">
+            <h2>Confiado por mais de 250 servidores</h2>
+            <div class="client-logos">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente 1" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente 2" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente 3" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente 4" class="client-logo">
+                <img src="https://via.placeholder.com/120x30" alt="Logo Cliente 5" class="client-logo">
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="recursos">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle">O que há de novo?</span>
+                <h2>Recursos do SteveShop</h2>
+                <p>Veja os recursos exclusivos que vão impulsionar seu servidor</p>
+            </div>
+            <div class="features-container">
+                <div class="features-text">
+                    <h3>Monetize seu servidor</h3>
+                    <p>Configure sua loja virtual, crie seus produtos, conecte-se ao seu servidor de jogos e comece a gerar receita em minutos.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Sua loja automatizada</h4>
+                                <p>No SteveShop, os produtos são entregues automaticamente assim que o cliente efetua o pagamento, tornando a experiência de compra mais rápida e eficiente.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Personalização</h4>
+                                <p>Ajuste a aparência e o funcionamento da sua loja com facilidade usando o SteveShop, tornando-a única e adaptada às suas necessidades.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Controle seus ganhos</h4>
+                                <p>Através do SteveShop, você terá acesso a um painel com gráficos em tempo real de suas vendas, além da gestão simplificada de métodos de pagamento e muito mais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-image">
+                    <div class="image-decoration"></div>
+                    <svg width="600" height="400" viewBox="0 0 600 400" class="dashboard-image floating">
+                        <rect x="10" y="10" width="580" height="380" rx="8" fill="#111936" />
+                        <rect x="30" y="50" width="260" height="160" rx="6" fill="#1a2547" />
+                        <rect x="310" y="50" width="260" height="160" rx="6" fill="#1a2547" />
+                        <rect x="30" y="230" width="540" height="140" rx="6" fill="#1a2547" />
+                        <circle cx="60" cy="30" r="6" fill="#ff5c5c" />
+                        <circle cx="80" cy="30" r="6" fill="#ffbd2e" />
+                        <circle cx="100" cy="30" r="6" fill="#28c941" />
+                        <rect x="45" y="70" width="150" height="10" rx="2" fill="#00c3ff" />
+                        <rect x="45" y="90" width="230" height="6" rx="2" fill="#424c70" />
+                        <rect x="45" y="110" width="230" height="80" rx="4" fill="#424c70" opacity="0.5" />
+                        <path d="M60,150 L90,130 L120,160 L150,120 L180,140 L210,130 L240,150" stroke="#00c3ff" stroke-width="2" fill="none" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="advantages" id="sobre">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle">Por que escolher</span>
+                <h2>Vantagens de usar o SteveShop</h2>
+                <p>Descubra o porque a maioria dos servidores preferem o SteveShop para monetizar seu servidor</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Segurança e proteção</h3>
+                    <p>O SteveShop usa os recursos mais modernos para garantir uma boa performance e maior segurança para seu servidor. Seus dados e transações estão sempre protegidos.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Múltiplos meios de pagamentos</h3>
+                    <p>Possuímos os meios de pagamentos mais convencionais, dando uma ampla variedade de opções ao seu comprador, aumentando suas chances de conversão.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Integração com plataformas</h3>
+                    <p>O SteveShop tem integração com as maiores plataformas do mercado, desde redes sociais até chat online para sua loja, proporcionando uma experiência completa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="planos">
+        <div class="container">
+            <div class="section-title">
+                <span class="subtitle">Escolha seu plano</span>
+                <h2>Nossos planos</h2>
+                <p>O seu servidor merece o melhor e nós temos o plano perfeito para você!</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Plano Básico</h3>
+                    <div class="price-value">
+                        <div class="price-original">R$50,00</div>
+                        <div class="price">R$45,00<span>/mês</span></div>
+                    </div>
+                    <p class="pricing-description">Venda scripts, modelagens, mapas, etc... de forma automatizada!</p>
+                    <ul class="feature-list-pricing">
+                        <li><i class="fas fa-check"></i> Website para vendas automáticas</li>
+                        <li><i class="fas fa-check"></i> Proteção básica para scripts</li>
+                        <li><i class="fas fa-check"></i> Ativação automática</li>
+                        <li><i class="fas fa-check"></i> Gerenciamento de equipe</li>
+                        <li><i class="fas fa-check"></i> Personalização da loja</li>
+                        <li><i class="fas fa-check"></i> Suporte por e-mail</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Selecionar</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Plano Premium</h3>
+                    <div class="price-value">
+                        <div class="price-original">R$80,00</div>
+                        <div class="price">R$70,00<span>/mês</span></div>
+                    </div>
+                    <p class="pricing-description">A melhor opção para servidores em crescimento!</p>
+                    <ul class="feature-list-pricing">
+                        <li><i class="fas fa-check"></i> Todas as funcionalidades do Plano Básico</li>
+                        <li><i class="fas fa-check"></i> Proteção avançada para scripts</li>
+                        <li><i class="fas fa-check"></i> Obfuscação extra para proteção</li>
+                        <li><i class="fas fa-check"></i> Templates de sites exclusivos</li>
+                        <li><i class="fas fa-check"></i> Suporte prioritário 24/7</li>
+                        <li><i class="fas fa-check"></i> Relatórios avançados de vendas</li>
+                        <li><i class="fas fa-check"></i> Integrações premium com plataformas</li>
+                    </ul>
+                    <a href="#" class="btn">Selecionar</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Plano Super</h3>
+                    <div class="price-value">
+                        <div class="price-original">R$120,00</div>
+                        <div class="price">R$99,00<span>/mês</span></div>
+                    </div>
+                    <p class="pricing-description">Para servidores que precisam de recursos ilimitados!</p>
+                    <ul class="feature-list-pricing">
+                        <li><i class="fas fa-check"></i> Todas as funcionalidades do Plano Premium</li>
+                        <li><i class="fas fa-check"></i> Número ilimitado de produtos</li>
+                        <li><i class="fas fa-check"></i> Domínio personalizado gratuito</li>
+                        <li><i class="fas fa-check"></i> Suporte VIP com atendimento dedicado</li>
+                        <li><i class="fas fa-check"></i> Personalização completa da loja</li>
+                        <li><i class="fas fa-check"></i> API avançada para integrações</li>
+                        <li><i class="fas fa-check"></i> Treinamento personalizado</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">Selecionar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>VAMOS COMEÇAR?</h2>
+                <p>O seu servidor merece o melhor e nós temos o plano perfeito para você!</p>
+                <a href="https://app.steveshop.com.br/account/register" class="btn">Começar agora</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <h1 class="footer-title">SteveShop</h1>
+                    </div>
+                    <p>🚀 SteveShop, transformando o mundo com a melhor automatização jamais vista no mercado!</p>
+                </div>
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Empresa</h3>
+                    <ul class="footer-links">
+                        <li><a href="#planos">Planos</a></li>
+                        <li><a href="#afiliados">Afiliados</a></li>
+                        <li><a href="#">Termos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Como começar?</a></li>
+                        <li><a href="#">Fale conosco</a></li>
+                        <li><a href="#documentacao">Documentação</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-column">
+                    <h3 class="footer-heading">Documentação</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Como integrar?</a></li>
+                        <li><a href="#">Como criar métodos?</a></li>
+                        <li><a href="#">Como criar produtos?</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2022-2025 • Todos os direitos reservados</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId !== '#') {
+                        document.querySelector(targetId).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Create mobile menu
+            const nav = document.querySelector('nav');
+            const mobileToggle = document.createElement('div');
+            mobileToggle.classList.add('mobile-menu-toggle');
+            mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            mobileToggle.style.display = 'none';
+            mobileToggle.style.fontSize = '1.5rem';
+            mobileToggle.style.color = '#fff';
+            mobileToggle.style.cursor = 'pointer';
+            
+            nav.appendChild(mobileToggle);
+            
+            const navLinks = document.querySelector('.nav-links');
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+            
+            function handleScreenChange(e) {
+                if (e.matches) {
+                    mobileToggle.style.display = 'block';
+                    navLinks.style.display = 'none';
+                    navLinks.style.position = 'fixed';
+                    navLinks.style.top = '0';
+                    navLinks.style.right = '-100%';
+                    navLinks.style.width = '80%';
+                    navLinks.style.maxWidth = '300px';
+                    navLinks.style.height = '100vh';
+                    navLinks.style.backgroundColor = 'var(--darker-bg)';
+                    navLinks.style.padding = '80px 20px 20px';
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.zIndex = '900';
+                    navLinks.style.transition = 'right 0.3s ease';
+                    
+                    // Reset mobile menu when screen size changes
+                    navLinks.style.right = '-100%';
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                } else {
+                    mobileToggle.style.display = 'none';
+                    navLinks.style.display = 'flex';
+                }
+            }
+            
+            mediaQuery.addEventListener('change', handleScreenChange);
+        });
+    </script>
+</body>
+</html>

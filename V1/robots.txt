@@ -1,0 +1,32 @@
+# SteveShop Robots.txt
+User-agent: *
+Allow: /
+
+# Desativar indexação de páginas específicas (adicionar quando necessário)
+# Disallow: /admin/
+# Disallow: /account/
+
+# Evitar indexação de páginas duplicadas ou desnecessárias
+Disallow: /account/login/
+Disallow: /account/register/
+Disallow: /checkout/
+Disallow: /search/
+
+# Permitir crawlers de redes sociais
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Diretivas específicas para otimização
+User-agent: Googlebot
+Allow: /
+Allow: /*.js$
+Allow: /*.css$
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Definição do sitemap
+Sitemap: https://steveshop.com.br/sitemap.xml
