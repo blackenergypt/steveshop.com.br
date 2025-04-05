@@ -26,7 +26,7 @@ jobs:
           outputs: type=docker,dest=/tmp/steveshop-image.tar
           
       - name: Upload image as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: steveshop-image
           path: /tmp/steveshop-image.tar
