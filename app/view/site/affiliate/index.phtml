@@ -1,7 +1,224 @@
-<main>
+<?php
+// Definição de variáveis da página
+$pageTitle = "Programa de Afiliados | SteveShop";
+$pageDescription = "Ganhe uma renda extra com o Programa de Afiliados da SteveShop. Comissões de até 5% em cada venda!";
+?>
 
-<h1>Brevemente</h1>
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Ganhe uma renda extra <span class="highlight">agora mesmo</span>.</h1>
+            <p>Faça parte do <strong>Programa de Afiliados</strong> e receba comissões que podem chegar até 5%, seja com assinatura ou renovação!</p>
+            <div class="hero-buttons">
+                <a href="#cadastro" class="btn">Cadastrar</a>
+            </div>
+        </div>
+    </div>
+</section>
 
-</main>
+<!-- PROCESS SECTION -->
+<section class="affiliate-process">
+    <div class="container">
+        <div class="section-title">
+            <span class="subtitle">COMO FUNCIONA</span>
+            <h2>Para começar é muito fácil</h2>
+            <p>Siga os passos abaixo e comece a ganhar comissões hoje mesmo.</p>
+        </div>
+        
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Cadastre-se</h3>
+                <p>Crie sua conta gratuita no programa de afiliados e obtenha seu link personalizado.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3>Compartilhe</h3>
+                <p>Divulgue seu link nas redes sociais, site, blog ou para seu servidor de Minecraft.</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3>Receba</h3>
+                <p>Ganhe comissões quando comprarem pelo seu link! Saque a partir de R$ 50,00.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-<?php require_once "app/view/site/home/footer.phtml"; ?>
+<!-- BENEFITS SECTION -->
+<section class="affiliate-benefits">
+    <div class="container">
+        <div class="section-title">
+            <span class="subtitle">VANTAGENS</span>
+            <h2>Por que se tornar um afiliado?</h2>
+        </div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <h3>Comissões Atrativas</h3>
+                <p>Ganhe até 5% sobre cada venda realizada através do seu link de afiliado.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Dashboard Detalhado</h3>
+                <p>Acompanhe seus ganhos, cliques e conversões em tempo real.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <h3>Pagamentos Rápidos</h3>
+                <p>Receba seus ganhos mensalmente via PIX, transferência bancária ou saldo na plataforma.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Materiais de Marketing</h3>
+                <p>Tenha acesso a banners, templates e conteúdos para suas divulgações.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REGISTRATION SECTION -->
+<section class="affiliate-registration" id="cadastro">
+    <div class="container">
+        <div class="registration-container">
+            <div class="registration-content">
+                <h2>Comece a ganhar agora</h2>
+                <p>Preencha o formulário para se tornar um afiliado e começar a ganhar comissões.</p>
+                
+                <form class="affiliate-form" method="post" action="">
+                    <div class="form-group">
+                        <label for="name">Nome completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="website">Site ou rede social (opcional)</label>
+                        <input type="url" id="website" name="website">
+                    </div>
+                    
+                    <button type="submit" class="btn">Cadastrar como afiliado</button>
+                </form>
+            </div>
+            
+            <div class="registration-image">
+                <img src="<?= APP_ROOT ?>app/content/site/assets/images/affiliate-illustration.svg" alt="Programa de Afiliados">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="affiliate-faq">
+    <div class="container">
+        <div class="section-title">
+            <span class="subtitle">DÚVIDAS</span>
+            <h2>Perguntas Frequentes</h2>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Como funciona o programa de afiliados?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Nosso programa de afiliados é simples: você se cadastra, recebe um link único e compartilha. Quando alguém compra através do seu link, você ganha uma comissão de até 5% sobre o valor da venda.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Quando recebo minhas comissões?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>As comissões são calculadas mensalmente e pagas até o dia 15 do mês seguinte, desde que você tenha atingido o valor mínimo de R$ 50,00 para saque.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Qual o valor mínimo para saque?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>O valor mínimo para saque é de R$ 50,00. Você pode acumular suas comissões até atingir esse valor.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Posso usar meu saldo na plataforma?</h3>
+                    <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="faq-answer">
+                    <p>Sim! Você pode usar o saldo de comissões para comprar produtos em nossa plataforma ou solicitar o saque.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta">
+    <div class="cta-content">
+        <h2>Comece a ganhar hoje mesmo</h2>
+        <p>Não perca tempo! Junte-se ao nosso programa de afiliados e transforme suas indicações em uma fonte de renda extra.</p>
+        <a href="#cadastro" class="btn">Tornar-se afiliado</a>
+    </div>
+</section>
+
+<script>
+    // Toggle FAQ answers
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+                
+                const icon = item.querySelector('.faq-toggle i');
+                if (item.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+    });
+</script>

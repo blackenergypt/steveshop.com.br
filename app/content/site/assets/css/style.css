@@ -1163,3 +1163,264 @@ footer {
         opacity: 0;
     }
 }
+
+/* Estilos da Página de Afiliados */
+.affiliate-process {
+    padding: 120px 0;
+    position: relative;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.step-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    flex: 1;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--primary-glow);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+}
+
+.step-icon i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.step-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.step-card p {
+    color: var(--text-secondary);
+}
+
+/* Benefits Section */
+.affiliate-benefits {
+    padding: 120px 0;
+    background: linear-gradient(0deg, rgba(9, 16, 38, 0.8), transparent);
+    position: relative;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.benefit-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--primary-glow);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.benefit-icon i {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.benefit-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.benefit-card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* Registration Section */
+.affiliate-registration {
+    padding: 120px 0;
+    position: relative;
+}
+
+.registration-container {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 50px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.registration-content {
+    flex: 1;
+}
+
+.registration-content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.registration-content p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.affiliate-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-group input {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: rgba(15, 23, 42, 0.3);
+    color: var(--text-color);
+}
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.registration-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.registration-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* FAQ Section */
+.affiliate-faq {
+    padding: 120px 0;
+    background: linear-gradient(0deg, transparent, rgba(9, 16, 38, 0.3));
+    position: relative;
+}
+
+.faq-container {
+    margin-top: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.faq-question h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.faq-toggle i {
+    transition: transform 0.3s;
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    padding: 0 20px 20px;
+    max-height: 200px;
+}
+
+.faq-answer p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive styles for the affiliate page */
+@media (max-width: 992px) {
+    .process-steps, 
+    .registration-container {
+        flex-direction: column;
+    }
+    
+    .registration-container {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .process-steps {
+        flex-direction: column;
+    }
+    
+    .step-card,
+    .benefit-card {
+        margin-bottom: 20px;
+    }
+}
