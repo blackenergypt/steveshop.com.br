@@ -9,15 +9,18 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./cdn:/var/www/html/cdn
+      - ./ssl/certs:/etc/ssl/certs
     environment:
       - PHP_MEMORY_LIMIT=256M
       - UPLOAD_MAX_FILESIZE=40M
       - POST_MAX_SIZE=40M
     networks:
       - steveshop_network
-
+    depends_on:
+      - db
   db:
     image: mysql:5.7
     environment:

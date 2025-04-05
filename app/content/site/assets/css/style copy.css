@@ -1011,17 +1011,6 @@ footer {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.error-content {
-    flex: 1;
-    min-width: 300px;
-    text-align: center;
 }
 
 .error-title {
@@ -1033,8 +1022,6 @@ footer {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1.2;
-    flex-basis: 100%;
-    margin-top: 20px;
 }
 
 .error-message {
@@ -1042,7 +1029,6 @@ footer {
     margin-bottom: 30px;
     color: var(--text-secondary);
 }
-
 @media (max-width: 768px) {
     .error-container {
         padding: 30px 20px;

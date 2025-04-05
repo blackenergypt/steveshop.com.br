@@ -21,11 +21,11 @@ error_reporting(E_ALL);
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.UTF-8', 'pt_BR.utf-8', 'brazilian');
 date_default_timezone_set('America/Sao_Paulo');
 
-define('DOMAIN', "localhost/steveshop");
+define('DOMAIN', "steveshop.com.br");
 
 
 if (! empty($_SERVER['HTTPS'])) {
-    $config['base_url'] = 'http://'.DOMAIN.'/';
+    $config['base_url'] = 'https://'.DOMAIN.'/';
 } else {
     $config['base_url'] = 'http://'.DOMAIN.'/';
 }

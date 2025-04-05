@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite \
     && a2enmod headers \
     && a2enmod expires \
-    && a2enmod deflate
+    && a2enmod deflate \
+    && a2enmod ssl  # Ativar módulo SSL
 
 # Instalar Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -38,11 +39,11 @@ RUN mkdir -p /var/www/html/cdn && \
     chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
-# Configurar VirtualHost para steveshop.com.br e subdomínios
+# Configurar VirtualHost para HTTP (porta 80)
 RUN echo '<VirtualHost *:80>\n\
     ServerAdmin webmaster@steveshop.com.br\n\
-    ServerName atm10.pt\n\
-    ServerAlias *.atm10.pt\n\
+    ServerName steveshop.com.br\n\
+    ServerAlias *.steveshop.com.br\n\
     DocumentRoot /var/www/html\n\
     \n\
     <Directory /var/www/html>\n\
@@ -54,16 +55,42 @@ RUN echo '<VirtualHost *:80>\n\
     ErrorLog ${APACHE_LOG_DIR}/error.log\n\
     CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
     \n\
-    # Configuração para permitir reescrita de URLs com subdomínios\n\
     RewriteEngine On\n\
     RewriteCond %{HTTP_HOST} ^(.+)\.atm10\.pt$\n\
     RewriteCond %{REQUEST_URI} !^/index\.php\n\
     RewriteRule ^(.*)$ /index.php [L]\n\
 </VirtualHost>' > /etc/apache2/sites-available/steveshop.conf
 
-# Ativar o VirtualHost
+# Configurar VirtualHost para HTTPS (porta 443) usando os certificados da pasta ssl/certs
+RUN echo '<VirtualHost *:443>\n\
+    ServerAdmin webmaster@steveshop.com.br\n\
+    ServerName steveshop.com.br\n\
+    ServerAlias *.steveshop.com.br\n\
+    DocumentRoot /var/www/html\n\
+    \n\
+    <Directory /var/www/html>\n\
+        Options Indexes FollowSymLinks MultiViews\n\
+        AllowOverride All\n\
+        Require all granted\n\
+    </Directory>\n\
+    \n\
+    ErrorLog ${APACHE_LOG_DIR}/error.log\n\
+    CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
+    \n\
+    SSLEngine on\n\
+    SSLCertificateFile /etc/ssl/certs/steveshop.crt\n\
+    SSLCertificateKeyFile /etc/ssl/certs/steveshop.key\n\
+    \n\
+    RewriteEngine On\n\
+    RewriteCond %{HTTP_HOST} ^(.+)\.steveshop\.com\.br$\n\
+    RewriteCond %{REQUEST_URI} !^/index\.php\n\
+    RewriteRule ^(.*)$ /index.php [L]\n\
+</VirtualHost>' > /etc/apache2/sites-available/steveshop-ssl.conf
+
+# Ativar os VirtualHosts
 RUN a2ensite steveshop.conf && \
+    a2ensite steveshop-ssl.conf && \
     a2dissite 000-default.conf
 
-# Expor a porta 80
-EXPOSE 80
+# Expor as portas 80 e 443
+EXPOSE 80 443
