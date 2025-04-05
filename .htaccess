@@ -34,7 +34,7 @@ RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
     Header set X-Frame-Options "SAMEORIGIN"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
     Header set Permissions-Policy "camera=(), microphone=(), geolocation=(self), interest-cohort=()"
-    Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src * data:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:;"
+    Header set Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src * data:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://atm10.pt data:;"
     Header always set Content-Security-Policy "upgrade-insecure-requests;"
     
     # Permitir Cross-Origin para fontes (necessário para carregar fontes do Google Fonts)
