@@ -1038,7 +1038,7 @@ footer {
 }
 
 .error-message {
-    font-size: 1.125rem;
+    font-size: 1rem;
     margin-bottom: 30px;
     color: var(--text-secondary);
 }
